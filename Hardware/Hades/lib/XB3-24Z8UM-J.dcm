@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP XB3-24Z8UM-J
+D Zigbee Modules (802.15.4) XBee3,2.4 Ghz ZB 3.0, U.FL Ant, MMT
+K
+F http://www.mouser.com/datasheet/2/111/ds_xbee-3-zigbee-3-1288823.pdf
+$ENDCMP
+#
+#End Doc Library

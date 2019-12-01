@@ -1,0 +1,49 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>RTW Report - ekfAHRS.h</title>
+<script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script>
+</head>
+<body bgcolor="#eeeeee" text="#1122aa" onload="try {if (top) { if (top.rtwFileOnLoad) top.rtwFileOnLoad(window.document); else local_onload();}} catch(err) {};">
+<p>
+<table border="0" cellspacing="0" cellpadding="6" width="100%%" height="100%%"><tr><td width="100%%" valign="top" bgcolor="#ffffff">
+<h4>File: <a href="../ekfAHRS.h" target="rtwreport_document_frame" id="linkToText_plain">ekfAHRS.h</a></h4>
+<pre id="RTWcode">
+<a name="1"><font color="#888888 "><i>    1   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * File: ekfAHRS.h</i></font>
+<a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * MATLAB Coder version            : 3.2</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> * C/C++ source code generated on  : 15-Apr-2019 03:04:04</i></font>
+<a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="7"><font color="#888888 "><i>    7   </i></font></a>
+<a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#992211">#</font><font color="#992211"><b>ifndef</b></font> EKFAHRS_H
+<a name="9"><font color="#888888 "><i>    9   </i></font></a><font color="#992211">#</font><font color="#992211"><b>define</b></font> EKFAHRS_H
+<a name="10"><font color="#888888 "><i>   10   </i></font></a>
+<a name="11"><font color="#888888 "><i>   11   </i></font></a><font color="#117755"><i>/* Include Files */</i></font>
+<a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&lt;math.h&gt;</font>
+<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&lt;stddef.h&gt;</font>
+<a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&lt;stdlib.h&gt;</font>
+<a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&lt;string.h&gt;</font>
+<a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;rtwtypes.h&quot;</font>
+<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;ekfAHRS_types.h&quot;</font>
+<a name="18"><font color="#888888 "><i>   18   </i></font></a>
+<a name="19"><font color="#888888 "><i>   19   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
+<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#112266"><b>extern</b></font> <font color="#112266"><b>void</b></font> <a href="ekfAHRS_c.html#fcn_ekfAHRS" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_ekfAHRS');" target="_self"><font color="#1122aa">ekfAHRS</font></a>(<font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> acc[3], <font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> gyr[3], <font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> mag[3],
+<a name="21"><font color="#888888 "><i>   21   </i></font></a>                    <font color="#112266"><b>double</b></font> airspeed, <font color="#112266"><b>double</b></font> pressure, <font color="#112266"><b>double</b></font> dt, <font color="#112266"><b>double</b></font> *roll,
+<a name="22"><font color="#888888 "><i>   22   </i></font></a>                    <font color="#112266"><b>double</b></font> *pitch, <font color="#112266"><b>double</b></font> *yaw, <font color="#112266"><b>double</b></font> *altitude);
+<a name="23"><font color="#888888 "><i>   23   </i></font></a><font color="#112266"><b>extern</b></font> <font color="#112266"><b>void</b></font> <a href="ekfAHRS_c.html#fcn_ekfAHRS_initialize" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_ekfAHRS_initialize');" target="_self"><font color="#1122aa">ekfAHRS_initialize</font></a>(<font color="#112266"><b>void</b></font>);
+<a name="24"><font color="#888888 "><i>   24   </i></font></a><font color="#112266"><b>extern</b></font> <font color="#112266"><b>void</b></font> <a href="ekfAHRS_c.html#fcn_ekfAHRS_terminate" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_ekfAHRS_terminate');" target="_self"><font color="#1122aa">ekfAHRS_terminate</font></a>(<font color="#112266"><b>void</b></font>);
+<a name="25"><font color="#888888 "><i>   25   </i></font></a>
+<a name="26"><font color="#888888 "><i>   26   </i></font></a><font color="#992211">#</font><font color="#992211"><b>endif</b></font>
+<a name="27"><font color="#888888 "><i>   27   </i></font></a>
+<a name="28"><font color="#888888 "><i>   28   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="29"><font color="#888888 "><i>   29   </i></font></a><font color="#117755"><I> * File trailer for ekfAHRS.h</i></font>
+<a name="30"><font color="#888888 "><i>   30   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="31"><font color="#888888 "><i>   31   </i></font></a><font color="#117755"><I> * [EOF]</i></font>
+<a name="32"><font color="#888888 "><i>   32   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="33"><font color="#888888 "><i>   33   </i></font></a></pre>
+</td></tr></table>
+</p>
+</body>
+</html>

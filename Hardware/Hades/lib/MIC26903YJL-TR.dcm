@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MIC26903YJL-TR
+D Switching Voltage Regulators 28V, 9A HyperLight Load  Synchronous DC/DC Buck Regulator SuperSwitcher IIG
+K
+F http://www.mouser.com/datasheet/2/268/MIC26903-778571.pdf
+$ENDCMP
+#
+#End Doc Library

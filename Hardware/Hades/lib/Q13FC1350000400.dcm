@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP Q13FC1350000400
+D SMD Crystal Resonators 32.768KHz +/-20ppm SMD-3215_2P RoHS
+K
+F https://datasheet.lcsc.com/szlcsc/1901081604_Seiko-Epson-Q13FC1350000400_C32346.pdf
+$ENDCMP
+#
+#End Doc Library

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP PTS636_SK43_SMTR_LFS
+D Tactile Switches Tact 50mA 12VDC, 6.0x3.5, 4.3mm H, 250gf, G leads, No ground pin, Black Actuator
+K
+F https://componentsearchengine.com/Datasheets/1/PTS636 SK43 SMTR LFS.pdf
+$ENDCMP
+#
+#End Doc Library

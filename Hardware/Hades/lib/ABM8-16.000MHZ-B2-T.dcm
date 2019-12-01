@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ABM8-16.000MHZ-B2-T
+D ABRACON - ABM8-16.000MHZ-B2-T - CRYSTAL, 16MHZ, 18PF CL, 3.2X2.5MM, SMT
+K
+F http://www.abracon.com/Resonators/abm8.pdf
+$ENDCMP
+#
+#End Doc Library

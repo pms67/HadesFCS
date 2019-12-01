@@ -1,0 +1,68 @@
+Ref Des,Qty,Manufacturer,Mfr Part #,Value,Package,Type,Your Instructions / Notes
+ANT1,1,TE Connectivity,5-1814832-1,5-1814832-1,5-1814832-1:TE_5-1814832-1,THT,"50 Ohm SMA, see 3D picture for orientation"
+BAT1,1,SparkFun,PRT-10474,XT60-M,XT60-M:AMASS_XT60-M,THT,"Male XT-60 Connector, NEGATIVE TERMINAL indicated by DOT on silkscreen, SEE 3D PICTURE FOR REFERENCE!"
+"C1, C8",2,Panasonic,EEE-FPV101XAV,100u,Capacitor_SMD:C_Elec_6.3x7.7,SMD,"Low ESR, High Ripple Current, Al Electrolytic, 35V, Polarity indicated by + on silkscreen"
+"C2, C9",2,Taiyo Yuden,GMK325BJ226MM-T,22u,Capacitor_SMD:C_1210_3225Metric,SMD,"Low ESR, 35V"
+"C3, C4",2,KEMET,C0805C225K4REC7210,2u2,Capacitor_SMD:C_0805_2012Metric,SMD,at least 10V rated
+"C5, C6",2,KEMET,C0805X104K5RAC3316,100n,Capacitor_SMD:C_0805_2012Metric,SMD,at least 10V rated
+C7,1,KEMET,C0805C472J3GEC7210,4n7,Capacitor_SMD:C_0805_2012Metric,SMD,at least 10V rated
+"C10, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25, C26, C28, C30, C31, C34, C35, C36, C40, C41, C42, C43, C44, C45, C46, C47, C48, C49, C51, C54, C55, C56, C58, C60, C61, C63, C68, C69, C70, C71, ",40,Murata Electronics,GRM155R61H104JE14D,100n,Capacitor_SMD:C_0402_1005Metric,SMD,at least 10V rated
+"C11, C12, C62",3,Murata Electronics,GRM188R61E106KA73D,10u,Capacitor_SMD:C_0603_1608Metric,SMD,at least 10V rated
+"C15, C39",2,AVX,F381A106MMAAH1,10u,Capacitor_SMD:C_0603_1608Metric,SMD,"Tantalum, Polarity indicated by + on silkscreen"
+"C13, C14,  C37, C38,",4,Yageo,CC0603KRX5R9BB225,2u2,Capacitor_SMD:C_0603_1608Metric,SMD,ESR < 100mOhms!
+"C27, C29, C50",3,AVX,TACL105K010RTA,1u,Capacitor_SMD:C_0603_1608Metric,SMD,"Tantalum, Polarity indicated by + on silkscreen"
+"C64, C65",2,KEMET,C0603C105Z3VACTU,1u,Capacitor_SMD:C_0603_1608Metric,SMD,at least 10V rated
+"C32, C33, C52, C53, ",4,AVX,04025A100JAT2A,10p,Capacitor_SMD:C_0402_1005Metric,SMD,at least 10V rated
+"C57, ",1,KEMET,C0402C102J5GAC7411,1n,Capacitor_SMD:C_0402_1005Metric,SMD,at least 10V rated
+"C59, ",1,KEMET,C0603C224K4RAC7411,220n,Capacitor_SMD:C_0603_1608Metric,SMD,at least 10V rated
+C66,1,KEMET,C0402C220J8GACTU,22p,Capacitor_SMD:C_0402_1005Metric,SMD,at least 10V rated
+"C67, ",1,KEMET,C0402C103J3RACAUTO,10n,Capacitor_SMD:C_0402_1005Metric,SMD,at least 10V rated
+"D1, D2, D3, D5, D4, ",5,Diodes Incorporated,SD103AWS-7-F,SD103AWS,Diode_SMD:D_SOD-323,SMD,"Schottky diode, Polarity indicated by + on silkscreen"
+"FB1, FB2, FB3, FB4, FB5, FB6, ",6,TDK,MPZ1005S121HT000,Ferrite_Bead_Small,Inductor_SMD:L_0402_1005Metric,SMD,"Ferrite bead, 1.5A current rating"
+"FCC1, ",1,STMicroelectronics,STM32H753VIT6,STM32H753VITx,Package_QFP:LQFP-100_14x14mm_P0.5mm,SMD,"Pin 1 indicated by DOT on silkscreen, WATCH FOR PIN 1 ON DATASHEET (LQFP-100)"
+"GPS_BAT1, ",1,Molex,53048-0210,Conn_01x02,Connector_Molex:Molex_PicoBlade_53048-0210_1x02_P1.25mm_Horizontal,THT,Watch orientation! See attached 3D picture!
+"GPS_NAVC1, ",1,Molex,53048-0710,Conn_01x07,Connector_Molex:Molex_PicoBlade_53048-0710_1x07_P1.25mm_Horizontal,THT,Watch orientation! See attached 3D picture!
+"HSE1, HSE2",2,ABRACON,ABM8G-25.000MHZ-4Y-T3,25MHz,Crystal:Crystal_SMD_Abracon_ABM8G-4Pin_3.2x2.5mm,SMD,"Pin 1 indicated by DOT on silkscreen, WATCH FOR PIN 1 ON DATASHEET"
+L1,1,Bourns,SRP1265A-150M,15u,SRP1265A-150M:INDPM135125X650N,SMD,DC Current Rating at least 9A
+L2,1,Murata Electronics,LQW15AN27NJ8ZD,27n,Inductor_SMD:L_0402_1005Metric,SMD,
+"LED1, LED2, LED13, LED14, ",4,Dialight,599-0081-007F,GREEN,LED_SMD:LED_0603_1608Metric,SMD,"Green LED, Polarity indicated by + on silkscreen"
+"LED3, LED4, LED9, LED10, ",4,Dialight,599-0010-007F,RED,LED_SMD:LED_0603_1608Metric,SMD,"Red LED, Polarity indicated by + on silkscreen"
+"LED5, LED11, ",2,Dialight,599-0040-007F,YELLOW,LED_SMD:LED_0603_1608Metric,SMD,"Yellow LED, Polarity indicated by + on silkscreen"
+"LED6, LED7, LED8, LED12, ",4,Dialight,599-0091-007F,BLUE,LED_SMD:LED_0603_1608Metric,SMD,"Blue LED, Polarity indicated by + on silkscreen"
+"NAVC1, ",1,STMicroelectronics,STM32F405RGT6,STM32F405RGTx,Package_QFP:LQFP-64_10x10mm_P0.5mm,SMD,"Pin 1 indicated by DOT on silkscreen, WATCH FOR PIN 1 ON DATASHEET (LQFP-64)"
+"PWM_POW1, ",1,Samtec,HTSW-108-07-T-T,Conn_02x08_Odd_Even,Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical,THT,"3 Rows 8 Columns (24 Positions total), 2.54mm Pitch, Vertical Male Header Pins"
+"R1, ",1,Yageo,PE2512FKE7W0R01Z,0.01,Resistor_SMD:R_2512_6332Metric,SMD,1W 1% 10mOhms 2512 Current Sense Resistor
+"R2, R3, ",2,Panasonic,ERJ-T06J103V,10k,Resistor_SMD:R_0805_2012Metric,SMD,1/4W
+"R4, ",1,Panasonic,ERJ-PB6B1962V,19k6,Resistor_SMD:R_0805_2012Metric,SMD,"1%, 1/8W"
+"R5, ",1,KOA Speer,RK73H2ATTD6R80F,6k8,Resistor_SMD:R_0805_2012Metric,SMD,"1%, 1/8W"
+"R6, ",1,KOA Speer,RK73H2ATTD1301F,1k3,Resistor_SMD:R_0805_2012Metric,SMD,"1%, 1/8W"
+"R7, R58, R59, ",3,Panasonic,ERJ-PA3F5600V,560,Resistor_SMD:R_0603_1608Metric,SMD,1/4W
+"R8, ",1,Panasonic,ERJ-PA3F2400V,240,Resistor_SMD:R_0603_1608Metric,SMD,1/4W
+"R9, R10, R11, R12, R13, R14, R28, R29, R30, R31, ",10,KOA Speer,SG73P1ETTP4701F,4k7,Resistor_SMD:R_0402_1005Metric,SMD,1/4W
+"R15, R16, R17, R33, R34, R35, ",6,Panasonic,ERJ-PA3D3300V,330,Resistor_SMD:R_0603_1608Metric,SMD,1/4W
+"R18, R19, R20, R36, ",4,Panasonic,ERJ-PA3D1000V,100,Resistor_SMD:R_0603_1608Metric,SMD,1/4W
+"R21, ",1,Panasonic,ERA-2AED470X,47,Resistor_SMD:R_0402_1005Metric,SMD,1/8W
+"R22, R24, R25, R26, R27, R37, R38, ",7,TE Connectivity / Holsworthy,CRGP0402F10K,10k,Resistor_SMD:R_0402_1005Metric,SMD,1/4W
+"R23, R32, ",2,Panasonic,ERJ-PA3F6200V,620,Resistor_SMD:R_0603_1608Metric,SMD,1/4W
+"R39, R40, R41, R42, R43, R44, R45, R46, R47, R48, R49, ",11,Panasonic,ERA-2AKD100X,10,Resistor_SMD:R_0402_1005Metric,SMD,1/8W
+"R50, R51, ",2,Vishay / Dale,RCS06030000Z0EC,0,Resistor_SMD:R_0603_1608Metric,SMD,1/8W
+"R52, R53, R55, R56, ",4,Panasonic,ERA-2AKD220X,22,Resistor_SMD:R_0402_1005Metric,SMD,1/8W
+"R54, R57, ",2,TE Connectivity / Holsworthy,CRGP0402F560R,560,Resistor_SMD:R_0402_1005Metric,SMD,1/8W
+"RCIN_FCC1, ",1,Molex,53048-0610,Conn_01x06,Connector_Molex:Molex_PicoBlade_53048-0610_1x06_P1.25mm_Horizontal,THT,Watch orientation! See attached 3D picture!
+"REG1, ",1,Microchip Technology,MIC26903YJL-TR,MIC26903YJL-TR,MLF-28,SMD,Pin 1 indicated by DOT on silkscreen
+"REG2, ",1,STMicroelectronics,LD39200PU33R,LD39200PU33R,DFN-6,SMD,Pin 1 indicated by DOT on silkscreen
+"SW1, SW5, ",2,ALPS,SKRPANE010,SKRPANE010,SKRPANE010:SKRPADE010,SMD,See attached 3D picture for orientation
+"SW2, SW3, SW4, ",3,C&K,TDD01H0SB1R,TDD01H0SB1R,TDD01H0SB1R:SOT175P420X230-3N,SMD,See attached 3D picture for orientation
+"SWD1, SWD2, ",2,Harwin,M50-3600542R,Conn_02x05_Odd_Even,Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD,SMD,"2 Rows, 5 Columns (10 Positions), SMD 1.27mm pitch, See attached 3D picture for orientation"
+"U1, ",1,Texas Instruments,INA219AIDCNR,INA219AIDCNR,SOT-23-8,SMD,Pin 1 indicated by DOT on silkscreen
+"U2, ",1,NXP Semiconductors,"PCA9685PW,118",PCA9685PW,TSSOP28,SMD,Pin 1 indicated by DOT on silkscreen
+"U3, U9, ",2,Microchip Technology,24CW1280T-I/OT,24CW1280T-I_OT,SOT-23-5,SMD,Pin 1 indicated by DOT on silkscreen
+"U4, ",1,Winbond,W25N01GVZEIG TR,W25N01GVZEIG_TR,WSON 8x6-mm ,SMD,Pin 1 indicated by DOT on silkscreen
+"U5, ",1,Bosch Sensortec,BMI088,BMI088,LGA-16,SMD,Pin 1 indicated by DOT on silkscreen
+"U6, ",1,Texas Instruments,TMP100NA/3K,TMP100,SOT-23-6,SMD,Pin 1 indicated by DOT on silkscreen
+"U7, ",1,Honeywell,MPRLS0025PA00001A,MPRLS0025PA00001A,MPRLS0025PA00001A:XDCR_MPRLS0025PA00001A,SMD,Pin 1 indicated by DOT on silkscreen
+"U8, ",1,STMicroelectronics,IIS2MDCTR,IIS2MDCTR,LGA-12 2.0 x 2.0 x 0.7 mm,SMD,Pin 1 indicated by DOT on silkscreen
+"U10, ",1,u-blox,MAX-8Q,u-blox MAX-8Q,MODULE-GPS-SMD-MAX-7Q-0_18P-9.6X10MM_:GPS18P-SMD-1.1-10X9.6MM,SMD,"Pin 1 indicated by DOT on silkscreen, Datasheet: https://www.u-blox.com/sites/default/files/MAX-8_DataSheet_%28UBX-16000093%29.pdf"
+"U11, U12, ",2,Jiangsu Qin Heng,CH330N,otter:CH330,SOP-8,SMD,"Pin 1 indicated by DOT on silkscreen, Datasheet: https://cdn.hackaday.io/files/1623896947650976/CH330DS1.zh-CN.en.pdf"
+"UART3_FCC1, UART4_FCC1, I2C3_FCC1, ADC_FCC1, UART5_FCC1, UART4_NAVC1, I2C3_NAVC1, ",7,Molex,53048-0410,Conn_01x04,Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal,THT,Watch orientation! See attached 3D picture!
+"USB1, USB3, USB2, USB4, ",4,Wurth Elektronik,629105150521,USB_B_Micro,Connector_USB:USB_Micro-B_Wuerth_629105150521_CircularHoles,THT/SMD,See attached 3D picture for orientation

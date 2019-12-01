@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP SKRPANE010
+D Tactile Switches 500mOhm 1.57N 16VDC 4.2X3.2X2.5MM 50mA
+K
+F https://www.alps.com/prod/info/E/HTML/Tact/SurfaceMount/SKRP/SKRPANE010.html
+$ENDCMP
+#
+#End Doc Library

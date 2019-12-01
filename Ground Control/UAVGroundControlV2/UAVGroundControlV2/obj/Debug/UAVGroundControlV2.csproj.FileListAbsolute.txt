@@ -1,0 +1,10 @@
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\bin\Debug\UAVGroundControlV2.exe.config
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\bin\Debug\UAVGroundControlV2.exe
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\bin\Debug\UAVGroundControlV2.pdb
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\obj\Debug\UAVGroundControlV2.frmMain.resources
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\obj\Debug\UAVGroundControlV2.Properties.Resources.resources
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\obj\Debug\UAVGroundControlV2.csproj.GenerateResource.cache
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\obj\Debug\UAVGroundControlV2.csproj.CoreCompileInputs.cache
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\obj\Debug\UAVGroundControlV2.exe
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\obj\Debug\UAVGroundControlV2.pdb
+C:\Users\phili\Dropbox\Drone\Software\UAVGroundControlV2\UAVGroundControlV2\obj\Debug\UAVGroundControlV2.csprojResolveAssemblyReference.cache

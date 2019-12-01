@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP SRP1265A-150M
+D Bourns SRP1265A Series Type 1265 Shielded Wire-wound SMD Inductor with a Carbonyl Powder Core, 15 uH +/-20% Wire-Wound
+K
+F https://www.bourns.com/docs/Product-Datasheets/SRP1265A.pdf
+$ENDCMP
+#
+#End Doc Library

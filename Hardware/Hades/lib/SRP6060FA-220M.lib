@@ -1,0 +1,30 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model SRP6060FA-220M
+#/1348153/71446/2.43/2/4/Inductor
+DEF SRP6060FA-220M L 0 30 Y Y 1 F N
+F0 "L" 650 250 50 H V L CNN
+F1 "SRP6060FA-220M" 650 150 50 H V L CNN
+F2 "SRP6060FA220M" 650 50 50 H I L CNN
+F3 "https://www.bourns.com/docs/Product-Datasheets/SRP6060FA.pdf" 650 -50 50 H I L CNN
+F4 "Fixed Inductors 22uH 20% 5A" 650 -150 50 H I L CNN "Description"
+F5 "6" 650 -250 50 H I L CNN "Height"
+F6 "Bourns" 650 -350 50 H I L CNN "Manufacturer_Name"
+F7 "SRP6060FA-220M" 650 -450 50 H I L CNN "Manufacturer_Part_Number"
+F8 "652-SRP6060FA-220M" 650 -550 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.com/Search/Refine.aspx?Keyword=652-SRP6060FA-220M" 650 -650 50 H I L CNN "Mouser Price/Stock"
+F10 "" 650 -750 50 H I L CNN "RS Part Number"
+F11 "" 650 -850 50 H I L CNN "RS Price/Stock"
+F12 "71262024" 650 -950 50 H I L CNN "Allied_Number"
+F13 "https://www.alliedelec.com/bourns-srp6060fa-220m/71262024/" 650 -1050 50 H I L CNN "Allied Price/Stock"
+DRAW
+X ~ 1 0 0 200 R 50 50 0 0 B
+X ~ 2 800 0 200 L 50 50 0 0 B
+A 250 -2 50 1777 -23 0 1 6 N 300 0 200 0
+A 350 -2 50 1777 -23 0 1 6 N 400 0 300 0
+A 450 -2 50 1777 -23 0 1 6 N 500 0 400 0
+A 550 -2 50 1777 -23 0 1 6 N 600 0 500 0
+ENDDRAW
+ENDDEF
+#
+#End Library

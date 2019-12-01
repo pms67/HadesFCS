@@ -1,0 +1,61 @@
+% Mass and Inertia (5)
+mass=25.0
+Jx=0.8244
+Jy=1.135
+Jz=1.759
+Jxz=0.1204
+
+% Geometry (4)
+S=0.55
+b=2.8956
+c=0.18994
+eff=0.9
+
+% Longitudinal Aerodynamic Coefficients (16)
+C_L_0=0.28
+C_L_alpha=3.45
+C_L_q=0
+C_L_delta_e=-0.36
+C_D_0=0.03
+C_D_alpha=0.30
+C_D_p=0.0437
+C_D_q=0
+C_D_delta_e=0
+C_m_0=-0.02338
+C_m_alpha=-0.38
+C_m_q=-3.6
+C_m_delta_e=-0.5
+M=50
+alpha_0=0.4712
+epsilon=0.1592
+
+% Lateral Aerodynamic Coefficients (18)
+C_Y_0=0
+C_Y_beta=-0.98
+C_Y_p=0
+C_Y_r=0
+C_Y_delta_a=0
+C_Y_delta_r=-0.17
+C_l_0=0
+C_l_beta=-0.12
+C_l_p=-0.26
+C_l_r=0.14
+C_l_delta_a=0.08
+C_l_delta_r=0.105
+C_n_0=0
+C_n_beta=0.25
+C_n_p=0.022
+C_n_r=-0.35
+C_n_delta_a=0.06
+C_n_delta_r=-0.032
+
+% Propulsion (5)
+S_prop=0.2027
+k_motor=80
+k_T_p=0
+k_omega=0
+C_prop=1.0
+
+% Environment (2)
+g=9.80655
+rho=1.2682

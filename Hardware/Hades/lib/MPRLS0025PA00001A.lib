@@ -1,0 +1,36 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# MPRLS0025PA00001A
+#
+DEF MPRLS0025PA00001A U 0 40 Y Y 1 L N
+F0 "U" -601 701 50 H V L BNN
+F1 "MPRLS0025PA00001A" -600 -801 50 H V L BNN
+F2 "XDCR_MPRLS0025PA00001A" 0 0 50 H I L BNN
+F3 "MPRLS0025PA00001A" 0 0 50 H I L BNN
+F4 "Unavailable" 0 0 50 H I L BNN
+F5 "Pressure Sensor 0psi to 25psi Absolute 12-Pin T/R" 0 0 50 H I L BNN
+F6 "SMD-10 Honeywell" 0 0 50 H I L BNN
+F7 "Honeywell Sensing" 0 0 50 H I L BNN
+F8 "None" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 -600 700 600 700 N
+P 2 0 0 10 600 700 600 -700 N
+P 2 0 0 10 600 -700 -600 -700 N
+P 2 0 0 10 -600 -700 -600 700 N
+X SS 1 -800 -100 200 R 40 40 0 0 I 
+X MOSI/SDA 2 -800 -300 200 R 40 40 0 0 B 
+X SCLK/SCL 3 -800 -200 200 R 40 40 0 0 I C
+X MISO 7 -800 -400 200 R 40 40 0 0 O 
+X VO+ 4 800 400 200 L 40 40 0 0 O 
+X VO- 6 800 300 200 L 40 40 0 0 O 
+X RES 9 -800 100 200 R 40 40 0 0 I 
+X VDD 12 800 600 200 L 40 40 0 0 W 
+X VSS 10 800 -600 200 L 40 40 0 0 W 
+X EOC 8 800 100 200 L 40 40 0 0 O 
+ENDDRAW
+ENDDEF
+#
+# End Library

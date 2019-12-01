@@ -1,0 +1,7 @@
+-IC:\Users\phili\Dropbox\Drone\SUAS_Code_v1\SUAS_Code\codegen\lib\getKalmanGain
+-IC:\Users\phili\Dropbox\Drone\SUAS_Code_v1\SUAS_Code
+-I"C:\Program Files\MATLAB\R2019a\extern\include"
+-I"C:\Program Files\MATLAB\R2019a\simulink\include"
+-I"C:\Program Files\MATLAB\R2019a\rtw\c\src"
+-I"C:\Program Files\MATLAB\R2019a\rtw\c\src\ext_mode\common"
+-I"C:\Program Files\MATLAB\R2019a\rtw\c\ert"

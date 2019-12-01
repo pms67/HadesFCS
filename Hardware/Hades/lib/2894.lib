@@ -1,0 +1,26 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model 2894
+#/1840530/71446/2.43/3/4/Hardware
+DEF 2894 H 0 30 Y Y 1 F N
+F0 "H" 750 300 50 H V L CNN
+F1 "2894" 750 200 50 H V L CNN
+F2 "2894" 750 100 50 H I L CNN
+F3 "https://www.keyelco.com/product-pdf.cfm?p=14467" 750 0 50 H I L CNN
+F4 "Coin Cell Battery Holders CR1220 COIN CELL SMT RETAINER" 750 -100 50 H I L CNN "Description"
+F5 "2.42" 750 -200 50 H I L CNN "Height"
+F6 "Keystone Electronics" 750 -300 50 H I L CNN "Manufacturer_Name"
+F7 "2894" 750 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "534-2894" 750 -500 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.com/Search/Refine.aspx?Keyword=534-2894" 750 -600 50 H I L CNN "Mouser Price/Stock"
+F10 "" 750 -700 50 H I L CNN "RS Part Number"
+F11 "" 750 -800 50 H I L CNN "RS Price/Stock"
+DRAW
+X + 1 0 0 200 R 50 50 0 0 B
+X - 2 0 -100 200 R 50 50 0 0 B
+X MP1 MP1 900 0 200 L 50 50 0 0 B
+P 5 0 1 6 200 100 700 100 700 -200 200 -200 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library

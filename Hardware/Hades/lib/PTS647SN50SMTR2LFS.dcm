@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP PTS647SN50SMTR2LFS
+D Tactile Switches 50mA 12VDC, 1.0N 5.0mm H, G leads
+K
+F https://www.ckswitches.com/media/2567/pts647.pdf
+$ENDCMP
+#
+#End Doc Library

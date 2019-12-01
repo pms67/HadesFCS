@@ -1,0 +1,10 @@
+{
+    "name": "UnityEditor.SpatialTracking",
+    "references": [
+      "UnityEngine.SpatialTracking"      
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

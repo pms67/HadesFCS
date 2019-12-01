@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP STM32F405RGT6
+D MCU 32-Bit, ARM Cortex M4, 1MB Flash STMicroelectronics STM32F405RGT6, 32bit ARM Cortex M4F Microcontroller, 168MHz, 1024 kB Flash, 64-Pin LQFP
+K
+F http://www.st.com/web/en/resource/technical/document/datasheet/DM00037051.pdf
+$ENDCMP
+#
+#End Doc Library

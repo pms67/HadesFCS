@@ -1,0 +1,46 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# 5-1814832-1
+#
+DEF 5-1814832-1 J 0 40 Y Y 1 L N
+F0 "J" -150 160 50 H V L BNN
+F1 "5-1814832-1" -170 -220 50 H V L BNN
+F2 "TE_5-1814832-1" 0 0 50 H I L BNN
+F3 "https://www.te.com/usa-en/product-518148321.html?te_bu=Cor&te_type=disp&te_campaign=seda_glo_cor-seda-global-disp-prtnr-fy19-seda-model-bom-cta_sma-317_1&elqCampaignId=32493" 0 0 50 H I L BNN
+F4 "TE Connectivity" 0 0 50 H I L BNN
+F5 "SMA/QMA socket 50 Ohm | TE Connectivity 518148321 _SMA/QMA socket 50 Ohm RF Connectors_." 0 0 50 H I L BNN
+F6 "518148321" 0 0 50 H I L BNN
+F7 "None" 0 0 50 H I L BNN
+F8 "Unavailable" 0 0 50 H I L BNN
+F9 "None" 0 0 50 H I L BNN
+DRAW
+C 0 100 40 0 0 10 N
+P 2 0 0 10 -40 60 0 60 N
+P 2 0 0 10 0 60 40 60 N
+P 2 0 0 10 0 -100 -140 -100 N
+P 2 0 0 10 -190 140 -150 100 N
+P 2 0 0 10 -190 60 -150 100 N
+P 2 0 0 10 -180 -60 -140 -100 N
+P 2 0 0 10 -180 -140 -140 -100 N
+P 2 0 0 10 0 60 0 -100 N
+C 0 -100 10 0 0 10 N
+P 2 0 0 10 -150 100 100 100 N
+P 2 0 0 10 100 -100 0 -100 N
+P 2 0 0 10 0 -100 0 -130 N
+P 2 0 0 10 0 -130 -30 -130 N
+P 2 0 0 10 0 -130 30 -130 N
+P 2 0 0 10 -30 -130 -50 -160 N
+P 2 0 0 10 0 -130 -20 -160 N
+P 2 0 0 10 30 -130 10 -160 N
+X 1 1 100 100 200 L 40 40 0 0 P 
+X 2 2 100 -100 200 L 40 40 0 0 P 
+X 2 3 100 -100 200 L 40 40 0 0 P 
+X 2 4 100 -100 200 L 40 40 0 0 P 
+X 2 5 100 -100 200 L 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

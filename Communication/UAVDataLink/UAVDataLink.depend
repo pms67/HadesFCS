@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1570116116 source:c:\users\phili\dropbox\drone\software\datalink\uavdatalink\main.c
+	<stdio.h>
+	<stdlib.h>
+	"UAVDataLink.h"
+
+1570117808 c:\users\phili\dropbox\drone\software\datalink\uavdatalink\uavdatalink.h
+	<stdint.h>
+
+1570116140 source:c:\users\phili\dropbox\drone\software\datalink\uavdatalink\uavdatalink.cpp
+

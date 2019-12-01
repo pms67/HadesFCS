@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP SRP6060FA-220M
+D Fixed Inductors 22uH 20% 5A
+K
+F https://www.bourns.com/docs/Product-Datasheets/SRP6060FA.pdf
+$ENDCMP
+#
+#End Doc Library

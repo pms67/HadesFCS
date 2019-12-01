@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NB679GD-P
+D Switching Voltage Regulators 26V Fixed 5V-8A Sync Buck Converter
+K
+F https://www.monolithicpower.com/pub/media/document/NB679_r1.03.pdf
+$ENDCMP
+#
+#End Doc Library

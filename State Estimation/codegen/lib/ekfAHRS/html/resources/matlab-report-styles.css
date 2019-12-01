@@ -1,0 +1,144 @@
+/*  Copyright 1984-2013 The MathWorks, Inc. */
+
+PRE {
+  font-size: 100%;
+}
+
+.mono {
+  font-family: monospace;
+  font-size: 100%;
+}
+ 
+.head {
+  font-weight: bold;
+}
+
+.report-head {
+  padding: 8px;
+  font-size: 150%;
+  font-weight: bold;
+  background: #008;
+  color: #FFF;
+}
+
+.report-desc {
+  margin-top:-8px;
+  margin-bottom:4px;
+}
+ 
+.subdir-top {
+  border-top:1px solid #CCC;  
+  margin-top:8px; 
+  margin-bottom:2px;
+}
+
+.subdir-bottom {
+  border-top:1px solid #CCC;  
+  margin-top:4px; 
+  margin-bottom:8px;
+}
+
+.grayline {
+  border-top:1px solid #CCC;  
+  margin-top:4px; 
+  margin-bottom:4px;
+}
+
+.td-linetop {
+  border-top:1px solid #BBB;  
+}
+
+.td-dashtop {
+  border-top:1px dotted #CCC;
+  background-color: #F0F0F0;
+}
+
+.td-linetopleft {
+  border-top:1px solid #BBB;  
+  border-left:1px solid #BBB;  
+}
+
+.td-dashtopleft {
+  border-top:1px dotted #CCC;  
+  border-left:1px solid #BBB;  
+  background-color: #F0F0F0;
+}
+
+.td-linebottomrt {
+  border-bottom:1px solid #BBB;  
+  border-right:1px solid #BBB;  
+}
+
+.td-function {
+  border-top:1px solid #CCC;  
+  border-left:1px solid #BBB;  
+  background: #F0F8FF;
+}
+
+.td-script {
+  border-top:1px solid #CCC;  
+  border-left:1px solid #BBB;  
+  background: #FFE;
+}
+
+.td-cellscript {
+  border-top:1px solid #CCC;  
+  background: #FFF;
+}
+
+
+/*    */
+
+.soft {
+  color: #888;
+}
+
+.warning {
+  background: #FFC0C0;
+}
+
+.xtrainfo {
+  font-family: monospace;
+  padding-left:3em;
+  padding-bottom:0px;
+  margin-bottom:-1em;
+}
+
+#FunctionListingTable{
+    border:0px;
+    border-spacing:0px;
+    border-collapse:collapse;
+}
+
+#FunctionListingTable tr {
+    padding:0px;
+    border:0px;
+}
+
+#FunctionListingTable th {
+    text-align:center;
+}
+
+#FunctionListingTable th.leftAligned {
+    text-align:left;
+}
+
+#FunctionListingTable pre {
+    margin:0px;
+}
+
+#FunctionListingTable th > pre > span {
+    font-weight:bold;
+    text-decoration:none;
+}
+
+#FunctionListingTable td {
+    padding:0px;
+    text-align:center;
+}
+
+#FunctionListingTable td.leftAligned {
+    padding:0px;
+    text-align:left;
+}
+

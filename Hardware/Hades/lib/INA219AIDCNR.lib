@@ -1,0 +1,34 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# INA219AIDCNR
+#
+DEF INA219AIDCNR U 0 40 Y Y 1 L N
+F0 "U" -211 760 50 H V L BNN
+F1 "INA219AIDCNR" -186 -1016 50 H V L BNN
+F2 "SOT65P280X145-8N" 0 0 50 H I L BNN
+F3 "Unavailable" 0 0 50 H I L BNN
+F4 "26-V, Bi-Directional, Zero-Drift, High-Side, I2C Out Current/Power Monitor 8-SOT-23 -40 to 125" 0 0 50 H I L BNN
+F5 "Texas Instruments" 0 0 50 H I L BNN
+F6 "SOT-23 Texas Instruments" 0 0 50 H I L BNN
+F7 "None" 0 0 50 H I L BNN
+F8 "INA219AIDCNR" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 16 -500 600 -500 -800 N
+P 2 0 0 16 -500 -800 500 -800 N
+P 2 0 0 16 500 -800 500 600 N
+P 2 0 0 16 500 600 -500 600 N
+X VS 4 -700 400 200 R 40 40 0 0 W 
+X VIN+ 1 -700 200 200 R 40 40 0 0 I 
+X VIN- 2 -700 100 200 R 40 40 0 0 I 
+X A0 7 -700 -100 200 R 40 40 0 0 I 
+X A1 8 -700 -200 200 R 40 40 0 0 I 
+X SCL 5 -700 -400 200 R 40 40 0 0 I 
+X GND 3 -700 -600 200 R 40 40 0 0 P 
+X SDA 6 700 400 200 L 40 40 0 0 B 
+ENDDRAW
+ENDDEF
+#
+# End Library

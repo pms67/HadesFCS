@@ -1,0 +1,39 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model SM3041-015-D-C-3-S
+#/1016650/71446/2.43/16/3/Integrated Circuit
+DEF SM3041-015-D-C-3-S IC 0 30 Y Y 1 F N
+F0 "IC" 1050 300 50 H V L CNN
+F1 "SM3041-015-D-C-3-S" 1050 200 50 H V L CNN
+F2 "SOIC127P1031X952-16N" 1050 100 50 H I L CNN
+F3 "https://www.mouser.co.uk/datasheet/2/589/SM3041_Datasheet2-930329.pdf" 1050 0 50 H I L CNN
+F4 "Board Mount Pressure Sensors Med Pressure Sensor Digital Output" 1050 -100 50 H I L CNN "Description"
+F5 "9.52" 1050 -200 50 H I L CNN "Height"
+F6 "Silicon Microstructures, Inc." 1050 -300 50 H I L CNN "Manufacturer_Name"
+F7 "SM3041-015-D-C-3-S" 1050 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "987-SM3041-015DC3S" 1050 -500 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.com/Search/Refine.aspx?Keyword=987-SM3041-015DC3S" 1050 -600 50 H I L CNN "Mouser Price/Stock"
+F10 "" 1050 -700 50 H I L CNN "RS Part Number"
+F11 "" 1050 -800 50 H I L CNN "RS Price/Stock"
+DRAW
+X NC_1 1 0 0 200 R 50 50 0 0 B
+X NC_2 2 0 -100 200 R 50 50 0 0 B
+X NC_3 3 0 -200 200 R 50 50 0 0 B
+X NC_4 4 0 -300 200 R 50 50 0 0 B
+X NC_5 5 0 -400 200 R 50 50 0 0 B
+X GND 6 0 -500 200 R 50 50 0 0 B
+X VDD 7 0 -600 200 R 50 50 0 0 B
+X NC_6 8 0 -700 200 R 50 50 0 0 B
+X NC_12 16 1200 0 200 L 50 50 0 0 B
+X NC_11 15 1200 -100 200 L 50 50 0 0 B
+X NC_10 14 1200 -200 200 L 50 50 0 0 B
+X NC_9 13 1200 -300 200 L 50 50 0 0 B
+X NC_8 12 1200 -400 200 L 50 50 0 0 B
+X SCL 11 1200 -500 200 L 50 50 0 0 B
+X SDA 10 1200 -600 200 L 50 50 0 0 B
+X NC_7 9 1200 -700 200 L 50 50 0 0 B
+P 5 0 1 6 200 100 1000 100 1000 -800 200 -800 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library

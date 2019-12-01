@@ -1,0 +1,70 @@
+PCBNEW-LibModule-V1  
+# encoding utf-8
+Units mm
+$INDEX
+TE_5-1814832-1
+$EndINDEX
+$MODULE TE_5-1814832-1
+Po 0 0 0 15 00000000 00000000 ~~
+Li TE_5-1814832-1
+Cd 
+Sc 00000000
+At STD
+Op 0 0 0
+.SolderMask 0
+.SolderPaste 0
+T0 -1.01029 -4.53632 1.00029 1.00029 0 0.05 N V 21 "TE_5-1814832-1"
+T1 -0.17517 4.86946 1.00091 1.00091 0 0.05 N V 21 "VAL**"
+DS -3.2 -3.2 3.2 -3.2 0.127 27
+DS 3.2 -3.2 3.2 3.2 0.127 27
+DS 3.2 3.2 -3.2 3.2 0.127 27
+DS -3.2 3.2 -3.2 -3.2 0.127 27
+DS -1.3 -3.2 1.3 -3.2 0.127 21
+DS 3.2 1.3 3.2 -1.3 0.127 21
+DS -3.2 1.3 -3.2 -1.3 0.127 21
+DS 1.3 3.2 -1.3 3.2 0.127 21
+DS -3.9 -3.9 3.9 -3.9 0.05 26
+DS 3.9 -3.9 3.9 3.9 0.05 26
+DS 3.9 3.9 -3.9 3.9 0.05 26
+DS -3.9 3.9 -3.9 -3.9 0.05 26
+$PAD
+Sh "1" C 2.25 2.25 0 0 0
+Dr 1.5 0 0
+At STD N 00C0FFFF
+.SolderMask 0
+Ne 0 ""
+Po 0 0
+$EndPAD
+$PAD
+Sh "2" C 2.4 2.4 0 0 0
+Dr 1.6 0 0
+At STD N 00C0FFFF
+.SolderMask 0
+Ne 0 ""
+Po -2.54 -2.54
+$EndPAD
+$PAD
+Sh "3" C 2.4 2.4 0 0 0
+Dr 1.6 0 0
+At STD N 00C0FFFF
+.SolderMask 0
+Ne 0 ""
+Po 2.54 -2.54
+$EndPAD
+$PAD
+Sh "5" C 2.4 2.4 0 0 0
+Dr 1.6 0 0
+At STD N 00C0FFFF
+.SolderMask 0
+Ne 0 ""
+Po 2.54 2.54
+$EndPAD
+$PAD
+Sh "4" C 2.4 2.4 0 0 0
+Dr 1.6 0 0
+At STD N 00C0FFFF
+.SolderMask 0
+Ne 0 ""
+Po -2.54 2.54
+$EndPAD
+$EndMODULE TE_5-1814832-1

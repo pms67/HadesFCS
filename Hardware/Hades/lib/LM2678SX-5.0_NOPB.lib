@@ -1,0 +1,32 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# LM2678SX-5.0/NOPB
+#
+DEF LM2678SX-5.0/NOPB U 0 40 Y Y 1 L N
+F0 "U" -601 420 50 H V L BNN
+F1 "LM2678SX-5.0/NOPB" -602 -522 50 H V L BNN
+F2 "TO127P1435X464-7" 0 0 50 H I L BNN
+F3 "TO-263-7 Texas Instruments" 0 0 50 H I L BNN
+F4 "SIMPLE SWITCHER 8V to 40V, 5A High Efficiency Step-Down DC/DC Switching Regulator 7-DDPAK/TO-263 -40 to 125" 0 0 50 H I L BNN
+F5 "None" 0 0 50 H I L BNN
+F6 "Unavailable" 0 0 50 H I L BNN
+F7 "Texas Instruments" 0 0 50 H I L BNN
+F8 "LM2678SX-5.0/NOPB" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 -600 400 -600 -400 N
+P 2 0 0 10 -600 -400 600 -400 N
+P 2 0 0 10 600 -400 600 400 N
+P 2 0 0 10 600 400 -600 400 N
+X FB 6 800 100 200 L 40 40 0 0 I 
+X INPUT 2 -800 0 200 R 40 40 0 0 W 
+X GND 4 800 -300 200 L 40 40 0 0 W 
+X CB 3 800 300 200 L 40 40 0 0 P 
+X SWITCH_OUTPUT 1 800 -100 200 L 40 40 0 0 O 
+X ON/!OFF 7 -800 300 200 R 40 40 0 0 I 
+ENDDRAW
+ENDDEF
+#
+# End Library

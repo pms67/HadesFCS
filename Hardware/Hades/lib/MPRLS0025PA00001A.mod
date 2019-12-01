@@ -1,0 +1,132 @@
+PCBNEW-LibModule-V1  
+# encoding utf-8
+Units mm
+$INDEX
+XDCR_MPRLS0025PA00001A
+$EndINDEX
+$MODULE XDCR_MPRLS0025PA00001A
+Po 0 0 0 15 00000000 00000000 ~~
+Li XDCR_MPRLS0025PA00001A
+Cd 
+Sc 00000000
+At SMD
+Op 0 0 0
+.SolderMask 0
+.SolderPaste 0
+T0 -0.70061 -3.70329 0.788102 0.788102 0 0.05 N V 21 "XDCR_MPRLS0025PA00001A"
+T1 -0.4005 3.40417 0.788362 0.788362 0 0.05 N V 21 "VAL**"
+DS 2.5 2.5 -2.5 2.5 0.127 27
+DS -2.5 2.5 -2.5 -2.5 0.127 27
+DS -2.5 -2.5 2.5 -2.5 0.127 27
+DS 2.5 -2.5 2.5 2.5 0.127 27
+DS 1.875 -2.5 2.5 -2.5 0.127 21
+DS 2.5 -2.5 2.5 -1.875 0.127 21
+DS -2.5 -2.5 -1.875 -2.5 0.127 21
+DS -2.5 -2.5 -2.5 -1.875 0.127 21
+DS -2.5 2.5 -1.875 2.5 0.127 21
+DS -2.5 2.5 -2.5 1.875 0.127 21
+DS 2.5 2.5 1.875 2.5 0.127 21
+DS 2.5 2.5 2.5 1.875 0.127 21
+DC -1.4 -2.9 -1.3 -2.9 0.2 21
+DC -1.2 -2.1 -1.1 -2.1 0.2 27
+DS -2.75 -2.75 2.75 -2.75 0.05 26
+DS 2.75 -2.75 2.75 2.75 0.05 26
+DS 2.75 2.75 -2.75 2.75 0.05 26
+DS -2.75 2.75 -2.75 -2.75 0.05 26
+$PAD
+Sh "1" R 0.7 0.65 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po -1.27 -2.1
+$EndPAD
+$PAD
+Sh "2" R 0.7 0.65 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 0 -2.1
+$EndPAD
+$PAD
+Sh "3" R 0.7 0.65 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 1.27 -2.1
+$EndPAD
+$PAD
+Sh "4" R 0.65 0.7 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 2.1 -1.27
+$EndPAD
+$PAD
+Sh "5" R 0.65 0.7 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 2.1 0
+$EndPAD
+$PAD
+Sh "6" R 0.65 0.7 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 2.1 1.27
+$EndPAD
+$PAD
+Sh "7" R 0.7 0.65 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 1.27 2.1
+$EndPAD
+$PAD
+Sh "8" R 0.7 0.65 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po 0 2.1
+$EndPAD
+$PAD
+Sh "9" R 0.7 0.65 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po -1.27 2.1
+$EndPAD
+$PAD
+Sh "10" R 0.65 0.7 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po -2.1 1.27
+$EndPAD
+$PAD
+Sh "11" R 0.65 0.7 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po -2.1 0
+$EndPAD
+$PAD
+Sh "12" R 0.65 0.7 0 0 1800
+At SMD N 00888000
+.SolderMask 0
+.SolderPaste 0
+Ne 0 ""
+Po -2.1 -1.27
+$EndPAD
+$EndMODULE XDCR_MPRLS0025PA00001A
