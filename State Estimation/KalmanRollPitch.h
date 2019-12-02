@@ -28,7 +28,7 @@ void KalmanRollPitch_Init(KalmanRollPitch *kal, float Pinit, float *Q, float *R)
 	kal->theta = 0.0f;
 	kal->P[0] = Pinit; kal->P[1] = 0.0f;
 	kal->P[2] = 0.0f;  kal->P[3] = Pinit;
-	kal->Q[0] = Q[0];  kal->Q[2] = Q[1];
+	kal->Q[0] = Q[0];  kal->Q[1] = Q[1];
 	kal->R[0] = R[0];  kal->R[1] = R[1]; kal->R[2] = R[2];
 }
 
@@ -87,7 +87,7 @@ void KalmanRollPitch_Update(KalmanRollPitch *kal, float *gyr, float *acc, float 
 	
 	/* Kalman gain K = P * C' / (C * P * C' + R) */
 	float G[9] = { kal->P[3]*C[1]*C[1] + kal->R[0],        C[1]*C[2]*kal->P[2] + C[1]*C[3]*kal->P[3],                                                   C[1]*C[4]*kal->P[2] + C[1]*C[5]*kal->P[3],
-				   C[1]*(C[2]*kal->P[1] + C[3]*kal->P[3]), kal->R[1] + C[2]*(C[2]*kal->P[0] + C[3]*kal->P[2]) + C[3]*(C[2]*kal->P[1] + C[3]*kal->P[3]), C[4]*(C[2]*kal->P[0] + C[3]*kal->P[2]) + C[5]*(C[2]*kal->P[1] + C[3]*kal->P[3])
+				   C[1]*(C[2]*kal->P[1] + C[3]*kal->P[3]), kal->R[1] + C[2]*(C[2]*kal->P[0] + C[3]*kal->P[2]) + C[3]*(C[2]*kal->P[1] + C[3]*kal->P[3]), C[4]*(C[2]*kal->P[0] + C[3]*kal->P[2]) + C[5]*(C[2]*kal->P[1] + C[3]*kal->P[3]),
 	               C[1]*(C[4]*kal->P[1] + C[5]*kal->P[3]), C[2]*(C[4]*kal->P[0] + C[5]*kal->P[2]) + C[3]*(C[4]*kal->P[1] + C[5]*kal->P[3]),             kal->R[2] + C[4]*(C[4]*kal->P[0] + C[5]*kal->P[2]) + C[5]*(C[4]*kal->P[1] + C[5]*kal->P[3]) };
 	
 	float Gdetinv = 1.0f / (G[0]*G[4]*G[8] - G[0]*G[5]*G[7] - G[1]*G[3]*G[8] + G[1]*G[5]*G[6] + G[2]*G[3]*G[7] - G[2]*G[4]*G[6]);
