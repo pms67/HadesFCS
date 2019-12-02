@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIRWinSyncDesign", "FIRWinSyncDesign\FIRWinSyncDesign.csproj", "{FCF704D4-A8C9-4C3D-BA41-1BD17E4F9980}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCF704D4-A8C9-4C3D-BA41-1BD17E4F9980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF704D4-A8C9-4C3D-BA41-1BD17E4F9980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF704D4-A8C9-4C3D-BA41-1BD17E4F9980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF704D4-A8C9-4C3D-BA41-1BD17E4F9980}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7EC4F8F8-E480-4FDB-9189-90ECFFE7F4D3}
+	EndGlobalSection
+EndGlobal
