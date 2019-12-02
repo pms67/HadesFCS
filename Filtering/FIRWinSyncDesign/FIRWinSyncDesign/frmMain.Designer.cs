@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea16 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chrtFilterTimeDomain = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -49,6 +50,14 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chrtWindowFrequencyDomain = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radBS = new System.Windows.Forms.RadioButton();
+            this.radBP = new System.Windows.Forms.RadioButton();
+            this.radHP = new System.Windows.Forms.RadioButton();
+            this.radLP = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtCutOffFrequencyHigh = new System.Windows.Forms.TextBox();
             this.btnDesignFilter = new System.Windows.Forms.Button();
             this.cmbDisplay = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -72,14 +81,6 @@
             this.exportFrequencyDomainDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.txtCutOffFrequencyHigh = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radBS = new System.Windows.Forms.RadioButton();
-            this.radBP = new System.Windows.Forms.RadioButton();
-            this.radHP = new System.Windows.Forms.RadioButton();
-            this.radLP = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtFilterTimeDomain)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -89,8 +90,8 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtWindowFrequencyDomain)).BeginInit();
             this.groupBox5.SuspendLayout();
-            this.mnuMain.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -107,39 +108,39 @@
             // chrtFilterTimeDomain
             // 
             this.chrtFilterTimeDomain.BackColor = System.Drawing.SystemColors.Control;
-            chartArea13.AxisX.Minimum = 0D;
-            chartArea13.AxisX.Title = "Time (s)";
-            chartArea13.BackColor = System.Drawing.Color.White;
-            chartArea13.Name = "ChartArea1";
-            this.chrtFilterTimeDomain.ChartAreas.Add(chartArea13);
+            chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisX.Title = "Time (s)";
+            chartArea1.BackColor = System.Drawing.Color.White;
+            chartArea1.Name = "ChartArea1";
+            this.chrtFilterTimeDomain.ChartAreas.Add(chartArea1);
             this.chrtFilterTimeDomain.Location = new System.Drawing.Point(6, 19);
             this.chrtFilterTimeDomain.Name = "chrtFilterTimeDomain";
-            series25.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series25.BorderWidth = 2;
-            series25.ChartArea = "ChartArea1";
-            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series25.Color = System.Drawing.Color.DimGray;
-            series25.Name = "IR";
-            series26.BorderWidth = 2;
-            series26.ChartArea = "ChartArea1";
-            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series26.Color = System.Drawing.Color.Black;
-            series26.Name = "IR (Win)";
-            series27.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series27.BorderWidth = 2;
-            series27.ChartArea = "ChartArea1";
-            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series27.Color = System.Drawing.Color.DimGray;
-            series27.Name = "SR";
-            series28.BorderWidth = 2;
-            series28.ChartArea = "ChartArea1";
-            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series28.Color = System.Drawing.Color.Black;
-            series28.Name = "SR (Win)";
-            this.chrtFilterTimeDomain.Series.Add(series25);
-            this.chrtFilterTimeDomain.Series.Add(series26);
-            this.chrtFilterTimeDomain.Series.Add(series27);
-            this.chrtFilterTimeDomain.Series.Add(series28);
+            series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.DimGray;
+            series1.Name = "IR";
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Color = System.Drawing.Color.Black;
+            series2.Name = "IR (Win)";
+            series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series3.BorderWidth = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Color = System.Drawing.Color.DimGray;
+            series3.Name = "SR";
+            series4.BorderWidth = 2;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.Color = System.Drawing.Color.Black;
+            series4.Name = "SR (Win)";
+            this.chrtFilterTimeDomain.Series.Add(series1);
+            this.chrtFilterTimeDomain.Series.Add(series2);
+            this.chrtFilterTimeDomain.Series.Add(series3);
+            this.chrtFilterTimeDomain.Series.Add(series4);
             this.chrtFilterTimeDomain.Size = new System.Drawing.Size(468, 275);
             this.chrtFilterTimeDomain.TabIndex = 0;
             // 
@@ -157,20 +158,20 @@
             // chrtWindowTimeDomain
             // 
             this.chrtWindowTimeDomain.BackColor = System.Drawing.SystemColors.Control;
-            chartArea14.AxisX.Minimum = 0D;
-            chartArea14.AxisX.Title = "Time (s)";
-            chartArea14.BackColor = System.Drawing.Color.White;
-            chartArea14.Name = "ChartArea1";
-            this.chrtWindowTimeDomain.ChartAreas.Add(chartArea14);
+            chartArea2.AxisX.Minimum = 0D;
+            chartArea2.AxisX.Title = "Time (s)";
+            chartArea2.BackColor = System.Drawing.Color.White;
+            chartArea2.Name = "ChartArea1";
+            this.chrtWindowTimeDomain.ChartAreas.Add(chartArea2);
             this.chrtWindowTimeDomain.Location = new System.Drawing.Point(6, 19);
             this.chrtWindowTimeDomain.Name = "chrtWindowTimeDomain";
-            series29.BorderWidth = 2;
-            series29.ChartArea = "ChartArea1";
-            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series29.Color = System.Drawing.Color.Black;
-            series29.IsVisibleInLegend = false;
-            series29.Name = "Window";
-            this.chrtWindowTimeDomain.Series.Add(series29);
+            series5.BorderWidth = 2;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series5.Color = System.Drawing.Color.Black;
+            series5.IsVisibleInLegend = false;
+            series5.Name = "Window";
+            this.chrtWindowTimeDomain.Series.Add(series5);
             this.chrtWindowTimeDomain.Size = new System.Drawing.Size(468, 275);
             this.chrtWindowTimeDomain.TabIndex = 1;
             // 
@@ -188,28 +189,28 @@
             // chrtFilterFrequencyDomain
             // 
             this.chrtFilterFrequencyDomain.BackColor = System.Drawing.SystemColors.Control;
-            chartArea15.AxisX.LabelStyle.Format = "#";
-            chartArea15.AxisX.Minimum = 0D;
-            chartArea15.AxisX.Title = "Frequency (Hz)";
-            chartArea15.BackColor = System.Drawing.Color.White;
-            chartArea15.Name = "ChartArea1";
-            this.chrtFilterFrequencyDomain.ChartAreas.Add(chartArea15);
+            chartArea3.AxisX.LabelStyle.Format = "#";
+            chartArea3.AxisX.Minimum = 0D;
+            chartArea3.AxisX.Title = "Frequency (Hz)";
+            chartArea3.BackColor = System.Drawing.Color.White;
+            chartArea3.Name = "ChartArea1";
+            this.chrtFilterFrequencyDomain.ChartAreas.Add(chartArea3);
             this.chrtFilterFrequencyDomain.Location = new System.Drawing.Point(6, 19);
             this.chrtFilterFrequencyDomain.Name = "chrtFilterFrequencyDomain";
-            series30.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series30.BorderWidth = 2;
-            series30.ChartArea = "ChartArea1";
-            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series30.Color = System.Drawing.Color.DimGray;
-            series30.IsVisibleInLegend = false;
-            series30.Name = "Magnitude";
-            series31.BorderWidth = 2;
-            series31.ChartArea = "ChartArea1";
-            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series31.Color = System.Drawing.Color.Black;
-            series31.Name = "MagnitudeWin";
-            this.chrtFilterFrequencyDomain.Series.Add(series30);
-            this.chrtFilterFrequencyDomain.Series.Add(series31);
+            series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series6.BorderWidth = 2;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series6.Color = System.Drawing.Color.DimGray;
+            series6.IsVisibleInLegend = false;
+            series6.Name = "Magnitude";
+            series7.BorderWidth = 2;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series7.Color = System.Drawing.Color.Black;
+            series7.Name = "MagnitudeWin";
+            this.chrtFilterFrequencyDomain.Series.Add(series6);
+            this.chrtFilterFrequencyDomain.Series.Add(series7);
             this.chrtFilterFrequencyDomain.Size = new System.Drawing.Size(468, 266);
             this.chrtFilterFrequencyDomain.TabIndex = 2;
             // 
@@ -227,21 +228,21 @@
             // chrtWindowFrequencyDomain
             // 
             this.chrtWindowFrequencyDomain.BackColor = System.Drawing.SystemColors.Control;
-            chartArea16.AxisX.LabelStyle.Format = "#";
-            chartArea16.AxisX.Minimum = 0D;
-            chartArea16.AxisX.Title = "Frequency (Hz)";
-            chartArea16.BackColor = System.Drawing.Color.White;
-            chartArea16.Name = "ChartArea1";
-            this.chrtWindowFrequencyDomain.ChartAreas.Add(chartArea16);
+            chartArea4.AxisX.LabelStyle.Format = "#";
+            chartArea4.AxisX.Minimum = 0D;
+            chartArea4.AxisX.Title = "Frequency (Hz)";
+            chartArea4.BackColor = System.Drawing.Color.White;
+            chartArea4.Name = "ChartArea1";
+            this.chrtWindowFrequencyDomain.ChartAreas.Add(chartArea4);
             this.chrtWindowFrequencyDomain.Location = new System.Drawing.Point(6, 19);
             this.chrtWindowFrequencyDomain.Name = "chrtWindowFrequencyDomain";
-            series32.BorderWidth = 2;
-            series32.ChartArea = "ChartArea1";
-            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series32.Color = System.Drawing.Color.Black;
-            series32.IsVisibleInLegend = false;
-            series32.Name = "Magnitude";
-            this.chrtWindowFrequencyDomain.Series.Add(series32);
+            series8.BorderWidth = 2;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series8.Color = System.Drawing.Color.Black;
+            series8.IsVisibleInLegend = false;
+            series8.Name = "Magnitude";
+            this.chrtWindowFrequencyDomain.Series.Add(series8);
             this.chrtWindowFrequencyDomain.Size = new System.Drawing.Size(468, 266);
             this.chrtWindowFrequencyDomain.TabIndex = 4;
             // 
@@ -274,6 +275,91 @@
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Parameters";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radBS);
+            this.panel1.Controls.Add(this.radBP);
+            this.panel1.Controls.Add(this.radHP);
+            this.panel1.Controls.Add(this.radLP);
+            this.panel1.Location = new System.Drawing.Point(566, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(93, 58);
+            this.panel1.TabIndex = 19;
+            // 
+            // radBS
+            // 
+            this.radBS.AutoSize = true;
+            this.radBS.Location = new System.Drawing.Point(49, 26);
+            this.radBS.Name = "radBS";
+            this.radBS.Size = new System.Drawing.Size(41, 17);
+            this.radBS.TabIndex = 26;
+            this.radBS.Text = "BS";
+            this.radBS.UseVisualStyleBackColor = true;
+            this.radBS.CheckedChanged += new System.EventHandler(this.radBS_CheckedChanged);
+            // 
+            // radBP
+            // 
+            this.radBP.AutoSize = true;
+            this.radBP.Location = new System.Drawing.Point(3, 26);
+            this.radBP.Name = "radBP";
+            this.radBP.Size = new System.Drawing.Size(41, 17);
+            this.radBP.TabIndex = 25;
+            this.radBP.Text = "BP";
+            this.radBP.UseVisualStyleBackColor = true;
+            this.radBP.CheckedChanged += new System.EventHandler(this.radBP_CheckedChanged);
+            // 
+            // radHP
+            // 
+            this.radHP.AutoSize = true;
+            this.radHP.Location = new System.Drawing.Point(49, 3);
+            this.radHP.Name = "radHP";
+            this.radHP.Size = new System.Drawing.Size(42, 17);
+            this.radHP.TabIndex = 24;
+            this.radHP.Text = "HP";
+            this.radHP.UseVisualStyleBackColor = true;
+            this.radHP.CheckedChanged += new System.EventHandler(this.radHP_CheckedChanged);
+            // 
+            // radLP
+            // 
+            this.radLP.AutoSize = true;
+            this.radLP.Checked = true;
+            this.radLP.Location = new System.Drawing.Point(3, 3);
+            this.radLP.Name = "radLP";
+            this.radLP.Size = new System.Drawing.Size(40, 17);
+            this.radLP.TabIndex = 23;
+            this.radLP.TabStop = true;
+            this.radLP.Text = "LP";
+            this.radLP.UseVisualStyleBackColor = true;
+            this.radLP.CheckedChanged += new System.EventHandler(this.radLP_CheckedChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(501, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 13);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Filter Type:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(252, 45);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(107, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "High Frequency (Hz):";
+            // 
+            // txtCutOffFrequencyHigh
+            // 
+            this.txtCutOffFrequencyHigh.Location = new System.Drawing.Point(376, 42);
+            this.txtCutOffFrequencyHigh.Name = "txtCutOffFrequencyHigh";
+            this.txtCutOffFrequencyHigh.Size = new System.Drawing.Size(104, 20);
+            this.txtCutOffFrequencyHigh.TabIndex = 16;
+            this.txtCutOffFrequencyHigh.Text = "20";
             // 
             // btnDesignFilter
             // 
@@ -481,12 +567,14 @@
             this.exportTimeDomainDataToolStripMenuItem.Name = "exportTimeDomainDataToolStripMenuItem";
             this.exportTimeDomainDataToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.exportTimeDomainDataToolStripMenuItem.Text = "Export Time Domain Data";
+            this.exportTimeDomainDataToolStripMenuItem.Click += new System.EventHandler(this.exportTimeDomainDataToolStripMenuItem_Click);
             // 
             // exportFrequencyDomainDataToolStripMenuItem
             // 
             this.exportFrequencyDomainDataToolStripMenuItem.Name = "exportFrequencyDomainDataToolStripMenuItem";
             this.exportFrequencyDomainDataToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.exportFrequencyDomainDataToolStripMenuItem.Text = "Export Frequency Domain Data";
+            this.exportFrequencyDomainDataToolStripMenuItem.Click += new System.EventHandler(this.exportFrequencyDomainDataToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
@@ -494,91 +582,6 @@
             this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.infoToolStripMenuItem.Text = "&Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
-            // 
-            // txtCutOffFrequencyHigh
-            // 
-            this.txtCutOffFrequencyHigh.Location = new System.Drawing.Point(376, 42);
-            this.txtCutOffFrequencyHigh.Name = "txtCutOffFrequencyHigh";
-            this.txtCutOffFrequencyHigh.Size = new System.Drawing.Size(104, 20);
-            this.txtCutOffFrequencyHigh.TabIndex = 16;
-            this.txtCutOffFrequencyHigh.Text = "20";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(252, 45);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(107, 13);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "High Frequency (Hz):";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(501, 19);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 13);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Filter Type:";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.radBS);
-            this.panel1.Controls.Add(this.radBP);
-            this.panel1.Controls.Add(this.radHP);
-            this.panel1.Controls.Add(this.radLP);
-            this.panel1.Location = new System.Drawing.Point(566, 13);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(93, 58);
-            this.panel1.TabIndex = 19;
-            // 
-            // radBS
-            // 
-            this.radBS.AutoSize = true;
-            this.radBS.Location = new System.Drawing.Point(49, 26);
-            this.radBS.Name = "radBS";
-            this.radBS.Size = new System.Drawing.Size(41, 17);
-            this.radBS.TabIndex = 26;
-            this.radBS.Text = "BS";
-            this.radBS.UseVisualStyleBackColor = true;
-            this.radBS.CheckedChanged += new System.EventHandler(this.radBS_CheckedChanged);
-            // 
-            // radBP
-            // 
-            this.radBP.AutoSize = true;
-            this.radBP.Location = new System.Drawing.Point(3, 26);
-            this.radBP.Name = "radBP";
-            this.radBP.Size = new System.Drawing.Size(41, 17);
-            this.radBP.TabIndex = 25;
-            this.radBP.Text = "BP";
-            this.radBP.UseVisualStyleBackColor = true;
-            this.radBP.CheckedChanged += new System.EventHandler(this.radBP_CheckedChanged);
-            // 
-            // radHP
-            // 
-            this.radHP.AutoSize = true;
-            this.radHP.Location = new System.Drawing.Point(49, 3);
-            this.radHP.Name = "radHP";
-            this.radHP.Size = new System.Drawing.Size(42, 17);
-            this.radHP.TabIndex = 24;
-            this.radHP.Text = "HP";
-            this.radHP.UseVisualStyleBackColor = true;
-            this.radHP.CheckedChanged += new System.EventHandler(this.radHP_CheckedChanged);
-            // 
-            // radLP
-            // 
-            this.radLP.AutoSize = true;
-            this.radLP.Checked = true;
-            this.radLP.Location = new System.Drawing.Point(3, 3);
-            this.radLP.Name = "radLP";
-            this.radLP.Size = new System.Drawing.Size(40, 17);
-            this.radLP.TabIndex = 23;
-            this.radLP.TabStop = true;
-            this.radLP.Text = "LP";
-            this.radLP.UseVisualStyleBackColor = true;
-            this.radLP.CheckedChanged += new System.EventHandler(this.radLP_CheckedChanged);
             // 
             // frmMain
             // 
@@ -592,12 +595,13 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.mnuMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnuMain;
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FIR Low-Pass Filter Designer";
+            this.Text = "FIR Filter Designer [Philip Salmony @ philsal.co.uk]";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chrtFilterTimeDomain)).EndInit();
@@ -609,10 +613,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.chrtWindowFrequencyDomain)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.mnuMain.ResumeLayout(false);
-            this.mnuMain.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.mnuMain.ResumeLayout(false);
+            this.mnuMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

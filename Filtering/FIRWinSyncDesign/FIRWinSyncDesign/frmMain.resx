@@ -126,4 +126,29 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>63</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
+        AAD//////v7+//7+/v/+/v7//////+vr6//s7Oz///////7+/v//////9fX1/+Tk5P///////v7+//7+
+        /v/+/v7//v7+//39/f/7+/v////////////U1NT/2NjY///////9/f3//////+Tk5P/Nzc3/+fn5////
+        ///7+/v//Pz8///////h4eH/0dHR//z8/P/x8fH/4uLi/+Dg4P/5+fn////////////f39//5ubm/+bm
+        5v//////2NjY/9jY2P/h4eH/4+Pj//Hx8f/j4+P/5ubm//Hx8f/k5OT/8vLy///////8/Pz/3d3d//j4
+        +P/f39//6+vr/+fn5//t7e3/5OTk//z8/P//////29vb/9PT0///////5ubm/+vr6///////9vb2/93d
+        3f//////3d3d/9LS0v/8/Pz////////////+/v7///////r6+v/39/f//////+zs7P/m5ub///////Dw
+        8P/i4uL///////n5+f/39/f///////7+/v/+/v7////////////+/v7//v7+///////y8vL/4ODg////
+        ///q6ur/5+fn///////+/v7/////////////////////////////////////////////////+Pj4/93d
+        3f//////5eXl/+3t7f///////v7+//////////////////////////////////////////////////z8
+        /P/b29v//////+Hh4f/y8vL/////////////////////////////////////////////////////////
+        ////////29vb///////f39//9/f3////////////////////////////////////////////////////
+        ///+/v7//////9zc3P/8/Pz/3d3d//z8/P//////////////////////////////////////////////
+        /////////v7+///////f39//8/Pz/97e3v//////////////////////////////////////////////
+        //////////////7+/v//////5eXl/+fn5//g4OD///////7+/v//////////////////////////////
+        ///////////////////+/v7//////+7u7v/a2tr/5ubm///////+/v7/////////////////////////
+        ///////////////////////////////////5+fn/xsbG/+3t7f///////v7+////////////////////
+        /////////////////////////////////////////////93d3f/5+fn/////////////////////////
+        ////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAA==
+</value>
+  </data>
 </root>

@@ -70,7 +70,7 @@ namespace FIRWinSyncDesign
         {
             /* Initial settings */
             SAMPLE_TIME_S = 0.01;
-            CUTOFF_FREQUENCY_HZ = 10.0;
+            CUTOFF_FREQUENCY_HZ = 20.0;
             CUTOFF_FREQUENCY2_HZ = 20.0;
             NUM_TOTAL_SAMPLES = 64;
             NUM_SHIFT_SAMPLES = 32;
@@ -134,8 +134,6 @@ namespace FIRWinSyncDesign
         {
             impulseResponse = new double[NUM_TOTAL_SAMPLES];
             stepResponse = new double[NUM_TOTAL_SAMPLES];
-
-            double dcGain = 0.0;
 
             for (int n = 0; n < NUM_TOTAL_SAMPLES; n++)
             {
@@ -506,32 +504,7 @@ namespace FIRWinSyncDesign
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("FIR Low-Pass Filter Designer\nWritten by Philip M. Salmony\n29 November 2019\nphilsal.co.uk", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void exportCoefficientsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saveFileDialog.Filter = "Text File|*.txt";
-            saveFileDialog.Title = "Export Filter Coefficients";
-            saveFileDialog.ShowDialog();
-
-            if (saveFileDialog.FileName != "")
-            {
-                string[] data = new string[3];
-                data[0] = "Filter Order: " + NUM_TOTAL_SAMPLES + " Sampling Frequency (Hz): " + (1.0 / SAMPLE_TIME_S).ToString("F6") + " Cut-Off Frequency (Hz): " + CUTOFF_FREQUENCY_HZ.ToString("F6");
-
-                data[1] = windowedImpulseResponse[0].ToString("F7");
-                data[2] = "float buf[] = {" + windowedImpulseResponse[0].ToString("F7") + "f";
-                for (int n = 1; n < NUM_TOTAL_SAMPLES; n++)
-                {
-                    data[1] += "," + windowedImpulseResponse[n].ToString("F9");
-                    data[2] += "," + windowedImpulseResponse[n].ToString("F7") + "f";
-                }
-                data[2] += "};";
-
-                System.IO.File.WriteAllLines(saveFileDialog.FileName, data);
-                MessageBox.Show("Coefficients written to file!", "Export Coefficients", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            MessageBox.Show("FIR Filter Designer\nWritten by Philip M. Salmony\n29 November 2019\nphilsal.co.uk", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void FilterTypeChange()
@@ -573,6 +546,90 @@ namespace FIRWinSyncDesign
         private void radBS_CheckedChanged(object sender, EventArgs e)
         {
             FilterTypeChange();
+        }
+
+        private void exportCoefficientsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Filter = "Text File|*.txt";
+            saveFileDialog.Title  = "Export Filter Coefficients";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                string[] data = new string[3];
+                data[0] = "Filter Order: " + NUM_TOTAL_SAMPLES + " Sampling Frequency (Hz): " + (1.0 / SAMPLE_TIME_S).ToString("F6") + " Cut-Off Frequency Lo (Hz): " + CUTOFF_FREQUENCY_HZ.ToString("F6") + " Cut-Off Frequency Hi (Hz): " + CUTOFF_FREQUENCY2_HZ.ToString("F6") + "\n\n";
+
+                data[1] = windowedImpulseResponse[0].ToString("F7");
+                data[2] = "float coeff[] = {" + windowedImpulseResponse[0].ToString("F7") + "f";
+                for (int n = 1; n < NUM_TOTAL_SAMPLES; n++)
+                {
+                    data[1] += "," + windowedImpulseResponse[n].ToString("F9");
+                    data[2] += "," + windowedImpulseResponse[n].ToString("F7") + "f";
+                }
+                data[1] += "\n\n";
+                data[2] += "};";
+                
+                System.IO.File.WriteAllLines(saveFileDialog.FileName, data);
+                MessageBox.Show("Coefficients written to file!", "Export Coefficients", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void exportTimeDomainDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Filter = "Text File|*.txt";
+            saveFileDialog.Title  = "Export Time Domain Data";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                string[] data = new string[4];
+                data[0] = "[TIME DOMAIN DATA (TIME/IMPULSE/STEP)] Filter Order: " + NUM_TOTAL_SAMPLES + " Sampling Frequency (Hz): " + (1.0 / SAMPLE_TIME_S).ToString("F6") + " Cut-Off Frequency Lo (Hz): " + CUTOFF_FREQUENCY_HZ.ToString("F6") + " Cut-Off Frequency Hi (Hz): " + CUTOFF_FREQUENCY2_HZ.ToString("F6") + "\n\n";
+
+                data[1] = timeVector[0].ToString("F6");
+                data[2] = windowedImpulseResponse[0].ToString("F9");
+                data[3] = windowedStepResponse[0].ToString("F9");
+                for (int n = 1; n < NUM_TOTAL_SAMPLES; n++)
+                {
+                    data[1] += "," + timeVector[n].ToString("F6");
+                    data[2] += "," + windowedImpulseResponse[n].ToString("F9");
+                    data[3] += "," + windowedStepResponse[n].ToString("F9") ;
+                }
+
+                data[1] += "\n\n";
+                data[2] += "\n\n";
+
+                System.IO.File.WriteAllLines(saveFileDialog.FileName, data);
+                MessageBox.Show("Data written to file!", "Export Time Domain Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void exportFrequencyDomainDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Filter = "Text File|*.txt";
+            saveFileDialog.Title  = "Export Frequency Domain Data";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                string[] data = new string[4];
+                data[0] = "[FREQUENCY DOMAIN DATA (FREQ/RAW/WINDOWED)] Filter Order: " + NUM_TOTAL_SAMPLES + " Sampling Frequency (Hz): " + (1.0 / SAMPLE_TIME_S).ToString("F6") + " Cut-Off Frequency Lo (Hz): " + CUTOFF_FREQUENCY_HZ.ToString("F6") + " Cut-Off Frequency Hi (Hz): " + CUTOFF_FREQUENCY2_HZ.ToString("F6") + "\n\n";
+
+                data[1] = frequencyVectorHz[0].ToString("F6");
+                data[2] = impRespMag[0].ToString("F9");
+                data[3] = winRespMag[0].ToString("F9");
+                for (int n = 1; n < NUM_FREQ_SAMPLES; n++)
+                {
+                    data[1] += "," + frequencyVectorHz[n].ToString("F6");
+                    data[2] += "," + impRespMag[n].ToString("F9");
+                    data[3] += "," + winRespMag[n].ToString("F9");
+                }
+                
+                data[1] += "\n\n";
+                data[2] += "\n\n";
+
+                System.IO.File.WriteAllLines(saveFileDialog.FileName, data);
+                MessageBox.Show("Data written to file!", "Export Frequency Domain Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 } 
