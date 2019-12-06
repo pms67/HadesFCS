@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP W25N01GVZEIG_TR
+D IC FLASH 1GBIT 104MHZ 8WSON
+K
+F https://www.winbond.com/resource-files/w25n01gv revg 032116.pdf
+$ENDCMP
+#
+#End Doc Library

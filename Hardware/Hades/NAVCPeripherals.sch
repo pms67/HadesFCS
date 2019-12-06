@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:Hades-cache
-EELAYER 29 0
+EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -1196,4 +1196,6 @@ Wire Wire Line
 Wire Wire Line
 	4250 6500 4550 6500
 Connection ~ 4550 6500
+Text Notes 7200 1100 0    118  ~ 0
+RESET AND INTERRUPT PINS ARE MIXED UP!!!!!
 $EndSCHEMATC

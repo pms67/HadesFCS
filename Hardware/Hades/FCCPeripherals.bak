@@ -1,0 +1,1022 @@
+EESchema Schematic File Version 4
+LIBS:Hades-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 6
+Title "FCC Peripherals"
+Date "2019-10-27"
+Rev "0.1"
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text GLabel 1750 1850 0    50   Input ~ 0
+I2C2_SDA_FCC
+Text GLabel 1750 1750 0    50   Input ~ 0
+I2C2_SCL_FCC
+NoConn ~ 1750 1950
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B01
+P 1750 2050
+AR Path="/5DD97B01" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B01" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B01" Ref="#PWR052"  Part="1" 
+F 0 "#PWR052" H 1750 1800 50  0001 C CNN
+F 1 "GND" H 1755 1877 50  0000 C CNN
+F 2 "" H 1750 2050 50  0001 C CNN
+F 3 "" H 1750 2050 50  0001 C CNN
+	1    1750 2050
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DD97B07
+P 2450 1300
+AR Path="/5DD97B07" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B07" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B07" Ref="#PWR069"  Part="1" 
+F 0 "#PWR069" H 2450 1150 50  0001 C CNN
+F 1 "+3.3V" H 2400 1450 50  0000 L CNN
+F 2 "" H 2450 1300 50  0001 C CNN
+F 3 "" H 2450 1300 50  0001 C CNN
+	1    2450 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5DD97B13
+P 1050 2500
+AR Path="/5DD97B13" Ref="C?"  Part="1" 
+AR Path="/5DB5C096/5DD97B13" Ref="C?"  Part="1" 
+AR Path="/5DD7F344/5DD97B13" Ref="C34"  Part="1" 
+F 0 "C34" H 1165 2546 50  0000 L CNN
+F 1 "100n" H 1165 2455 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 1088 2350 50  0001 C CNN
+F 3 "~" H 1050 2500 50  0001 C CNN
+	1    1050 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B19
+P 1750 3150
+AR Path="/5DD97B19" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B19" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B19" Ref="#PWR068"  Part="1" 
+F 0 "#PWR068" H 1750 2900 50  0001 C CNN
+F 1 "GND" H 1755 2977 50  0000 C CNN
+F 2 "" H 1750 3150 50  0001 C CNN
+F 3 "" H 1750 3150 50  0001 C CNN
+	1    1750 3150
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B1F
+P 1750 3050
+AR Path="/5DD97B1F" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B1F" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B1F" Ref="#PWR059"  Part="1" 
+F 0 "#PWR059" H 1750 2800 50  0001 C CNN
+F 1 "GND" H 1755 2877 50  0000 C CNN
+F 2 "" H 1750 3050 50  0001 C CNN
+F 3 "" H 1750 3050 50  0001 C CNN
+	1    1750 3050
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B25
+P 1750 2950
+AR Path="/5DD97B25" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B25" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B25" Ref="#PWR058"  Part="1" 
+F 0 "#PWR058" H 1750 2700 50  0001 C CNN
+F 1 "GND" H 1755 2777 50  0000 C CNN
+F 2 "" H 1750 2950 50  0001 C CNN
+F 3 "" H 1750 2950 50  0001 C CNN
+	1    1750 2950
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B2B
+P 1750 2850
+AR Path="/5DD97B2B" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B2B" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B2B" Ref="#PWR057"  Part="1" 
+F 0 "#PWR057" H 1750 2600 50  0001 C CNN
+F 1 "GND" H 1755 2677 50  0000 C CNN
+F 2 "" H 1750 2850 50  0001 C CNN
+F 3 "" H 1750 2850 50  0001 C CNN
+	1    1750 2850
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B31
+P 1750 2750
+AR Path="/5DD97B31" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B31" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B31" Ref="#PWR056"  Part="1" 
+F 0 "#PWR056" H 1750 2500 50  0001 C CNN
+F 1 "GND" H 1755 2577 50  0000 C CNN
+F 2 "" H 1750 2750 50  0001 C CNN
+F 3 "" H 1750 2750 50  0001 C CNN
+	1    1750 2750
+	0    1    1    0   
+$EndComp
+$Comp
+L Driver_LED:PCA9685PW PWM?
+U 1 1 5DD97B37
+P 2450 2450
+AR Path="/5DD97B37" Ref="PWM?"  Part="1" 
+AR Path="/5DB5C096/5DD97B37" Ref="PWM?"  Part="1" 
+AR Path="/5DD7F344/5DD97B37" Ref="U2"  Part="1" 
+F 0 "U2" H 2000 3300 50  0000 C CNN
+F 1 "PCA9685PW" H 2750 3300 50  0000 C CNN
+F 2 "Package_SO:TSSOP-28_4.4x9.7mm_P0.65mm" H 2475 1475 50  0001 L CNN
+F 3 "http://www.nxp.com/documents/data_sheet/PCA9685.pdf" H 2050 3150 50  0001 C CNN
+	1    2450 2450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 3600 2450 3550
+Wire Wire Line
+	2450 3550 1050 3550
+Connection ~ 2450 3550
+Text Notes 2650 3550 0    50   ~ 0
+I2C address: 0x41
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DD97B42
+P 1750 2650
+AR Path="/5DD97B42" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B42" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B42" Ref="#PWR053"  Part="1" 
+F 0 "#PWR053" H 1750 2500 50  0001 C CNN
+F 1 "+3.3V" V 1765 2778 50  0000 L CNN
+F 2 "" H 1750 2650 50  0001 C CNN
+F 3 "" H 1750 2650 50  0001 C CNN
+	1    1750 2650
+	0    -1   -1   0   
+$EndComp
+NoConn ~ 3150 2550
+NoConn ~ 3150 2650
+NoConn ~ 3150 2750
+NoConn ~ 3150 2850
+NoConn ~ 3150 2950
+NoConn ~ 3150 3050
+NoConn ~ 3150 3150
+NoConn ~ 3150 3250
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B5D
+P 5050 2150
+AR Path="/5DD97B5D" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B5D" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B5D" Ref="#PWR077"  Part="1" 
+F 0 "#PWR077" H 5050 2000 50  0001 C CNN
+F 1 "+5V" V 5065 2278 50  0000 L CNN
+F 2 "" H 5050 2150 50  0001 C CNN
+F 3 "" H 5050 2150 50  0001 C CNN
+	1    5050 2150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B63
+P 5050 2250
+AR Path="/5DD97B63" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B63" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B63" Ref="#PWR078"  Part="1" 
+F 0 "#PWR078" H 5050 2100 50  0001 C CNN
+F 1 "+5V" V 5065 2378 50  0000 L CNN
+F 2 "" H 5050 2250 50  0001 C CNN
+F 3 "" H 5050 2250 50  0001 C CNN
+	1    5050 2250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B69
+P 5050 2350
+AR Path="/5DD97B69" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B69" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B69" Ref="#PWR079"  Part="1" 
+F 0 "#PWR079" H 5050 2200 50  0001 C CNN
+F 1 "+5V" V 5065 2478 50  0000 L CNN
+F 2 "" H 5050 2350 50  0001 C CNN
+F 3 "" H 5050 2350 50  0001 C CNN
+	1    5050 2350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B6F
+P 5050 2450
+AR Path="/5DD97B6F" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B6F" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B6F" Ref="#PWR080"  Part="1" 
+F 0 "#PWR080" H 5050 2300 50  0001 C CNN
+F 1 "+5V" V 5065 2578 50  0000 L CNN
+F 2 "" H 5050 2450 50  0001 C CNN
+F 3 "" H 5050 2450 50  0001 C CNN
+	1    5050 2450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B75
+P 5050 2550
+AR Path="/5DD97B75" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B75" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B75" Ref="#PWR081"  Part="1" 
+F 0 "#PWR081" H 5050 2400 50  0001 C CNN
+F 1 "+5V" V 5065 2678 50  0000 L CNN
+F 2 "" H 5050 2550 50  0001 C CNN
+F 3 "" H 5050 2550 50  0001 C CNN
+	1    5050 2550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B7B
+P 5050 2650
+AR Path="/5DD97B7B" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B7B" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B7B" Ref="#PWR082"  Part="1" 
+F 0 "#PWR082" H 5050 2500 50  0001 C CNN
+F 1 "+5V" V 5065 2778 50  0000 L CNN
+F 2 "" H 5050 2650 50  0001 C CNN
+F 3 "" H 5050 2650 50  0001 C CNN
+	1    5050 2650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B81
+P 5050 2750
+AR Path="/5DD97B81" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B81" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B81" Ref="#PWR083"  Part="1" 
+F 0 "#PWR083" H 5050 2600 50  0001 C CNN
+F 1 "+5V" V 5065 2878 50  0000 L CNN
+F 2 "" H 5050 2750 50  0001 C CNN
+F 3 "" H 5050 2750 50  0001 C CNN
+	1    5050 2750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5DD97B87
+P 5050 2850
+AR Path="/5DD97B87" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B87" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B87" Ref="#PWR084"  Part="1" 
+F 0 "#PWR084" H 5050 2700 50  0001 C CNN
+F 1 "+5V" V 5065 2978 50  0000 L CNN
+F 2 "" H 5050 2850 50  0001 C CNN
+F 3 "" H 5050 2850 50  0001 C CNN
+	1    5050 2850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B8D
+P 5550 2150
+AR Path="/5DD97B8D" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B8D" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B8D" Ref="#PWR085"  Part="1" 
+F 0 "#PWR085" H 5550 1900 50  0001 C CNN
+F 1 "GND" V 5555 2022 50  0000 R CNN
+F 2 "" H 5550 2150 50  0001 C CNN
+F 3 "" H 5550 2150 50  0001 C CNN
+	1    5550 2150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B93
+P 5550 2250
+AR Path="/5DD97B93" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B93" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B93" Ref="#PWR086"  Part="1" 
+F 0 "#PWR086" H 5550 2000 50  0001 C CNN
+F 1 "GND" V 5555 2122 50  0000 R CNN
+F 2 "" H 5550 2250 50  0001 C CNN
+F 3 "" H 5550 2250 50  0001 C CNN
+	1    5550 2250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B99
+P 5550 2350
+AR Path="/5DD97B99" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B99" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B99" Ref="#PWR087"  Part="1" 
+F 0 "#PWR087" H 5550 2100 50  0001 C CNN
+F 1 "GND" V 5555 2222 50  0000 R CNN
+F 2 "" H 5550 2350 50  0001 C CNN
+F 3 "" H 5550 2350 50  0001 C CNN
+	1    5550 2350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B9F
+P 5550 2450
+AR Path="/5DD97B9F" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B9F" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B9F" Ref="#PWR088"  Part="1" 
+F 0 "#PWR088" H 5550 2200 50  0001 C CNN
+F 1 "GND" V 5555 2322 50  0000 R CNN
+F 2 "" H 5550 2450 50  0001 C CNN
+F 3 "" H 5550 2450 50  0001 C CNN
+	1    5550 2450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97BA5
+P 5550 2550
+AR Path="/5DD97BA5" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97BA5" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97BA5" Ref="#PWR089"  Part="1" 
+F 0 "#PWR089" H 5550 2300 50  0001 C CNN
+F 1 "GND" V 5555 2422 50  0000 R CNN
+F 2 "" H 5550 2550 50  0001 C CNN
+F 3 "" H 5550 2550 50  0001 C CNN
+	1    5550 2550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97BAB
+P 5550 2650
+AR Path="/5DD97BAB" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97BAB" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97BAB" Ref="#PWR090"  Part="1" 
+F 0 "#PWR090" H 5550 2400 50  0001 C CNN
+F 1 "GND" V 5555 2522 50  0000 R CNN
+F 2 "" H 5550 2650 50  0001 C CNN
+F 3 "" H 5550 2650 50  0001 C CNN
+	1    5550 2650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97BB1
+P 5550 2750
+AR Path="/5DD97BB1" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97BB1" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97BB1" Ref="#PWR091"  Part="1" 
+F 0 "#PWR091" H 5550 2500 50  0001 C CNN
+F 1 "GND" V 5555 2622 50  0000 R CNN
+F 2 "" H 5550 2750 50  0001 C CNN
+F 3 "" H 5550 2750 50  0001 C CNN
+	1    5550 2750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97BB7
+P 5550 2850
+AR Path="/5DD97BB7" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97BB7" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97BB7" Ref="#PWR092"  Part="1" 
+F 0 "#PWR092" H 5550 2600 50  0001 C CNN
+F 1 "GND" V 5555 2722 50  0000 R CNN
+F 2 "" H 5550 2850 50  0001 C CNN
+F 3 "" H 5550 2850 50  0001 C CNN
+	1    5550 2850
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2450 1300 2450 1400
+Connection ~ 2450 1400
+Wire Wire Line
+	2450 1400 2450 1450
+$Comp
+L 24CW1280T-I_OT:24CW1280T-I_OT EEPROM?
+U 1 1 5DD97BD6
+P 1800 4900
+AR Path="/5DD97BD6" Ref="EEPROM?"  Part="1" 
+AR Path="/5DB5C096/5DD97BD6" Ref="EEPROM?"  Part="1" 
+AR Path="/5DD7F344/5DD97BD6" Ref="U3"  Part="1" 
+F 0 "U3" H 2300 5165 50  0000 C CNN
+F 1 "24CW1280T-I_OT" H 2300 5074 50  0000 C CNN
+F 2 "24CW1280T-I_OT:SOT95P280X145-5N" H 2650 5000 50  0001 L CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/24CW16X-24CW32X-24CW64X-24CW128X-Data-Sheet-20005772B.pdf" H 2650 4900 50  0001 L CNN
+F 4 "MICROCHIP - 24CW1280T-I/OT - EEPROM, 128KBIT, -40 TO 85DEG C" H 2650 4800 50  0001 L CNN "Description"
+F 5 "1.45" H 2650 4700 50  0001 L CNN "Height"
+F 6 "Microchip" H 2650 4600 50  0001 L CNN "Manufacturer_Name"
+F 7 "24CW1280T-I/OT" H 2650 4500 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "579-24CW1280T-I/OT" H 2650 4400 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.com/Search/Refine.aspx?Keyword=579-24CW1280T-I%2FOT" H 2650 4300 50  0001 L CNN "Mouser Price/Stock"
+F 10 "1871851" H 2650 4200 50  0001 L CNN "RS Part Number"
+F 11 "http://uk.rs-online.com/web/p/products/1871851" H 2650 4100 50  0001 L CNN "RS Price/Stock"
+	1    1800 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5DD97BDD
+P 3100 5050
+AR Path="/5DD97BDD" Ref="C?"  Part="1" 
+AR Path="/5DB5C096/5DD97BDD" Ref="C?"  Part="1" 
+AR Path="/5DD7F344/5DD97BDD" Ref="C35"  Part="1" 
+F 0 "C35" H 3215 5096 50  0000 L CNN
+F 1 "100n" H 3215 5005 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 3138 4900 50  0001 C CNN
+F 3 "~" H 3100 5050 50  0001 C CNN
+	1    3100 5050
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2800 5000
+Wire Wire Line
+	2800 4900 3100 4900
+Wire Wire Line
+	3100 5300 3100 5200
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DD97BE9
+P 3100 4900
+AR Path="/5DD97BE9" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97BE9" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97BE9" Ref="#PWR074"  Part="1" 
+F 0 "#PWR074" H 3100 4750 50  0001 C CNN
+F 1 "+3.3V" H 3115 5073 50  0000 C CNN
+F 2 "" H 3100 4900 50  0001 C CNN
+F 3 "" H 3100 4900 50  0001 C CNN
+	1    3100 4900
+	1    0    0    -1  
+$EndComp
+Connection ~ 3100 4900
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97BF0
+P 3100 5300
+AR Path="/5DD97BF0" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97BF0" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97BF0" Ref="#PWR075"  Part="1" 
+F 0 "#PWR075" H 3100 5050 50  0001 C CNN
+F 1 "GND" H 3105 5127 50  0000 C CNN
+F 2 "" H 3100 5300 50  0001 C CNN
+F 3 "" H 3100 5300 50  0001 C CNN
+	1    3100 5300
+	1    0    0    -1  
+$EndComp
+Connection ~ 3100 5300
+Text Notes 1950 5500 0    50   ~ 0
+I2C address: 0x50
+$Comp
+L W25N01GVZEIG_TR:W25N01GVZEIG_TR IC?
+U 1 1 5DD97C00
+P 6350 4700
+AR Path="/5DD97C00" Ref="IC?"  Part="1" 
+AR Path="/5DB5C096/5DD97C00" Ref="IC?"  Part="1" 
+AR Path="/5DD7F344/5DD97C00" Ref="U4"  Part="1" 
+F 0 "U4" H 6600 5150 50  0000 L CNN
+F 1 "W25N01GVZEIG_TR" H 7200 5150 50  0000 L CNN
+F 2 "W25N01GVZEIG_TR:SON127P800X600X80-9N-D" H 7900 5100 50  0001 L CNN
+F 3 "https://www.winbond.com/resource-files/w25n01gv revg 032116.pdf" H 7900 5000 50  0001 L CNN
+F 4 "IC FLASH 1GBIT 104MHZ 8WSON" H 7900 4900 50  0001 L CNN "Description"
+F 5 "0.8" H 7900 4800 50  0001 L CNN "Height"
+F 6 "Winbond" H 7900 4700 50  0001 L CNN "Manufacturer_Name"
+F 7 "W25N01GVZEIG TR" H 7900 4600 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "454-W25N01GVZEIGTR" H 7900 4500 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.com/Search/Refine.aspx?Keyword=454-W25N01GVZEIGTR" H 7900 4400 50  0001 L CNN "Mouser Price/Stock"
+F 10 "" H 7900 4300 50  0001 L CNN "RS Part Number"
+F 11 "" H 7900 4200 50  0001 L CNN "RS Price/Stock"
+	1    6350 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DD97C07
+P 7150 4000
+AR Path="/5DD97C07" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97C07" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97C07" Ref="#PWR097"  Part="1" 
+F 0 "#PWR097" H 7150 3850 50  0001 C CNN
+F 1 "+3.3V" H 7100 4150 50  0000 L CNN
+F 2 "" H 7150 4000 50  0001 C CNN
+F 3 "" H 7150 4000 50  0001 C CNN
+	1    7150 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5DD97C0D
+P 5300 4800
+AR Path="/5DD97C0D" Ref="R?"  Part="1" 
+AR Path="/5DB5C096/5DD97C0D" Ref="R?"  Part="1" 
+AR Path="/5DD7F344/5DD97C0D" Ref="R25"  Part="1" 
+F 0 "R25" H 5370 4846 50  0000 L CNN
+F 1 "10k" H 5370 4755 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 5230 4800 50  0001 C CNN
+F 3 "~" H 5300 4800 50  0001 C CNN
+	1    5300 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7150 4000 7150 4050
+Connection ~ 7150 4050
+Wire Wire Line
+	7150 4050 7150 4100
+$Comp
+L Device:R R?
+U 1 1 5DD97C1A
+P 5000 4800
+AR Path="/5DD97C1A" Ref="R?"  Part="1" 
+AR Path="/5DB5C096/5DD97C1A" Ref="R?"  Part="1" 
+AR Path="/5DD7F344/5DD97C1A" Ref="R24"  Part="1" 
+F 0 "R24" H 5070 4846 50  0000 L CNN
+F 1 "10k" H 5070 4755 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" V 4930 4800 50  0001 C CNN
+F 3 "~" H 5000 4800 50  0001 C CNN
+	1    5000 4800
+	1    0    0    -1  
+$EndComp
+Text GLabel 8050 4700 2    50   Input ~ 0
+SPI1_MISO_FCC
+Text GLabel 6350 4800 0    50   Input ~ 0
+SPI1_CS_FLASH_FCC
+Text GLabel 6350 4900 0    50   Input ~ 0
+SPI1_SCK_FCC
+Text GLabel 6350 4700 0    50   Input ~ 0
+SPI1_MOSI_FCC
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97C29
+P 7150 5850
+AR Path="/5DD97C29" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97C29" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97C29" Ref="#PWR098"  Part="1" 
+F 0 "#PWR098" H 7150 5600 50  0001 C CNN
+F 1 "GND" H 7155 5677 50  0000 C CNN
+F 2 "" H 7150 5850 50  0001 C CNN
+F 3 "" H 7150 5850 50  0001 C CNN
+	1    7150 5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7150 5850 7150 5800
+Wire Wire Line
+	7250 5700 7250 5800
+Wire Wire Line
+	7250 5800 7150 5800
+Connection ~ 7150 5800
+Wire Wire Line
+	7150 5800 7150 5700
+$Comp
+L Device:C C?
+U 1 1 5DD97C34
+P 8950 4850
+AR Path="/5DD97C34" Ref="C?"  Part="1" 
+AR Path="/5DB5C096/5DD97C34" Ref="C?"  Part="1" 
+AR Path="/5DD7F344/5DD97C34" Ref="C36"  Part="1" 
+F 0 "C36" H 8750 4800 50  0000 C CNN
+F 1 "100n" H 8750 4900 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 8988 4700 50  0001 C CNN
+F 3 "~" H 8950 4850 50  0001 C CNN
+	1    8950 4850
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8950 5000 8950 5800
+Wire Wire Line
+	8950 5800 7250 5800
+Connection ~ 7250 5800
+Wire Wire Line
+	8950 4700 8950 4050
+Wire Wire Line
+	8950 4050 7150 4050
+Text Notes 550  800  0    197  Italic 0
+FCC Peripherals
+$Comp
+L Connector_Generic:Conn_01x04 UART3_FCC1
+U 1 1 5DDCC41B
+P 7350 1900
+F 0 "UART3_FCC1" H 7430 1892 50  0000 L CNN
+F 1 "Conn_01x04" H 7430 1801 50  0000 L CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal" H 7350 1900 50  0001 C CNN
+F 3 "~" H 7350 1900 50  0001 C CNN
+	1    7350 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DDCCCE4
+P 7150 1800
+AR Path="/5DB5C096/5DDCCCE4" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DDCCCE4" Ref="#PWR093"  Part="1" 
+F 0 "#PWR093" H 7150 1650 50  0001 C CNN
+F 1 "+3V3" V 7150 2050 50  0000 C CNN
+F 2 "" H 7150 1800 50  0001 C CNN
+F 3 "" H 7150 1800 50  0001 C CNN
+	1    7150 1800
+	0    -1   -1   0   
+$EndComp
+Text GLabel 7150 2000 0    50   Input ~ 0
+UART3_TX_FCC
+Text GLabel 7150 2100 0    50   Input ~ 0
+UART3_RX_FCC
+$Comp
+L power:GND #PWR?
+U 1 1 5DDCD95E
+P 7150 1900
+AR Path="/5DDCD95E" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DDCD95E" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DDCD95E" Ref="#PWR094"  Part="1" 
+F 0 "#PWR094" H 7150 1650 50  0001 C CNN
+F 1 "GND" V 7150 1700 50  0000 C CNN
+F 2 "" H 7150 1900 50  0001 C CNN
+F 3 "" H 7150 1900 50  0001 C CNN
+	1    7150 1900
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 UART4_FCC1
+U 1 1 5DDCDE10
+P 8800 1900
+F 0 "UART4_FCC1" H 8880 1892 50  0000 L CNN
+F 1 "Conn_01x04" H 8880 1801 50  0000 L CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal" H 8800 1900 50  0001 C CNN
+F 3 "~" H 8800 1900 50  0001 C CNN
+	1    8800 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 I2C3_FCC1
+U 1 1 5DDD08A3
+P 7350 2700
+F 0 "I2C3_FCC1" H 7430 2692 50  0000 L CNN
+F 1 "Conn_01x04" H 7430 2601 50  0000 L CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal" H 7350 2700 50  0001 C CNN
+F 3 "~" H 7350 2700 50  0001 C CNN
+	1    7350 2700
+	1    0    0    -1  
+$EndComp
+Text GLabel 8600 2000 0    50   Input ~ 0
+UART4_TX_FCC
+Text GLabel 8600 2100 0    50   Input ~ 0
+UART4_RX_FCC
+Text GLabel 7150 2800 0    50   Input ~ 0
+I2C3_SCL_FCC
+Text GLabel 7150 2900 0    50   Input ~ 0
+I2C3_SDA_FCC
+$Comp
+L Connector_Generic:Conn_01x04 ADC_FCC1
+U 1 1 5DDD2471
+P 8800 2700
+F 0 "ADC_FCC1" H 8880 2692 50  0000 L CNN
+F 1 "Conn_01x04" H 8880 2601 50  0000 L CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal" H 8800 2700 50  0001 C CNN
+F 3 "~" H 8800 2700 50  0001 C CNN
+	1    8800 2700
+	1    0    0    -1  
+$EndComp
+Text GLabel 8600 2800 0    50   Input ~ 0
+ADC3_0_FCC
+Text GLabel 8600 2900 0    50   Input ~ 0
+ADC3_1_FCC
+$Comp
+L Connector_Generic:Conn_01x06 RCIN_FCC1
+U 1 1 5DDD3A2C
+P 10250 2600
+F 0 "RCIN_FCC1" H 10330 2592 50  0000 L CNN
+F 1 "Conn_01x06" H 10330 2501 50  0000 L CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0610_1x06_P1.25mm_Horizontal" H 10250 2600 50  0001 C CNN
+F 3 "~" H 10250 2600 50  0001 C CNN
+	1    10250 2600
+	1    0    0    -1  
+$EndComp
+Text GLabel 10050 2600 0    50   Input ~ 0
+TIM4_CH1_FCC
+Text GLabel 10050 2700 0    50   Input ~ 0
+TIM4_CH2_FCC
+Text GLabel 10050 2800 0    50   Input ~ 0
+TIM4_CH3_FCC
+Text GLabel 10050 2900 0    50   Input ~ 0
+TIM4_CH4_FCC
+$Comp
+L Connector_Generic:Conn_01x08 PWM?
+U 1 1 5DD97B50
+P 4650 2450
+AR Path="/5DD97B50" Ref="PWM?"  Part="1" 
+AR Path="/5DB5C096/5DD97B50" Ref="PWM?"  Part="1" 
+AR Path="/5DD7F344/5DD97B50" Ref="PWM_SIG1"  Part="1" 
+F 0 "PWM_SIG1" H 4250 3000 50  0000 L CNN
+F 1 "2.54mm" H 4250 2900 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 4650 2450 50  0001 C CNN
+F 3 "~" H 4650 2450 50  0001 C CNN
+	1    4650 2450
+	1    0    0    -1  
+$EndComp
+Text GLabel 3150 1750 2    50   Input ~ 0
+PWM_0
+Text GLabel 3150 1850 2    50   Input ~ 0
+PWM_1
+Text GLabel 3150 1950 2    50   Input ~ 0
+PWM_2
+Text GLabel 3150 2050 2    50   Input ~ 0
+PWM_3
+Text GLabel 3150 2150 2    50   Input ~ 0
+PWM_4
+Text GLabel 3150 2250 2    50   Input ~ 0
+PWM_5
+Text GLabel 3150 2350 2    50   Input ~ 0
+PWM_6
+Text GLabel 3150 2450 2    50   Input ~ 0
+PWM_7
+Text GLabel 4450 2150 0    50   Input ~ 0
+PWM_0
+Text GLabel 4450 2250 0    50   Input ~ 0
+PWM_1
+Text GLabel 4450 2350 0    50   Input ~ 0
+PWM_2
+Text GLabel 4450 2450 0    50   Input ~ 0
+PWM_3
+Text GLabel 4450 2550 0    50   Input ~ 0
+PWM_4
+Text GLabel 4450 2650 0    50   Input ~ 0
+PWM_5
+Text GLabel 4450 2750 0    50   Input ~ 0
+PWM_6
+Text GLabel 4450 2850 0    50   Input ~ 0
+PWM_7
+Wire Notes Line
+	4100 2950 4100 1850
+Wire Notes Line
+	4100 1850 5850 1850
+Wire Notes Line
+	5850 1850 5850 2950
+Wire Notes Line
+	5850 2950 4100 2950
+Wire Wire Line
+	1050 2350 1050 1400
+Wire Wire Line
+	1050 1400 2450 1400
+Wire Wire Line
+	1050 2650 1050 3550
+$Comp
+L power:GND #PWR?
+U 1 1 5DD97B0D
+P 2450 3600
+AR Path="/5DD97B0D" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DD97B0D" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DD97B0D" Ref="#PWR071"  Part="1" 
+F 0 "#PWR071" H 2450 3350 50  0001 C CNN
+F 1 "GND" H 2455 3427 50  0000 C CNN
+F 2 "" H 2450 3600 50  0001 C CNN
+F 3 "" H 2450 3600 50  0001 C CNN
+	1    2450 3600
+	1    0    0    -1  
+$EndComp
+Wire Notes Line
+	950  1100 3500 1100
+Wire Notes Line
+	3500 1100 3500 3850
+Wire Notes Line
+	3500 3850 950  3850
+Wire Notes Line
+	950  1100 950  3850
+Text Notes 950  3950 0    50   ~ 0
+PWM Driver
+Text Notes 4100 3150 0    50   ~ 0
+Servo Connector\n(3 Rows, 8 Cols, 2.54mm Pitch)
+Wire Notes Line
+	6500 1550 10800 1550
+Wire Notes Line
+	10800 1550 10800 3150
+Wire Notes Line
+	10800 3150 6500 3150
+Wire Notes Line
+	6500 1550 6500 3150
+Text Notes 6500 3350 0    50   ~ 0
+Board To Wire Connectors\n(Molex PicoBlade)
+Text GLabel 1800 4900 0    50   Input ~ 0
+I2C2_SCL_FCC
+Text GLabel 1800 5100 0    50   Input ~ 0
+I2C2_SDA_FCC
+Wire Wire Line
+	1200 5000 1200 5300
+Wire Wire Line
+	1200 5000 1800 5000
+Wire Wire Line
+	1200 5300 3100 5300
+Wire Notes Line
+	1150 4550 3450 4550
+Wire Notes Line
+	3450 4550 3450 5650
+Wire Notes Line
+	3450 5650 1150 5650
+Wire Notes Line
+	1150 4550 1150 5650
+Text Notes 1150 5750 0    50   ~ 0
+EEPROM
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5DE25F66
+P 5000 4650
+AR Path="/5DE25F66" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DE25F66" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DE25F66" Ref="#PWR076"  Part="1" 
+F 0 "#PWR076" H 5000 4500 50  0001 C CNN
+F 1 "+3.3V" H 4950 4800 50  0000 L CNN
+F 2 "" H 5000 4650 50  0001 C CNN
+F 3 "" H 5000 4650 50  0001 C CNN
+	1    5000 4650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5300 5000 5300 4950
+Wire Wire Line
+	5000 4950 5000 5100
+Wire Wire Line
+	5300 4650 5000 4650
+Connection ~ 5000 4650
+Wire Wire Line
+	5300 5000 6350 5000
+Wire Wire Line
+	5000 5100 6350 5100
+Wire Notes Line
+	4900 3800 9250 3800
+Wire Notes Line
+	9250 3800 9250 6100
+Wire Notes Line
+	9250 6100 4900 6100
+Wire Notes Line
+	4900 3800 4900 6100
+Text Notes 4900 6200 0    50   ~ 0
+FLASH Memory
+$Comp
+L power:GND #PWR?
+U 1 1 5DC20571
+P 8600 1900
+AR Path="/5DC20571" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DC20571" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC20571" Ref="#PWR0100"  Part="1" 
+F 0 "#PWR0100" H 8600 1650 50  0001 C CNN
+F 1 "GND" V 8600 1700 50  0000 C CNN
+F 2 "" H 8600 1900 50  0001 C CNN
+F 3 "" H 8600 1900 50  0001 C CNN
+	1    8600 1900
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DC20935
+P 8600 1800
+AR Path="/5DB5C096/5DC20935" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC20935" Ref="#PWR099"  Part="1" 
+F 0 "#PWR099" H 8600 1650 50  0001 C CNN
+F 1 "+3V3" V 8600 2050 50  0000 C CNN
+F 2 "" H 8600 1800 50  0001 C CNN
+F 3 "" H 8600 1800 50  0001 C CNN
+	1    8600 1800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC211C5
+P 7150 2700
+AR Path="/5DC211C5" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DC211C5" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC211C5" Ref="#PWR096"  Part="1" 
+F 0 "#PWR096" H 7150 2450 50  0001 C CNN
+F 1 "GND" V 7150 2500 50  0000 C CNN
+F 2 "" H 7150 2700 50  0001 C CNN
+F 3 "" H 7150 2700 50  0001 C CNN
+	1    7150 2700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DC2162A
+P 7150 2600
+AR Path="/5DB5C096/5DC2162A" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC2162A" Ref="#PWR095"  Part="1" 
+F 0 "#PWR095" H 7150 2450 50  0001 C CNN
+F 1 "+3V3" V 7150 2850 50  0000 C CNN
+F 2 "" H 7150 2600 50  0001 C CNN
+F 3 "" H 7150 2600 50  0001 C CNN
+	1    7150 2600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DC21D08
+P 8600 2600
+AR Path="/5DB5C096/5DC21D08" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC21D08" Ref="#PWR0101"  Part="1" 
+F 0 "#PWR0101" H 8600 2450 50  0001 C CNN
+F 1 "+3V3" V 8600 2850 50  0000 C CNN
+F 2 "" H 8600 2600 50  0001 C CNN
+F 3 "" H 8600 2600 50  0001 C CNN
+	1    8600 2600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC2221F
+P 8600 2700
+AR Path="/5DC2221F" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DC2221F" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC2221F" Ref="#PWR0102"  Part="1" 
+F 0 "#PWR0102" H 8600 2450 50  0001 C CNN
+F 1 "GND" V 8600 2500 50  0000 C CNN
+F 2 "" H 8600 2700 50  0001 C CNN
+F 3 "" H 8600 2700 50  0001 C CNN
+	1    8600 2700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DC2272F
+P 10050 2400
+AR Path="/5DB5C096/5DC2272F" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC2272F" Ref="#PWR0103"  Part="1" 
+F 0 "#PWR0103" H 10050 2250 50  0001 C CNN
+F 1 "+3V3" V 10050 2650 50  0000 C CNN
+F 2 "" H 10050 2400 50  0001 C CNN
+F 3 "" H 10050 2400 50  0001 C CNN
+	1    10050 2400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DC22CED
+P 10050 2500
+AR Path="/5DC22CED" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DC22CED" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DC22CED" Ref="#PWR0104"  Part="1" 
+F 0 "#PWR0104" H 10050 2250 50  0001 C CNN
+F 1 "GND" V 10050 2300 50  0000 C CNN
+F 2 "" H 10050 2500 50  0001 C CNN
+F 3 "" H 10050 2500 50  0001 C CNN
+	1    10050 2500
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 UART5_FCC1
+U 1 1 5DBB8D2E
+P 10250 1900
+F 0 "UART5_FCC1" H 10330 1892 50  0000 L CNN
+F 1 "Conn_01x04" H 10330 1801 50  0000 L CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal" H 10250 1900 50  0001 C CNN
+F 3 "~" H 10250 1900 50  0001 C CNN
+	1    10250 1900
+	1    0    0    -1  
+$EndComp
+Text GLabel 10050 2000 0    50   Input ~ 0
+UART5_TX_FCC
+Text GLabel 10050 2100 0    50   Input ~ 0
+UART5_RX_FCC
+$Comp
+L power:GND #PWR?
+U 1 1 5DBB8D36
+P 10050 1900
+AR Path="/5DBB8D36" Ref="#PWR?"  Part="1" 
+AR Path="/5DB5C096/5DBB8D36" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DBB8D36" Ref="#PWR0164"  Part="1" 
+F 0 "#PWR0164" H 10050 1650 50  0001 C CNN
+F 1 "GND" V 10050 1700 50  0000 C CNN
+F 2 "" H 10050 1900 50  0001 C CNN
+F 3 "" H 10050 1900 50  0001 C CNN
+	1    10050 1900
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5DBB8D3C
+P 10050 1800
+AR Path="/5DB5C096/5DBB8D3C" Ref="#PWR?"  Part="1" 
+AR Path="/5DD7F344/5DBB8D3C" Ref="#PWR0163"  Part="1" 
+F 0 "#PWR0163" H 10050 1650 50  0001 C CNN
+F 1 "+3V3" V 10050 2050 50  0000 C CNN
+F 2 "" H 10050 1800 50  0001 C CNN
+F 3 "" H 10050 1800 50  0001 C CNN
+	1    10050 1800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x08_Odd_Even PWM_POW1
+U 1 1 5DD371B1
+P 5250 2450
+F 0 "PWM_POW1" H 5300 2967 50  0000 C CNN
+F 1 "Conn_02x08_Odd_Even" H 5300 2876 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical" H 5250 2450 50  0001 C CNN
+F 3 "~" H 5250 2450 50  0001 C CNN
+	1    5250 2450
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

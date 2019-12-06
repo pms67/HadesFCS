@@ -1,0 +1,9 @@
+(sym_lib_table
+  (lib (name BMI088)(type Legacy)(uri ${KIPRJMOD}/lib/BMI088.lib)(options "")(descr ""))
+  (lib (name IIS2MDCTR)(type Legacy)(uri ${KIPRJMOD}/lib/IIS2MDCTR.lib)(options "")(descr ""))
+  (lib (name W25N01GVZEIG_TR)(type Legacy)(uri ${KIPRJMOD}/lib/W25N01GVZEIG_TR.lib)(options "")(descr ""))
+  (lib (name 24CW1280T-I_OT)(type Legacy)(uri ${KIPRJMOD}/lib/24CW1280T-I_OT.lib)(options "")(descr ""))
+  (lib (name LD39200PU33R)(type Legacy)(uri ${KIPRJMOD}/lib/LD39200PU33R.lib)(options "")(descr ""))
+  (lib (name BMP388)(type Legacy)(uri ${KIPRJMOD}/lib/BMP388.lib)(options "")(descr ""))
+  (lib (name USBLC6-2SC6Y)(type Legacy)(uri ${KIPRJMOD}/lib/USBLC6-2SC6Y.lib)(options "")(descr ""))
+)

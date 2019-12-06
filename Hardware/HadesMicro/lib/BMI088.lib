@@ -1,0 +1,41 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# BMI088
+#
+DEF BMI088 U 0 40 Y Y 1 L N
+F0 "U" -500 825 50 H V L BNN
+F1 "BMI088" -500 -900 50 H V L BNN
+F2 "PQFN50P450X300X100-16N" 0 0 50 H I L BNN
+F3 "BMI088" 0 0 50 H I L BNN
+F4 "None" 0 0 50 H I L BNN
+F5 "VFLGA-16 Bosch Sensortec" 0 0 50 H I L BNN
+F6 "Bosch Sensortec" 0 0 50 H I L BNN
+F7 "High-performance 6-axis inertial sensor _accelerometer + gyroscope_" 0 0 50 H I L BNN
+F8 "Unavailable" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 -500 800 500 800 N
+P 2 0 0 10 500 800 500 -800 N
+P 2 0 0 10 500 -800 -500 -800 N
+P 2 0 0 10 -500 -800 -500 800 N
+X INT2 1 700 -100 200 L 40 40 0 0 B 
+X VDD 3 700 700 200 L 40 40 0 0 W 
+X GNDA 4 700 -700 200 L 40 40 0 0 W 
+X GNDIO 6 700 -600 200 L 40 40 0 0 W 
+X CSB2 5 -700 100 200 R 40 40 0 0 I 
+X PS 7 -700 400 200 R 40 40 0 0 I 
+X SCL/SCK 8 -700 0 200 R 40 40 0 0 I C
+X SDA/SDI 9 -700 -100 200 R 40 40 0 0 B 
+X SDO2 10 -700 -300 200 R 40 40 0 0 O 
+X VDDIO 11 700 600 200 L 40 40 0 0 W 
+X INT3 12 700 -200 200 L 40 40 0 0 B 
+X INT4 13 700 -300 200 L 40 40 0 0 B 
+X CSB1 14 -700 200 200 R 40 40 0 0 I 
+X SDO1 15 -700 -200 200 R 40 40 0 0 O 
+X INT1 16 700 0 200 L 40 40 0 0 B 
+ENDDRAW
+ENDDEF
+#
+# End Library

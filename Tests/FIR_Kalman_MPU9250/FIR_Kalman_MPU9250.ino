@@ -13,7 +13,7 @@ FIRFilter lpfAccX;
 FIRFilter lpfAccY;
 FIRFilter lpfAccZ;
 
-float lpfGyrCoeff[] = {0.0000069f,0.0000000f,-0.0000899f,-0.0001611f,0.0003930f,0.0013753f,0.0000000f,-0.0049735f,-0.0053085f,0.0087375f,0.0224203f,0.0000000f,-0.0531261f,-0.0511723f,0.0857082f,0.2961945f,0.4000000f,0.2961945f,0.0857082f,-0.0511723f,-0.0531261f,0.0000000f,0.0224203f,0.0087375f,-0.0053085f,-0.0049735f,0.0000000f,0.0013753f,0.0003930f,-0.0001611f,-0.0000899f,0.0000000f};
+float lpfGyrCoeff[] = {0.0000000f,0.0002039f,0.0016460f,0.0004565f,0.0000000f,0.0081026f,0.0000000f,-0.0179358f,0.0000000f,-0.0060113f,-0.0697635f,-0.0495153f,0.0000000f,-0.1357168f,-0.1799769f,0.2024041f,0.5000000f,0.2024041f,-0.1799769f,-0.1357168f,0.0000000f,-0.0495153f,-0.0697635f,-0.0060113f,0.0000000f,-0.0179358f,0.0000000f,0.0081026f,0.0000000f,0.0004565f,0.0016460f,0.0002039f};
 float lpfAccCoeff[] = {-0.0000011f,-0.0000139f,-0.0000662f,-0.0001802f,-0.0003389f,-0.0004011f,0.0000000f,0.0015241f,0.0050860f,0.0116617f,0.0219439f,0.0359377f,0.0526573f,0.0700909f,0.0855263f,0.0961888f,0.1000000f,0.0961888f,0.0855263f,0.0700909f,0.0526573f,0.0359377f,0.0219439f,0.0116617f,0.0050860f,0.0015241f,0.0000000f,-0.0004011f,-0.0003389f,-0.0001802f,-0.0000662f,-0.0000139f};
 
 float lpfGyrPBuf[32];
@@ -27,6 +27,7 @@ float lpfAccZBuf[32];
 void setup() {
 
   Serial.begin(115200);
+  while (!Serial);
 
   IMU_Init();
 
@@ -35,7 +36,7 @@ void setup() {
 
   float Pinit = 10.0f;
   float Q[] = {3.0f * gyroNoiseStdDev * gyroNoiseStdDev, 2.0f * gyroNoiseStdDev * gyroNoiseStdDev};
-  float R[] = {accNoiseStdDev, accNoiseStdDev, accNoiseStdDev};
+  float R[] = {accNoiseStdDev * accNoiseStdDev, accNoiseStdDev * accNoiseStdDev, accNoiseStdDev * accNoiseStdDev};
 
   KalmanRollPitch_Init(&kal, Pinit, Q, R);
 
@@ -67,9 +68,13 @@ void loop() {
   FIRFilter_Update(&lpfAccY, acc[1]);
   FIRFilter_Update(&lpfAccZ, acc[2]);
 
+  Serial.print(gyr[0], 6); Serial.print(","); Serial.print(gyr[1], 6); Serial.print(","); Serial.print(gyr[2], 6); Serial.print(",");
+
   gyr[0] = lpfGyrP.out;
   gyr[1] = lpfGyrQ.out;
   gyr[2] = lpfGyrR.out;
+
+  Serial.print(gyr[0], 6); Serial.print(","); Serial.print(gyr[1], 6); Serial.print(","); Serial.println(gyr[2], 6);
 
   acc[0] = lpfAccX.out;
   acc[1] = lpfAccY.out;
@@ -77,7 +82,7 @@ void loop() {
 
   KalmanRollPitch_Update(&kal, gyr, acc, 0.0f, 0.01f);
    
-  Serial.print(kal.phi * 180.0f / M_PI, 3); Serial.print(" "); Serial.println(kal.theta * 180.0f / M_PI, 3);
+  //Serial.print(kal.phi * 180.0f / M_PI, 3); Serial.print(" "); Serial.println(kal.theta * 180.0f / M_PI, 3);
 
   delay(10);
   
@@ -93,9 +98,9 @@ void IMU_Update() {
 }
 
 void IMU_getAcc(float *acc) {
-  acc[0] = 0.995f * mpu.getAccelX_mss() - 0.185f;
-  acc[1] = 1.001f * mpu.getAccelY_mss() + 0.0703f;
-  acc[2] = 1.010f * mpu.getAccelZ_mss() - 1.219f;
+  acc[0] = 1.00050968f * mpu.getAccelX_mss() - 0.1950968f;
+  acc[1] = 1.00050968f * mpu.getAccelY_mss() + 0.0150101f;
+  acc[2] = 1.00356778f * mpu.getAccelZ_mss() - 1.0787104f;
 }
 
 void IMU_getGyr(float *gyr) {
@@ -112,20 +117,20 @@ void IMU_getMag(float *mag) {
 
 void IMU_Print() {
     Serial.print(mpu.getAccelX_mss(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.print(mpu.getAccelY_mss(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.print(mpu.getAccelZ_mss(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.print(mpu.getGyroX_rads(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.print(mpu.getGyroY_rads(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.print(mpu.getGyroZ_rads(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.print(mpu.getMagX_uT(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.print(mpu.getMagY_uT(),6);
-    Serial.print("\t");
+    Serial.print(",");
     Serial.println(mpu.getMagZ_uT(),6);
 }

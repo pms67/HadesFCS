@@ -1,0 +1,36 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# BMP388
+#
+DEF BMP388 U 0 40 Y Y 1 L N
+F0 "U" -300 601 50 H V L BNN
+F1 "BMP388" -300 -601 50 H V L BNN
+F2 "PQFN50P200X200X80-10N" 0 0 50 H I L BNN
+F3 "P-Sensor SPI I2C 1, 25 Bar SMD" 0 0 50 H I L BNN
+F4 "WFLGA-10 Bosch Tools" 0 0 50 H I L BNN
+F5 "BMP388" 0 0 50 H I L BNN
+F6 "Unavailable" 0 0 50 H I L BNN
+F7 "None" 0 0 50 H I L BNN
+F8 "Bosch Sensortec" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 300 -500 -300 -500 N
+P 2 0 0 10 -300 -500 -300 600 N
+P 2 0 0 10 -300 600 300 600 N
+P 2 0 0 10 300 600 300 -500 N
+X VDDIO 1 500 400 200 L 40 40 0 0 W 
+X SCK 2 -500 100 200 R 40 40 0 0 I C
+X VSS 3 500 -400 200 L 40 40 0 0 W 
+X VSS 8 500 -400 200 L 40 40 0 0 W 
+X VSS 9 500 -400 200 L 40 40 0 0 W 
+X SDI 4 -500 -100 200 R 40 40 0 0 B 
+X SDO 5 -500 -200 200 R 40 40 0 0 B 
+X CSB 6 -500 200 200 R 40 40 0 0 I 
+X INT 7 500 200 200 L 40 40 0 0 O 
+X VDD 10 500 500 200 L 40 40 0 0 W 
+ENDDRAW
+ENDDEF
+#
+# End Library

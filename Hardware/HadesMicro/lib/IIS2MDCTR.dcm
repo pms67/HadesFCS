@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP IIS2MDCTR
+D STMICROELECTRONICS - IIS2MDCTR - MEMS MODULE, 3-AXIS MAGNETOMETER, LGA-12
+K
+F https://www.st.com/resource/en/datasheet/iis2mdc.pdf
+$ENDCMP
+#
+#End Doc Library
