@@ -1,8 +1,11 @@
 #include "main.h"
 
+#include <string.h>
+
 #include "MPRLS.h"
 #include "IIS2MDC.h"
 #include "BMI088.h"
+#include "TMP100.h"
 
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c2;
@@ -27,6 +30,11 @@ static void MX_I2C3_Init(void);
 MPRLSBarometer bar;
 IISMagnetometer mag;
 BMI088IMU imu;
+TMP100 tmp;
+
+void printDebug(char *buf) {
+	HAL_UART_Transmit(&huart3, (uint8_t *) buf, strlen(buf), HAL_MAX_DELAY);
+}
 
 int main(void)
 {
@@ -44,73 +52,110 @@ int main(void)
   MX_I2C2_Init();
   MX_I2C3_Init();
 
+  printDebug("NAVC started.\r\n");
+  printDebug("Initialising sensors...\r\n");
 
   /* Initialise pressure sensor */
   uint8_t status = MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, GPIOA, INTBAR_Pin);
+  if (status == MPRLS_STATUS_POWERED) {
+	  printDebug("Barometer initialised.\r\n");
+  }
 
   /* Initialise magnetometer */
   status = IISMagnetometer_Init(&mag, &hi2c1, GPIOA, INTMAG_Pin);
+  if (status == 1) {
+	  printDebug("Magnetometer initialised.\r\n");
+  }
 
   /* Initialise IMU */
   status = BMI088_Init(&imu, &hi2c1, GPIOA, INTACC_Pin, GPIOA, INTGYR_Pin);
+  if (status == 1) {
+	  printDebug("IMU initialised.\r\n");
+  }
 
-  char buf[256];
+  /* Initialise temperature sensor */
+  TMP100_Init(&tmp, &hi2c1);
+  printDebug("Temperature sensor initialised.\r\n");
 
-  uint32_t timerBar   = 0;
-  uint32_t timerMag   = 0;
-  uint32_t timerAcc   = 0;
-  uint32_t timerGyr   = 0;
-  uint32_t timerDebug = 0;
+
+  uint32_t timerBar = 0;
+  uint32_t timerMag = 0;
+  uint32_t timerAcc = 0;
+  uint32_t timerGyr = 0;
+  uint32_t timerTmp = 0;
+  uint32_t timerDbg = 0;
+  uint32_t timerLED = 0;
 
   const uint32_t SAMPLE_TIME_BAR_MS = 10;
   const uint32_t SAMPLE_TIME_MAG_MS = 10;
   const uint32_t SAMPLE_TIME_ACC_MS = 5;
   const uint32_t SAMPLE_TIME_GYR_MS = 1;
-  const uint32_t SAMPLE_TIME_DEBUG_MS = 250;
+  const uint32_t SAMPLE_TIME_TMP_MS = 320;
+  const uint32_t SAMPLE_TIME_DBG_MS = 250;
+  const uint32_t SAMPLE_TIME_LED_MS = 1000;
 
+  printDebug("Starting main loop...\r\n");
   while (1)
   {
-	  uint32_t elapsedMillis = HAL_GetTick();
-
-	  if (elapsedMillis - timerGyr >= SAMPLE_TIME_GYR_MS) {
+	  /* Gyroscope */
+	  if (HAL_GetTick() - timerGyr >= SAMPLE_TIME_GYR_MS) {
 		  BMI088_ReadGyr(&imu);
 
 		  timerGyr += SAMPLE_TIME_GYR_MS;
 	  }
 
-	  if (elapsedMillis - timerAcc >= SAMPLE_TIME_ACC_MS) {
+	  /* Accelerometer */
+	  if (HAL_GetTick() - timerAcc >= SAMPLE_TIME_ACC_MS) {
 		  BMI088_ReadAcc(&imu);
 
 		  timerAcc += SAMPLE_TIME_ACC_MS;
 	  }
 
-	  if (elapsedMillis - timerBar >= SAMPLE_TIME_BAR_MS) {
+	  /* Barometer */
+	  if (HAL_GetTick() - timerBar >= SAMPLE_TIME_BAR_MS) {
 		  /* Read pressure */
 		  MPRLSBarometer_ReadPressure(&bar);
 
 		  timerBar += SAMPLE_TIME_BAR_MS;
 	  }
 
-	  if (elapsedMillis - timerMag >= SAMPLE_TIME_MAG_MS) {
-		  /* Read magnetometer */
+	  /* Magnetometer */
+	  if (HAL_GetTick() - timerMag >= SAMPLE_TIME_MAG_MS) {
 		  IISMagnetomer_Read(&mag);
 
 		  timerMag += SAMPLE_TIME_MAG_MS;
 	  }
 
-	  if (elapsedMillis - timerDebug >= SAMPLE_TIME_DEBUG_MS) {
-		  long pres = (long) bar.pressurePa;
-		  sprintf(buf, "[%ld] Bar: %ld | Mag: %i %i %i | Acc: %ld %ld %ld | Gyr: %ld %ld %ld\r\n",
-				  elapsedMillis, pres, mag.x, mag.y, mag.z,
+	  /* Temperature sensor */
+	  if (HAL_GetTick() - timerTmp >= SAMPLE_TIME_TMP_MS) {
+		  TMP100_Read(&tmp);
+
+		  timerTmp += SAMPLE_TIME_TMP_MS;
+	  }
+
+	  /* Debug USB output */
+	  if (HAL_GetTick() - timerDbg >= SAMPLE_TIME_DBG_MS) {
+		  char buf[256];
+		  sprintf(buf, "[%ld] Bar: %ld | Mag: %i %i %i | Acc: %ld %ld %ld | Gyr: %ld %ld %ld | Tmp: %ld\r\n",
+				  HAL_GetTick(),
+				  (long) (bar.pressurePa),
+				  mag.x, mag.y, mag.z,
 				  (long) (imu.acc[0] * 1000), (long) (imu.acc[1] * 1000), (long) (imu.acc[2] * 1000),
-				  (long) (imu.gyr[0] * 1000), (long) (imu.gyr[1] * 1000), (long) (imu.gyr[2] * 1000));
+				  (long) (imu.gyr[0] * 1000), (long) (imu.gyr[1] * 1000), (long) (imu.gyr[2] * 1000),
+				  (long) (tmp.temp_C * 10));
 
-		  HAL_UART_Transmit(&huart3, (uint8_t *) buf, strlen(buf), HAL_MAX_DELAY);
+		  printDebug(buf);
 
+		  timerDbg += SAMPLE_TIME_DBG_MS;
+	  }
+
+	  /* Heartbeat LED */
+	  if (HAL_GetTick() - timerLED >= SAMPLE_TIME_LED_MS) {
 		  HAL_GPIO_TogglePin(GPIOB, LEDA_Pin);
 
-		  timerDebug += SAMPLE_TIME_DEBUG_MS;
+		  timerLED += SAMPLE_TIME_LED_MS;
 	  }
+
   }
 
 }
