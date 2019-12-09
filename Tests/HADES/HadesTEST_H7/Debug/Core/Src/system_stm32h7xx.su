@@ -1,0 +1,2 @@
+system_stm32h7xx.c:140:6:SystemInit	4	static
+system_stm32h7xx.c:274:6:SystemCoreClockUpdate	40	static

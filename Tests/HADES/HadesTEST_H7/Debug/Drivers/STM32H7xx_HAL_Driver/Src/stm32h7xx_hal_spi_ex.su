@@ -1,0 +1,3 @@
+stm32h7xx_hal_spi_ex.c:76:19:HAL_SPIEx_FlushRxFifo	32	static
+stm32h7xx_hal_spi_ex.c:115:19:HAL_SPIEx_EnableLockConfiguration	24	static
+stm32h7xx_hal_spi_ex.c:163:19:HAL_SPIEx_ConfigureUnderrun	32	static

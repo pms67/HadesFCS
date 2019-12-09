@@ -1,0 +1,14 @@
+stm32h7xx_hal_uart_ex.c:166:19:HAL_RS485Ex_Init	32	static
+stm32h7xx_hal_uart_ex.c:272:13:HAL_UARTEx_WakeupCallback	16	static
+stm32h7xx_hal_uart_ex.c:287:13:HAL_UARTEx_RxFifoFullCallback	16	static
+stm32h7xx_hal_uart_ex.c:302:13:HAL_UARTEx_TxFifoEmptyCallback	16	static
+stm32h7xx_hal_uart_ex.c:352:19:HAL_MultiProcessorEx_AddressLength_Set	16	static
+stm32h7xx_hal_uart_ex.c:390:19:HAL_UARTEx_StopModeWakeUpSourceConfig	40	static
+stm32h7xx_hal_uart_ex.c:445:19:HAL_UARTEx_EnableStopMode	16	static
+stm32h7xx_hal_uart_ex.c:464:19:HAL_UARTEx_DisableStopMode	16	static
+stm32h7xx_hal_uart_ex.c:483:19:HAL_UARTEx_EnableFifoMode	24	static
+stm32h7xx_hal_uart_ex.c:524:19:HAL_UARTEx_DisableFifoMode	24	static
+stm32h7xx_hal_uart_ex.c:570:19:HAL_UARTEx_SetTxFifoThreshold	24	static
+stm32h7xx_hal_uart_ex.c:619:19:HAL_UARTEx_SetRxFifoThreshold	24	static
+stm32h7xx_hal_uart_ex.c:673:13:UARTEx_Wakeup_AddressConfig	24	static
+stm32h7xx_hal_uart_ex.c:691:13:UARTEx_SetNbDataToProcess	40	static
