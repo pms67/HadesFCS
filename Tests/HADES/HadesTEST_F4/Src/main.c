@@ -136,13 +136,13 @@ int main(void)
 	  /* Debug USB output */
 	  if (HAL_GetTick() - timerDbg >= SAMPLE_TIME_DBG_MS) {
 		  char buf[256];
-		  sprintf(buf, "[%ld] Bar: %ld | Mag: %i %i %i | Acc: %ld %ld %ld | Gyr: %ld %ld %ld | Tmp: %ld\r\n",
+		  sprintf(buf, "[%ld] Bar: %f | Mag: %f %f %f | Acc: %f %f %f | Gyr: %f %f %f | Tmp: %f\r\n",
 				  HAL_GetTick(),
-				  (long) (bar.pressurePa),
+				  bar.pressurePa,
 				  mag.x, mag.y, mag.z,
-				  (long) (imu.acc[0] * 1000), (long) (imu.acc[1] * 1000), (long) (imu.acc[2] * 1000),
-				  (long) (imu.gyr[0] * 1000), (long) (imu.gyr[1] * 1000), (long) (imu.gyr[2] * 1000),
-				  (long) (tmp.temp_C * 10));
+				  imu.acc[0], imu.acc[1], imu.acc[2],
+				  imu.gyr[0], imu.gyr[1], imu.gyr[2],
+				  tmp.temp_C);
 
 		  printDebug(buf);
 

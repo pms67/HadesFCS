@@ -122,9 +122,10 @@ void BMI088_ReadAcc(BMI088IMU *imu) {
 			accZ <<= 8;
 			accZ |= rxBuf[4];
 
-	imu->acc[0] = accX * 0.18310546875f;
-	imu->acc[1] = accY * 0.18310546875f;
-	imu->acc[2] = accZ * 0.18310546875f;
+	/* Scale (to m/s^2) and re-map axes */
+	imu->acc[0] = -accY * 0.00179626456f;
+	imu->acc[1] = -accX * 0.00179626456f;
+	imu->acc[2] = -accZ * 0.00179626456f;
 }
 
 void BMI088_ReadGyr(BMI088IMU *imu) {
@@ -143,7 +144,8 @@ void BMI088_ReadGyr(BMI088IMU *imu) {
 			gyrZ <<= 8;
 			gyrZ |= rxBuf[4];
 
-	imu->gyr[0] = gyrX * 0.01525925473f;
-	imu->gyr[1] = gyrY * 0.01525925473f;
-	imu->gyr[2] = gyrZ * 0.01525925473f;
+	/* Scale (to rad/s) and re-map axes */
+	imu->gyr[0] = -gyrY * 0.00026632423f;
+	imu->gyr[1] = -gyrX * 0.00026632423f;
+	imu->gyr[2] = -gyrZ * 0.00026632423f;
 }

@@ -2,6 +2,7 @@
 #define IIS2MDC_H_
 
 #include "stm32f4xx_hal.h"
+#include <math.h>
 
 #define IIS_I2C_ADDR (0x1E << 1)
 #define IIS_I2C_TIMEOUT 100
@@ -23,10 +24,10 @@ typedef struct {
 	I2C_HandleTypeDef *I2Chandle;
 	GPIO_TypeDef *intPinBank;
 	uint16_t intPin;
-	int16_t x;
-	int16_t y;
-	int16_t z;
-	float temp_C;
+	float x;
+	float y;
+	float z;
+	float tempC;
 } IISMagnetometer;
 
 uint8_t IISMagnetometer_Init(IISMagnetometer *mag, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *intPinBank, uint16_t intPin);

@@ -1,0 +1,5 @@
+INA219.c:3:6:INA219_Init32V9A	24	static
+INA219.c:23:6:INA219_Init32V2A	24	static
+INA219.c:42:6:INA219_Read	24	static
+INA219.c:69:6:INA219_WriteReg16	32	static
+INA219.c:77:6:INA219_ReadReg16	48	static

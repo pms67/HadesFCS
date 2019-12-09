@@ -56,7 +56,7 @@ all: HadesTEST_F7.elf secondary-outputs
 
 # Tool invocations
 HadesTEST_F7.elf: $(OBJS) $(USER_OBJS) C:\Users\phili\OneDrive\UAV\Tests\HADES\HadesTEST_H7\STM32H753VITX_FLASH.ld
-	arm-none-eabi-g++ -o "HadesTEST_F7.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\phili\OneDrive\UAV\Tests\HADES\HadesTEST_H7\STM32H753VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="HadesTEST_F7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+	arm-none-eabi-g++ -o "HadesTEST_F7.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\phili\OneDrive\UAV\Tests\HADES\HadesTEST_H7\STM32H753VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="HadesTEST_F7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

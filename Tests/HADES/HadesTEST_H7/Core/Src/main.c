@@ -1,6 +1,9 @@
 #include "main.h"
 
+#include <stdio.h>
 #include <string.h>
+
+#include "INA219.h"
 
 ADC_HandleTypeDef hadc3;
 
@@ -32,6 +35,9 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_USART3_UART_Init(void);
 
+/* Peripherals */
+INA219 ina;
+
 void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart1, (uint8_t *) buf, strlen(buf), HAL_MAX_DELAY);
 }
@@ -55,14 +61,25 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
 
+  /* Initialise current/voltage/power sensor */
+  INA219_Init32V2A(&ina, &hi2c2);
+
+  uint32_t timerPVI = 0;
   uint32_t timerLED = 0;
   uint32_t timerDbg = 0;
 
+  const uint32_t SAMPLE_TIME_PVI_MS =  100;
   const uint32_t SAMPLE_TIME_LED_MS = 1000;
   const uint32_t SAMPLE_TIME_DBG_MS =  250;
 
   while (1)
   {
+	  if (HAL_GetTick() - timerPVI >= SAMPLE_TIME_PVI_MS) {
+		  INA219_Read(&ina);
+
+		  timerPVI += SAMPLE_TIME_PVI_MS;
+	  }
+
 	  if (HAL_GetTick() - timerLED >= SAMPLE_TIME_LED_MS) {
 		  HAL_GPIO_TogglePin(GPIOB, LEDA_Pin);
 
@@ -70,7 +87,16 @@ int main(void)
 	  }
 
 	  if (HAL_GetTick() - timerDbg >= SAMPLE_TIME_DBG_MS) {
-		  printDebug("FLIGHT CONTROL COMPUTER\r\n");
+		  char buf[128];
+
+		  sprintf(buf, "[%ld] Vbus (mV): %f | Vshnt (mV): %f | Current (mA): %f | Power (mW): %f\r\n",
+				  	  HAL_GetTick(),
+				  	  ina.voltageBusmV,
+					  ina.voltageShuntmV,
+					  ina.currentmA,
+					  ina.powermW);
+
+		  printDebug(buf);
 
 		  timerDbg += SAMPLE_TIME_DBG_MS;
 	  }

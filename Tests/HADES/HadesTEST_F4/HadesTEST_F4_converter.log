@@ -1,0 +1,23 @@
+Project: HadesTEST_F4
+Converter: Atollic TrueSTUDIO project converter
+Date: 20191209
+
+Post-build step might need some manual actions.
+Unknown value type "" for id com.atollic.truestudio.as.general.incpath on tool com.atollic.truestudio.exe.debug.toolchain.as
+Unknown value type "" for id com.atollic.truestudio.gcc.symbols.defined on tool com.atollic.truestudio.exe.debug.toolchain.as
+Option com.atollic.truestudio.common_options.target.endianess is no longer supported
+Option com.atollic.truestudio.common_options.target.instr_set is no longer supported
+Unknown value type "" for id com.atollic.truestudio.common_options.target.interwork on tool com.atollic.truestudio.exe.debug.toolchain.gcc
+Option com.atollic.truestudio.common_options.target.endianess is no longer supported
+Option com.atollic.truestudio.common_options.target.instr_set is no longer supported
+Unknown value type "" for id com.atollic.truestudio.ld.libraries.list on tool com.atollic.truestudio.exe.debug.toolchain.ld
+Unknown value type "" for id com.atollic.truestudio.ld.libraries.searchpath on tool com.atollic.truestudio.exe.debug.toolchain.ld
+Option com.atollic.truestudio.common_options.target.endianess is no longer supported
+Option com.atollic.truestudio.common_options.target.instr_set is no longer supported
+Unknown value type "" for id com.atollic.truestudio.gpp.optimization.fno_rtti on tool com.atollic.truestudio.exe.debug.toolchain.gpp
+Unknown value type "" for id com.atollic.truestudio.gpp.optimization.fno_exceptions on tool com.atollic.truestudio.exe.debug.toolchain.gpp
+Option com.atollic.truestudio.common_options.target.endianess is no longer supported
+Option com.atollic.truestudio.common_options.target.instr_set is no longer supported
+Option com.atollic.truestudio.common_options.target.endianess is no longer supported
+Option com.atollic.truestudio.common_options.target.instr_set is no longer supported
+No map found for id: com.atollic.truestudio.exe.release

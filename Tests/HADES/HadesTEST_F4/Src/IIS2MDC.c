@@ -7,7 +7,7 @@ uint8_t IISMagnetometer_Init(IISMagnetometer *mag, I2C_HandleTypeDef *I2Chandle,
 	mag->x          = 0;
 	mag->y          = 0;
 	mag->z          = 0;
-	mag->temp_C     = 0.0f;
+	mag->tempC      = 0.0f;
 
 	/* Check device ID register */
 	uint8_t whoAmI;
@@ -46,21 +46,24 @@ void IISMagnetomer_Read(IISMagnetometer *mag) {
 
 	/* Read raw X, Y, and Z values */
 	uint8_t rxBuf[2];
-	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_OUTX_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
+	int16_t magRaw[3];
 
-	mag->x = rxBuf[1];
-	mag->x <<= 8;
-	mag->x |= rxBuf[0];
+	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_OUTX_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
+	magRaw[0] = ((rxBuf[1] << 8) | rxBuf[0]);
 
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_OUTY_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
-	mag->y = rxBuf[1];
-	mag->y <<= 8;
-	mag->y |= rxBuf[0];
+	magRaw[1] = ((rxBuf[1] << 8) | rxBuf[0]);
 
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_OUTZ_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
-	mag->z = rxBuf[1];
-	mag->z <<= 8;
-	mag->z |= rxBuf[0];
+	magRaw[2] = ((rxBuf[1] << 8) | rxBuf[0]);
+
+	/* Convert to unit vector */
+	float inorm = 1.0f / ((float) (magRaw[0] * magRaw[0] + magRaw[1] * magRaw[1] + magRaw[2] * magRaw[2]));
+		  inorm = sqrt(inorm);
+
+    mag->x = magRaw[0] * inorm;
+    mag->y = magRaw[1] * inorm;
+    mag->z = magRaw[2] * inorm;
 
 	/* Read temperature */
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_TEMP_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
@@ -68,5 +71,5 @@ void IISMagnetomer_Read(IISMagnetometer *mag) {
 			temp <<= 8;
 			temp |= rxBuf[0];
 
-	mag->temp_C = temp / 8.0f;
+	mag->tempC = temp / 8.0f;
 }
