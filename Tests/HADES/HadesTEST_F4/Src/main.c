@@ -7,6 +7,8 @@
 #include "BMI088.h"
 #include "TMP100.h"
 
+#include "KalmanRollPitch.h"
+
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
@@ -32,6 +34,9 @@ IISMagnetometer mag;
 BMI088IMU imu;
 TMP100 tmp;
 
+/* State estimators */
+KalmanRollPitch kalrp;
+
 void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart3, (uint8_t *) buf, strlen(buf), HAL_MAX_DELAY);
 }
@@ -52,8 +57,12 @@ int main(void)
   MX_I2C2_Init();
   MX_I2C3_Init();
 
+  HAL_Delay(100);
+
   printDebug("NAVC started.\r\n");
+  HAL_Delay(100);
   printDebug("Initialising sensors...\r\n");
+  HAL_Delay(100);
 
   /* Initialise pressure sensor */
   uint8_t status = MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, GPIOA, INTBAR_Pin);
@@ -78,6 +87,12 @@ int main(void)
   printDebug("Temperature sensor initialised.\r\n");
 
 
+  /* Initialise Kalman filter (roll and pitch) */
+  float KALRP_INIT_P = 10.0f;
+  float KALRP_Q[] = {0.002077734f, 0.001385156f};//{0.00002077734f, 0.00001385156f};
+  float KALRP_R[] = {0.04927288f, 0.04927288f, 0.06948246f};//{0.00004927288f, 0.00004927288f, 0.00006948246f};
+  KalmanRollPitch_Init(&kalrp, KALRP_INIT_P, KALRP_Q, KALRP_R);
+
   uint32_t timerBar = 0;
   uint32_t timerMag = 0;
   uint32_t timerAcc = 0;
@@ -97,16 +112,23 @@ int main(void)
   printDebug("Starting main loop...\r\n");
   while (1)
   {
-	  /* Gyroscope */
+	  /* Gyroscope and Kalman filter prediction */
 	  if (HAL_GetTick() - timerGyr >= SAMPLE_TIME_GYR_MS) {
+		  float T = (HAL_GetTick() - timerGyr) * 0.001f;
+
 		  BMI088_ReadGyr(&imu);
+
+		  KalmanRollPitch_Update(&kalrp, imu.gyr, T);
 
 		  timerGyr += SAMPLE_TIME_GYR_MS;
 	  }
 
-	  /* Accelerometer */
+	  /* Accelerometer and Kalman filter update */
 	  if (HAL_GetTick() - timerAcc >= SAMPLE_TIME_ACC_MS) {
 		  BMI088_ReadAcc(&imu);
+
+		  /* Note: Airspeed measurement not implemented yet! */
+		  KalmanRollPitch_UpdateMeasurement(&kalrp, imu.gyr, imu.acc, 0.0f);
 
 		  timerAcc += SAMPLE_TIME_ACC_MS;
 	  }
@@ -136,13 +158,15 @@ int main(void)
 	  /* Debug USB output */
 	  if (HAL_GetTick() - timerDbg >= SAMPLE_TIME_DBG_MS) {
 		  char buf[256];
-		  sprintf(buf, "[%ld] Bar: %f | Mag: %f %f %f | Acc: %f %f %f | Gyr: %f %f %f | Tmp: %f\r\n",
+		  sprintf(buf, "[%ld] Bar: %f | Mag: %f %f %f | Acc: %f %f %f | Gyr: %f %f %f | Tmp: %f | Roll: %f | Pitch: %f\r\n",
 				  HAL_GetTick(),
 				  bar.pressurePa,
 				  mag.x, mag.y, mag.z,
 				  imu.acc[0], imu.acc[1], imu.acc[2],
 				  imu.gyr[0], imu.gyr[1], imu.gyr[2],
-				  tmp.temp_C);
+				  tmp.temp_C,
+				  kalrp.phi * 57.2957795131f,
+				  kalrp.theta * 57.2957795131f);
 
 		  printDebug(buf);
 

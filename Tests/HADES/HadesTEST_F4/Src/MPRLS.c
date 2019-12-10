@@ -8,7 +8,7 @@ uint8_t MPRLSBarometer_Init(MPRLSBarometer *bar, I2C_HandleTypeDef *I2Chandle, G
 	bar->intPin     = rstPin;
 	bar->pressurePa = 0.0f;
 
-	MPRLSBarometer_Reset(bar);
+//	MPRLSBarometer_Reset(bar);
 
 	HAL_Delay(10);
 

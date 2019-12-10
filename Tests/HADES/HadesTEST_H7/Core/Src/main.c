@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "INA219.h"
+#include "PCA9685.h"
 
 ADC_HandleTypeDef hadc3;
 
@@ -37,6 +38,7 @@ static void MX_USART3_UART_Init(void);
 
 /* Peripherals */
 INA219 ina;
+PCA9685 pwm;
 
 void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart1, (uint8_t *) buf, strlen(buf), HAL_MAX_DELAY);
@@ -64,13 +66,20 @@ int main(void)
   /* Initialise current/voltage/power sensor */
   INA219_Init32V2A(&ina, &hi2c2);
 
+  /* Initialise PWM driver */
+  PCA9685_Init(&pwm, &hi2c2, 50);
+
   uint32_t timerPVI = 0;
+  uint32_t timerPWM = 0;
   uint32_t timerLED = 0;
   uint32_t timerDbg = 0;
 
   const uint32_t SAMPLE_TIME_PVI_MS =  100;
+  const uint32_t SAMPLE_TIME_PWM_MS =  500;
   const uint32_t SAMPLE_TIME_LED_MS = 1000;
   const uint32_t SAMPLE_TIME_DBG_MS =  250;
+
+  uint16_t pwmSetting = 0;
 
   while (1)
   {
@@ -78,6 +87,23 @@ int main(void)
 		  INA219_Read(&ina);
 
 		  timerPVI += SAMPLE_TIME_PVI_MS;
+	  }
+
+	  if (HAL_GetTick() - timerPWM >= SAMPLE_TIME_PWM_MS) {
+		  int channel;
+		  for (channel = 0; channel < 8; channel++) {
+			  pwm.setting[channel] = pwmSetting;
+		  }
+
+		  pwmSetting += 256;
+
+		  PCA9685_SetAll(&pwm);
+
+		  if (pwmSetting > 4096) {
+			  pwmSetting = 0;
+		  }
+
+		  timerPWM += SAMPLE_TIME_PWM_MS;
 	  }
 
 	  if (HAL_GetTick() - timerLED >= SAMPLE_TIME_LED_MS) {

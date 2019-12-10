@@ -20,12 +20,12 @@ uint8_t IISMagnetometer_Init(IISMagnetometer *mag, I2C_HandleTypeDef *I2Chandle,
 	/* Configure sensor */
 	uint8_t txBuf[2];
 
-	/* Temperature compensation = 0, Reboot = 0, Soft_Rst = 0, Low Power = 0, ODR 100 Hz = 11, MODE CONTINUOUS 00 */
-	uint8_t cfgRegA = 0x0C;
+	/* Temperature compensation = 1, Reboot = 0, Soft_Rst = 0, Low Power = 0, ODR 100 Hz = 11, MODE CONTINUOUS 00 */
+	uint8_t cfgRegA = 0x8C;
 	txBuf[0] = IIS_CFG_REG_A; txBuf[1] = cfgRegA;
 	HAL_I2C_Master_Transmit(mag->I2Chandle, IIS_I2C_ADDR, txBuf, 2, IIS_I2C_TIMEOUT);
 
-	/* 0 0 0, Offset cancelation = 0, INT_on_DataOff = 0, Set_Freq = 0, Offset cancellation = 0, Low-pass filter = 1 */
+	/* 0 0 0, Offset cancellation = 0, INT_on_DataOff = 0, Set_Freq = 0, Offset cancellation = 0, Low-pass filter = 1 */
 	uint8_t cfgRegB = 0x01;
 	txBuf[0] = IIS_CFG_REG_B; txBuf[1] = cfgRegB;
 	HAL_I2C_Master_Transmit(mag->I2Chandle, IIS_I2C_ADDR, txBuf, 2, IIS_I2C_TIMEOUT);
@@ -57,13 +57,13 @@ void IISMagnetomer_Read(IISMagnetometer *mag) {
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_OUTZ_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
 	magRaw[2] = ((rxBuf[1] << 8) | rxBuf[0]);
 
-	/* Convert to unit vector */
+	/* Convert to unit vector and re-map axes */
 	float inorm = 1.0f / ((float) (magRaw[0] * magRaw[0] + magRaw[1] * magRaw[1] + magRaw[2] * magRaw[2]));
 		  inorm = sqrt(inorm);
 
-    mag->x = magRaw[0] * inorm;
-    mag->y = magRaw[1] * inorm;
-    mag->z = magRaw[2] * inorm;
+    mag->x =  magRaw[0] * inorm;
+    mag->y = -magRaw[1] * inorm;
+    mag->z = -magRaw[2] * inorm;
 
 	/* Read temperature */
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_TEMP_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
