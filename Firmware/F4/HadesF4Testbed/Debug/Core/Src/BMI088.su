@@ -1,0 +1,3 @@
+BMI088.c:3:9:BMI088_Init	56	static
+BMI088.c:109:6:BMI088_ReadAcc	48	static
+BMI088.c:131:6:BMI088_ReadGyr	48	static
