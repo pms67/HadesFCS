@@ -1,0 +1,46 @@
+Ref Des,Qty per Board,Manufacturer,Mfr Part #, Value,Package,Type,Your Instructions / Notes,,,,Link,Cost per Part (EUR)
+BAR1 ,1,Bosch Sensortec,BMP388,,LGA-10,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/Bosch-Sensortec/BMP388?qs=sGAEpiMZZMve4%2FbfQkoj%252BAy%2FxhOQV%252BBuxFZSqQnT8YU%3D,2.88
+BOOT0 BOOT1 ,2,C&K,TDD01H0SB1R,,,SMD,,,,,https://lcsc.com/product-detail/DIP-Switches_C-K-TDD01H0SB1R_C221991.html,1.2
+C13 C14 ,2,KEMET,C0402C225Z8VACTU,2u2,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/80-C0402C225Z8VACTU,0.81
+C15 ,1,Taiyo Yuden,JMK105BJ105KP-F,1u,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/963-JMK105BJ105KP-F,0.09
+C16 C4 C5 C6 C7 C8 C9 C10 C11 C12 C20 C21 C24 C23 C26 C27 C19 C30 C28 C29 C31 C34 C32 C33 ,24,Yageo,CC0402KPX5R6BB104,100n,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/603-CC402KPX5R6BB104,0.09
+C17 C18 ,2,Murata Electronics,GRM0225C1H100GA03L,10p,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/81-GRM0225C1H100GA3L,0.09
+C22 ,1,Yageo,CC0402KPX5R6BB224,220n,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/603-CC0402KPX56BB224,0.09
+C3 ,1,ROHM Semiconductor,TCSOM1A106M8R-ZM1,10u,Tantalum Polarised 0603_1608Metric,SMD,Polarity indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/ROHM-Semiconductor/TCSOM1A106M8R-ZM1?qs=sGAEpiMZZMtZ1n0r9vR22XeoJqjdI1aDU7CVYQfu%252BoDyumqaafBwCw%3D%3D,0.59
+C1 C2 C25 ,3,Murata Electronics,GRM188R61E106KA73D,10u,0603_1608Metric,SMD,At least 10VDC rated,,,,https://www.mouser.de/ProductDetail/Murata-Electronics/GRM188R61E106KA73D?qs=sGAEpiMZZMs0AnBnWHyRQN7%2FAA2D2lPPadjwaUSKtHX%252BeURw46TYGA%3D%3D,0.32
+D2 ,1,Dialight,599-0010-007F,RED,0603_1608Metric,SMD,Polarity indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/645-599-0010-007F,0.33
+D3 D4 ,2,Dialight,599-0091-007F,BLUE,0603_1608Metric,SMD,Polarity indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/645-599-0091-007F,0.48
+D5 D6 ,2,Diodes Incorporated,B0530WS-7-F,Schottky 0.5A,SOD-323,SMD,Polarity indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/Diodes-Incorporated/B0530WS-7-F?qs=sGAEpiMZZMtQ8nqTKtFS%2FO37ks9M9GniCRdD0tdJMJ8%3D,0.34
+EEPROM1 ,1,Microchip Technology,24CW1280T-I/OT,,SOT-23-5,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/Microchip-Technology/24CW1280T-I-OT?qs=sGAEpiMZZMuVhdAcoizlRW4gxDl3t41wG4Wcyz0W9h8%3D,0.405
+F1 ,1,Bourns,SF-0603FP050F-2,,0603_1608Metric,SMD,,,,,https://www.mouser.de/ProductDetail/652-SF-0603FP050F-2,0.84
+FB1 FB2 ,2,Murata Electronics,BLM18DN601SZ1D,,0603_1608Metric,SMD,,,,,https://www.mouser.de/ProductDetail/81-BLM18DN601SZ1D,0.32
+FLASH1 ,1,Winbond Elec,W25N01GVZEIG,,WSON-8,SMD,Pin 1 indicated on silkscreen,,,,https://lcsc.com/product-detail/FLASH_Winbond-Elec-W25N01GVZEIG_C88868.html,1.28
+HSE1 ,1,ABRACON,ABM8G-16.000MHZ-4Y-T3,16MHz,4Pin_3.2x2.5mm,SMD,,,,,https://www.mouser.de/ProductDetail/815-ABM8G-16-4YT3,0.666
+IC1 ,1,Nexperia,74LVC1G04GX4Z,,X2SON-4,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/Nexperia/74LVC1G04GX4Z?qs=%2Fha2pyFadujDV9Qzz2MeGesA1VZd%252Bd%252Bdsb8tXbz%2F0lV54LoU09OB4g%3D%3D,0.41
+IMU1 ,1,Bosch Sensortec,BMI088,,LGA-16,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/Bosch-Sensortec/BMI088?qs=sGAEpiMZZMve4%2FbfQkoj%252BKNIMLZP%2FhAQsZAKYu1PzHs%3D,5.72
+JP1 ,1,Harwin,M50-3530242,,2 pin 1.27mm pitch,THT,Watch orientation (see 3D picture),,,,https://www.mouser.de/ProductDetail/855-M50-3530242,0.1
+MAG1 ,1,STMicroelectronics,IIS2MDCTR,,LGA-12,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/STMicroelectronics/IIS2MDCTR?qs=sGAEpiMZZMve4%2FbfQkoj%252BNsA%2FYLrKsWenI%252BNJIvEAfE%3D,2.12
+MCU1 ,1,STMicroelectronics,STM32F405RGT6,,LQFP-64_10x10mm_P0.5mm,SMD,Pin 1 indicated on silkscreen,,,,https://lcsc.com/product-detail/ST-Microelectronics_STMicroelectronics_STM32F405RGT6_STM32F405RGT6_C15742.html,5.81
+PWM1 ,1,NXP Semiconductors,"PCA9685BS,118",,HVQFN28,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/NXP-Semiconductors/PCA9685BS118?qs=%2Fha2pyFaduh0jNxpnKUpmyyaOxP01TAv4fctUSk%2F7lWg1ymOlHPhJw%3D%3D,2.14
+PWM_PWR1 ,1,Samtec,TSW-108-25-T-T,,3 rows 8 columns (24 positions total) 2.54mm pitch,THT,Watch orientation (see 3D picture),,,,https://www.mouser.de/ProductDetail/200-TSW10825TT,1.45
+PWR1 D1 ,2,Dialight,599-0060-007F,YELLOW-GREEN,0603_1608Metric,SMD,Polarity indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/Dialight/599-0060-007F?qs=sGAEpiMZZMseGfSY3csMkdgyOOAg6kv2xbBPj9AvT%252B5%252BlxldYrDZqQ%3D%3D,0.33
+R10 R11 R12 ,3,Bourns,CR0402AFX-1001GAS,1k,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/652-CR0402AFX1001GAS,0.11
+R13 R14 ,2,Vishay / Dale,CRCW040222R0FKEDC,22,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/71-CRCW040222R0FKEDC,0.09
+R19 R20 R17 R18 ,4,TE Connectivity / Holsworthy,CRGP0402F10K,10k,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/279-CRGP0402F10K,0.09
+R4 R5 R6 R7 R3 R9 ,6,TE Connectivity / Holsworthy,CRGP0402F2K2,2k2,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/279-CRGP0402F2K2,0.1
+R8 ,1,Panasonic,ERJ-2RKF6200X,620,0402_1005Metric,SMD,,,,,https://www.mouser.de/ProductDetail/667-ERJ-2RKF6200X,0.09
+REG1 ,1,STMicroelectronics,LD39200PU33R,,DFN-6,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/511-LD39200PU33R,0.77
+RESET1 ,1,ALPS,SKRPANE010,,,SMD,,,,,https://www.mouser.de/ProductDetail/688-SKRPANE010,0.41
+I2C3 RC1 SBUS1 GPS1 TELEM1 ,5,Molex,53048-0410,,4-pin Molex Picoblade Horizontal,THT,,,,,https://www.mouser.de/ProductDetail/Molex/53048-0410?qs=%2Fha2pyFadugezjm2rIZa9xKLIlIVNTdbkMMdzTGtD0A%3D,0.35
+SERVO1 ,1,Phoenix,"""1984617""",,Fixed Terminal Blocks PT 1.5/2-3.5H 2POS HRZ 3.5mm SCREW,THT,Watch orientation (see 3D picture),,,,https://www.mouser.de/ProductDetail/651-1984617,0.43
+SWD1 ,1,Adafruit,752,,5 rows 2 columns (10 positions total) 1.27mm pitch,SMD,"Pin 1 indicated on silkscreen, Shroud on same side as Pin 1",,,,https://www.mouser.de/ProductDetail/Adafruit/752?qs=sGAEpiMZZMve4%2FbfQkoj%252BMJ4aL13Ap75KXohUURpZoY%3D,1.35
+U1 ,1,STMicroelectronics,USBLC6-2SC6,,SOT-23-6,SMD,Pin 1 indicated on silkscreen,,,,https://www.mouser.de/ProductDetail/511-USBLC6-2SC6,0.41
+U2 ,1,WCH (Jiangsu Qin Heng),CH330N,,SOP-8_3.95x5.21x3.27mm_P1.27mm,SMD,Pin 1 indicated on silkscreen,,,,https://lcsc.com/product-detail/USB-ICs_WCH-Jiangsu-Qin-Heng-CH330N_C108996.html,0.39
+USB1 ,1,Wurth Elektronik,"""629105150521""",Micro USB,USB_Micro-B_Wuerth_629105150521_CircularHoles,SMD/THT,,,,,https://www.mouser.de/ProductDetail/Wurth-Elektronik/629105150521?qs=%2Fha2pyFaduh5MOEvnTSnzvQE0gDzlAefETBUBdiYL4HWmkGIahBzMg%3D%3D,1.89
+VIN1 ,1,Molex,53048-0210,,2-pin Molex Picoblade Horizontal,THT,Watch orientation (see 3D picture),,,,https://www.mouser.de/ProductDetail/Molex/53048-0210?qs=%2Fha2pyFaduiceht3xV8aGVOofKfGAqqxcALnTPkrLZw%3D,0.23
+,,,,,,,,,,,,
+PER BOARD,,,,,,,,,,,,
+Total parts:,86,,,,,,,,,,,
+Unique parts:,39,,,,,,,,,,,
+SMD parts:,76,,,,,,,,,,,
+THT parts:,10,,,,,,,,,,,

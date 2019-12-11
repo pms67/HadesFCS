@@ -6,4 +6,8 @@
   (lib (name LD39200PU33R)(type Legacy)(uri ${KIPRJMOD}/lib/LD39200PU33R.lib)(options "")(descr ""))
   (lib (name BMP388)(type Legacy)(uri ${KIPRJMOD}/lib/BMP388.lib)(options "")(descr ""))
   (lib (name USBLC6-2SC6Y)(type Legacy)(uri ${KIPRJMOD}/lib/USBLC6-2SC6Y.lib)(options "")(descr ""))
+  (lib (name CH330)(type Legacy)(uri ${KIPRJMOD}/lib/CH330.lib)(options "")(descr ""))
+  (lib (name 74LVC1G04GX4Z)(type Legacy)(uri ${KIPRJMOD}/lib/74LVC1G04GX4Z.lib)(options "")(descr ""))
+  (lib (name SKRPANE010)(type Legacy)(uri ${KIPRJMOD}/lib/SKRPANE010.lib)(options "")(descr ""))
+  (lib (name TDD01H0SB1R)(type Legacy)(uri ${KIPRJMOD}/lib/TDD01H0SB1R.lib)(options "")(descr ""))
 )

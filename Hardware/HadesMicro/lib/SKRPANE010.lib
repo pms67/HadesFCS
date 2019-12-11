@@ -1,0 +1,27 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model SKRPANE010
+#/1552126/71446/2.44/4/4/Switch
+DEF SKRPANE010 S 0 30 Y Y 1 F N
+F0 "S" 650 300 50 H V L CNN
+F1 "SKRPANE010" 650 200 50 H V L CNN
+F2 "SKRPADE010" 650 100 50 H I L CNN
+F3 "https://www.alps.com/prod/info/E/HTML/Tact/SurfaceMount/SKRP/SKRPANE010.html" 650 0 50 H I L CNN
+F4 "Tactile Switches 500mOhm 1.57N 16VDC 4.2X3.2X2.5MM 50mA" 650 -100 50 H I L CNN "Description"
+F5 "2" 650 -200 50 H I L CNN "Height"
+F6 "ALPS" 650 -300 50 H I L CNN "Manufacturer_Name"
+F7 "SKRPANE010" 650 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "688-SKRPANE010" 650 -500 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.com/Search/Refine.aspx?Keyword=688-SKRPANE010" 650 -600 50 H I L CNN "Mouser Price/Stock"
+F10 "" 650 -700 50 H I L CNN "RS Part Number"
+F11 "" 650 -800 50 H I L CNN "RS Price/Stock"
+DRAW
+X 1 1 0 0 200 R 50 50 0 0 U
+X 2 2 0 -100 200 R 50 50 0 0 U
+X 3 3 800 0 200 L 50 50 0 0 U
+X 4 4 800 -100 200 L 50 50 0 0 U
+P 5 0 1 6 200 100 600 100 600 -200 200 -200 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library
