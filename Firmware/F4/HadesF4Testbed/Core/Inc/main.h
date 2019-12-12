@@ -102,6 +102,10 @@ void Error_Handler(void);
 
 /* USER CODE END Private defines */
 
+void initPeripherals();
+void pollSensors();
+void printSensorData();
+
 #ifdef __cplusplus
 }
 #endif

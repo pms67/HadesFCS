@@ -7,6 +7,9 @@
 #include "IIS2MDC.h"
 #include "BMI088.h"
 #include "TMP100.h"
+#include "UBLOX.h"
+
+#include "gps.h"
 
 I2C_HandleTypeDef hi2c1; /* GPS */
 I2C_HandleTypeDef hi2c2;
@@ -15,7 +18,6 @@ I2C_HandleTypeDef hi2c3;
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
-
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -26,99 +28,75 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_USART3_UART_Init(void);
 
-
 /* Sensors */
 MPRLSBarometer bar;
 IISMagnetometer mag;
 BMI088IMU imu;
 TMP100 tmp;
 
+/* GPS receiver */
+UBloxGPS gps;
+
+/* Timing */
+uint32_t timerBar = 0;
+uint32_t timerMag = 0;
+uint32_t timerAcc = 0;
+uint32_t timerGyr = 0;
+uint32_t timerTmp = 0;
+uint32_t timerDbg = 0;
+uint32_t timerLED = 0;
+
+const uint32_t SAMPLE_TIME_BAR_MS = 10;
+const uint32_t SAMPLE_TIME_MAG_MS = 10;
+const uint32_t SAMPLE_TIME_ACC_MS = 5;
+const uint32_t SAMPLE_TIME_GYR_MS = 1;
+const uint32_t SAMPLE_TIME_TMP_MS = 320;
+const uint32_t SAMPLE_TIME_DBG_MS = 250;
+const uint32_t SAMPLE_TIME_LED_MS = 1000;
+
+/* UART-to-USB debug output */
 void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart3, (uint8_t *) buf, strlen(buf), HAL_MAX_DELAY);
 }
 
 int main(void)
 {
-  HAL_Init();
+   HAL_Init();
 
-  SystemClock_Config();
+    SystemClock_Config();
 
-  MX_GPIO_Init();
-  MX_I2C1_Init();
-  MX_I2C2_Init();
-  MX_I2C3_Init();
-  MX_USART1_UART_Init();
-  MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
+    MX_GPIO_Init();
+    MX_I2C1_Init();
+    MX_I2C2_Init();
+    MX_I2C3_Init();
+    MX_USART1_UART_Init();
+  	MX_USART2_UART_Init();
+  	MX_USART3_UART_Init();
 
-  HAL_Delay(100);
+  	initPeripherals();
 
-    printDebug("NAVC started.\r\n");
-    HAL_Delay(100);
-    printDebug("Initialising sensors...\r\n");
-    HAL_Delay(100);
-
-    /* Initialise pressure sensor */
-    uint8_t status = MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, INTBAR_GPIO_Port, INTBAR_Pin);
-    if (status == MPRLS_STATUS_POWERED) {
-  	  printDebug("Barometer initialised.\r\n");
-    }
-
-    /* Initialise magnetometer */
-    status = IISMagnetometer_Init(&mag, &hi2c1, GPIOA, INTMAG_Pin);
-    if (status == 1) {
-  	  printDebug("Magnetometer initialised.\r\n");
-    }
-
-    /* Initialise IMU */
-    status = BMI088_Init(&imu, &hi2c1, GPIOA, INTACC_Pin, GPIOA, INTGYR_Pin);
-    if (status == 1) {
-  	  printDebug("IMU initialised.\r\n");
-    }
-
-    /* Initialise temperature sensor */
-    TMP100_Init(&tmp, &hi2c1);
-    printDebug("Temperature sensor initialised.\r\n");
-
-
-
-    uint32_t timerBar = 0;
-    uint32_t timerMag = 0;
-    uint32_t timerAcc = 0;
-    uint32_t timerGyr = 0;
-    uint32_t timerTmp = 0;
-    uint32_t timerDbg = 0;
-    uint32_t timerLED = 0;
-
-    const uint32_t SAMPLE_TIME_BAR_MS = 10;
-    const uint32_t SAMPLE_TIME_MAG_MS = 10;
-    const uint32_t SAMPLE_TIME_ACC_MS = 5;
-    const uint32_t SAMPLE_TIME_GYR_MS = 1;
-    const uint32_t SAMPLE_TIME_TMP_MS = 320;
-    const uint32_t SAMPLE_TIME_DBG_MS = 250;
-    const uint32_t SAMPLE_TIME_LED_MS = 1000;
+  	gps_t hgps;
+  	gps_init(&hgps);
 
     printDebug("Starting main loop...\r\n");
 
     while (1)
     {
     	//pollSensors();
+    	char gpsRxBuf[16];
+    	HAL_UART_Receive(&huart1, (uint8_t *) gpsRxBuf, 16, HAL_MAX_DELAY);
 
-    	/* Debug USB output */
-    	if (HAL_GetTick() - timerDbg >= SAMPLE_TIME_DBG_MS) {
-    		char buf[256];
-    		sprintf(buf, "[%ld] Bar: %f | Mag: %f %f %f | Acc: %f %f %f | Gyr: %f %f %f | Tmp: %f\r\n",
-    				HAL_GetTick(),
-					bar.pressurePa,
-					mag.x, mag.y, mag.z,
-					imu.acc[0], imu.acc[1], imu.acc[2],
-				  	  imu.gyr[0], imu.gyr[1], imu.gyr[2],
-  				  tmp.temp_C);
+    	printDebug(gpsRxBuf);
 
-    		printDebug(buf);
+    	//gps_process(&hgps, gpsRxBuf, 16);
 
-    		timerDbg += SAMPLE_TIME_DBG_MS;
-    	}
+    	//char debugBuf[128];
+    	//sprintf(debugBuf, "Valid: %d | Lat: %f | Lon: %f | Alt: %f\r\n", hgps.is_valid, hgps.latitude, hgps.longitude, hgps.altitude);
+
+    	//printDebug(debugBuf);
+
+
+		//printSensorData();
 
     	/* Heartbeat LED */
     	if (HAL_GetTick() - timerLED >= SAMPLE_TIME_LED_MS) {
@@ -128,6 +106,69 @@ int main(void)
     	}
 
     }
+}
+
+void printSensorData() {
+	/* Debug USB output */
+	if (HAL_GetTick() - timerDbg >= SAMPLE_TIME_DBG_MS) {
+		char buf[256];
+		sprintf(buf, "[%ld] Bar: %f | Mag: %f %f %f | Acc: %f %f %f | Gyr: %f %f %f | Tmp: %f\r\n",
+				HAL_GetTick(),
+				bar.pressurePa,
+				mag.x, mag.y, mag.z,
+				imu.acc[0], imu.acc[1], imu.acc[2],
+			  	  imu.gyr[0], imu.gyr[1], imu.gyr[2],
+				  tmp.temp_C);
+
+		printDebug(buf);
+
+		timerDbg += SAMPLE_TIME_DBG_MS;
+	}
+}
+
+void initPeripherals() {
+	HAL_Delay(100);
+
+	    printDebug("NAVC started.\r\n");
+	    HAL_GPIO_WritePin(GPIOB, LEDA_Pin|LEDB_Pin|LEDC_Pin|LEDD_Pin, GPIO_PIN_SET);
+	    HAL_Delay(100);
+	    printDebug("Initialising sensors...\r\n");
+	    HAL_Delay(100);
+
+	    /* Initialise pressure sensor */
+	    uint8_t statBar = (MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, INTBAR_GPIO_Port, INTBAR_Pin) == MPRLS_STATUS_POWERED);
+	    if (statBar == 1) {
+	  	  printDebug("Barometer initialised.\r\n");
+	    }
+
+	    /* Initialise magnetometer */
+	    uint8_t statMag = IISMagnetometer_Init(&mag, &hi2c1, GPIOA, INTMAG_Pin);
+	    if (statMag == 1) {
+	  	  printDebug("Magnetometer initialised.\r\n");
+	    }
+
+	    /* Initialise IMU */
+	    uint8_t statIMU = BMI088_Init(&imu, &hi2c1, GPIOA, INTACC_Pin, GPIOA, INTGYR_Pin);
+	    if (statIMU == 1) {
+	  	  printDebug("IMU initialised.\r\n");
+	    }
+
+	    /* Initialise temperature sensor */
+	    TMP100_Init(&tmp, &hi2c1);
+	    printDebug("Temperature sensor initialised.\r\n");
+
+	    /* Initialise GPS receiver */
+	    UBloxGPS_Init(&gps, &huart1, GPIOC, GPSNRST_Pin, GPIOC, GPSPPS_Pin, GPIOC, GPSLNAEN_Pin);
+	    UBloxGPS_Reset(&gps);
+	    printDebug("GPS receiver initialised.\r\n");
+
+	    uint8_t status = statBar + statMag + statIMU;
+	    if (status < 3) {
+	    	printDebug("Error: at least one sensor could not be initialised!\r\n");
+	    	HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_SET);
+	    } else {
+	    	HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_RESET);
+	    }
 }
 
 void pollSensors() {
