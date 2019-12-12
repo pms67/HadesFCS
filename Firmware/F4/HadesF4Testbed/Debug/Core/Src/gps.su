@@ -1,0 +1,10 @@
+gps.c:36:1:parse_number	24	static
+gps.c:59:1:parse_float_number	32	static
+gps.c:81:1:parse_lat_long	48	static
+gps.c:98:1:parse_term	32	static
+gps.c:256:1:check_crc	24	static
+gps.c:268:1:copy_from_tmp_memory	24	static
+gps.c:314:1:gps_init	16	static
+gps.c:327:1:gps_process	32	static
+gps.c:369:1:gps_distance_bearing	104	static
+gps.c:442:1:gps_to_speed	32	static

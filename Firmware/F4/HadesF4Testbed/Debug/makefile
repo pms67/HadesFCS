@@ -32,6 +32,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 HadesF4.list \
 
+OBJCOPY_HEX += \
+HadesF4.hex \
+
 
 # All Target
 all: HadesF4.elf secondary-outputs
@@ -52,12 +55,17 @@ HadesF4.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+HadesF4.hex: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "HadesF4.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
 .PHONY: all clean dependents
 .SECONDARY:

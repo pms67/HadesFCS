@@ -7,3 +7,4 @@ stm32f4xx_it.c:143:6:SVC_Handler	4	static
 stm32f4xx_it.c:156:6:DebugMon_Handler	4	static
 stm32f4xx_it.c:169:6:PendSV_Handler	4	static
 stm32f4xx_it.c:182:6:SysTick_Handler	8	static
+stm32f4xx_it.c:203:6:USART1_IRQHandler	8	static
