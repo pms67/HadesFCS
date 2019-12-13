@@ -9,7 +9,9 @@
 #include "TMP100.h"
 #include "UBLOX.h"
 
-#include "gps.h"
+#include "GPSNMEAParser.h"
+
+#include "KalmanQuatAtt.h"
 
 I2C_HandleTypeDef hi2c1; /* GPS */
 I2C_HandleTypeDef hi2c2;
@@ -37,12 +39,17 @@ TMP100 tmp;
 /* GPS receiver */
 UBloxGPS gps;
 
+/* GPS parsed data container */
+GPSData gpsData;
+
 /* Timing */
 uint32_t timerBar = 0;
 uint32_t timerMag = 0;
 uint32_t timerAcc = 0;
 uint32_t timerGyr = 0;
 uint32_t timerTmp = 0;
+uint32_t timerEKF = 0;
+uint32_t timerGPSDbg = 0;
 uint32_t timerDbg = 0;
 uint32_t timerLED = 0;
 
@@ -51,6 +58,8 @@ const uint32_t SAMPLE_TIME_MAG_MS = 10;
 const uint32_t SAMPLE_TIME_ACC_MS = 5;
 const uint32_t SAMPLE_TIME_GYR_MS = 1;
 const uint32_t SAMPLE_TIME_TMP_MS = 320;
+const uint32_t SAMPLE_TIME_EKF_MS = 100;
+const uint32_t SAMPLE_TIME_GPSDBG_MS = 1000;
 const uint32_t SAMPLE_TIME_DBG_MS = 250;
 const uint32_t SAMPLE_TIME_LED_MS = 1000;
 
@@ -73,34 +82,48 @@ int main(void)
   	MX_USART2_UART_Init();
   	MX_USART3_UART_Init();
 
+    HAL_GPIO_WritePin(GPIOB, LEDA_Pin|LEDB_Pin|LEDC_Pin|LEDD_Pin, GPIO_PIN_SET);
+    HAL_Delay(100);
+
+  	printDebug("NAVC started.\r\n");
+
   	initPeripherals();
 
-  	gps_t hgps;
-  	gps_init(&hgps);
+  	updateEKFQuatAtt_initialize();
+
+  	//GPSNMEAParser_Init(&gpsData);
 
     printDebug("Starting main loop...\r\n");
 
+    float roll_deg = 0.0f;
+    float pitch_deg = 0.0f;
+    float yaw_deg = 0.0f;
+
     while (1)
     {
-    	//pollSensors();
-    	char gpsRxBuf[16];
-    	HAL_UART_Receive(&huart1, (uint8_t *) gpsRxBuf, 16, HAL_MAX_DELAY);
-
-    	printDebug(gpsRxBuf);
-
-    	//gps_process(&hgps, gpsRxBuf, 16);
-
-    	//char debugBuf[128];
-    	//sprintf(debugBuf, "Valid: %d | Lat: %f | Lon: %f | Alt: %f\r\n", hgps.is_valid, hgps.latitude, hgps.longitude, hgps.altitude);
-
-    	//printDebug(debugBuf);
-
+    	pollSensors();
+    	//pollGPS();
 
 		//printSensorData();
+
+    	if (HAL_GetTick() - timerEKF >= SAMPLE_TIME_EKF_MS) {
+    	//	updateEKFQuatAtt(imu.gyr, imu.acc, mag.xyz, 0.0f, 0.0f, (SAMPLE_TIME_EKF_MS / 1000.0f), 1.0f, &roll_deg, &pitch_deg, &yaw_deg);
+
+    		timerEKF += SAMPLE_TIME_EKF_MS;
+    	}
+
+
 
     	/* Heartbeat LED */
     	if (HAL_GetTick() - timerLED >= SAMPLE_TIME_LED_MS) {
     		HAL_GPIO_TogglePin(GPIOB, LEDA_Pin);
+    		HAL_GPIO_TogglePin(GPIOB, LEDC_Pin);
+    		HAL_GPIO_TogglePin(GPIOB, LEDD_Pin);
+
+    		char buf[32];
+    		sprintf(buf, "%f %f %f\r\n", roll_deg, pitch_deg, yaw_deg);
+
+    		printDebug(buf);
 
     		timerLED += SAMPLE_TIME_LED_MS;
     	}
@@ -115,7 +138,7 @@ void printSensorData() {
 		sprintf(buf, "[%ld] Bar: %f | Mag: %f %f %f | Acc: %f %f %f | Gyr: %f %f %f | Tmp: %f\r\n",
 				HAL_GetTick(),
 				bar.pressurePa,
-				mag.x, mag.y, mag.z,
+				mag.xyz[0], mag.xyz[1], mag.xyz[2],
 				imu.acc[0], imu.acc[1], imu.acc[2],
 			  	  imu.gyr[0], imu.gyr[1], imu.gyr[2],
 				  tmp.temp_C);
@@ -127,61 +150,56 @@ void printSensorData() {
 }
 
 void initPeripherals() {
+	printDebug("Initialising sensors...\r\n");
 	HAL_Delay(100);
 
-	    printDebug("NAVC started.\r\n");
-	    HAL_GPIO_WritePin(GPIOB, LEDA_Pin|LEDB_Pin|LEDC_Pin|LEDD_Pin, GPIO_PIN_SET);
-	    HAL_Delay(100);
-	    printDebug("Initialising sensors...\r\n");
-	    HAL_Delay(100);
+	/* Initialise pressure sensor */
+	uint8_t statBar = (MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, INTBAR_GPIO_Port, INTBAR_Pin) == MPRLS_STATUS_POWERED);
+	if (statBar == 1) {
+	  printDebug("Barometer initialised.\r\n");
+	}
 
-	    /* Initialise pressure sensor */
-	    uint8_t statBar = (MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, INTBAR_GPIO_Port, INTBAR_Pin) == MPRLS_STATUS_POWERED);
-	    if (statBar == 1) {
-	  	  printDebug("Barometer initialised.\r\n");
-	    }
+	/* Initialise magnetometer */
+	uint8_t statMag = IISMagnetometer_Init(&mag, &hi2c1, GPIOA, INTMAG_Pin);
+	if (statMag == 1) {
+	  printDebug("Magnetometer initialised.\r\n");
+	}
 
-	    /* Initialise magnetometer */
-	    uint8_t statMag = IISMagnetometer_Init(&mag, &hi2c1, GPIOA, INTMAG_Pin);
-	    if (statMag == 1) {
-	  	  printDebug("Magnetometer initialised.\r\n");
-	    }
+	/* Initialise IMU */
+	uint8_t statIMU = BMI088_Init(&imu, &hi2c1, GPIOA, INTACC_Pin, GPIOA, INTGYR_Pin);
+	if (statIMU == 1) {
+	  printDebug("IMU initialised.\r\n");
+	}
 
-	    /* Initialise IMU */
-	    uint8_t statIMU = BMI088_Init(&imu, &hi2c1, GPIOA, INTACC_Pin, GPIOA, INTGYR_Pin);
-	    if (statIMU == 1) {
-	  	  printDebug("IMU initialised.\r\n");
-	    }
+	/* Initialise temperature sensor */
+	TMP100_Init(&tmp, &hi2c1);
+	printDebug("Temperature sensor initialised.\r\n");
 
-	    /* Initialise temperature sensor */
-	    TMP100_Init(&tmp, &hi2c1);
-	    printDebug("Temperature sensor initialised.\r\n");
+	/* Initialise GPS receiver */
+	UBloxGPS_Init(&gps, &huart1, GPIOC, GPSNRST_Pin, GPIOC, GPSPPS_Pin, GPIOC, GPSLNAEN_Pin);
+	UBloxGPS_Reset(&gps);
+	printDebug("GPS receiver initialised.\r\n");
 
-	    /* Initialise GPS receiver */
-	    UBloxGPS_Init(&gps, &huart1, GPIOC, GPSNRST_Pin, GPIOC, GPSPPS_Pin, GPIOC, GPSLNAEN_Pin);
-	    UBloxGPS_Reset(&gps);
-	    printDebug("GPS receiver initialised.\r\n");
-
-	    uint8_t status = statBar + statMag + statIMU;
-	    if (status < 3) {
-	    	printDebug("Error: at least one sensor could not be initialised!\r\n");
-	    	HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_SET);
-	    } else {
-	    	HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_RESET);
-	    }
+	uint8_t status = statBar + statMag + statIMU;
+	if (status < 3) {
+		printDebug("Error: at least one sensor could not be initialised!\r\n");
+		HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_SET);
+	} else {
+		HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_RESET);
+	}
 }
 
 void pollSensors() {
 	 /* Gyroscope and Kalman filter prediction */
 	  	  if (HAL_GetTick() - timerGyr >= SAMPLE_TIME_GYR_MS) {
-	  		  BMI088_ReadGyr(&imu);
+	  		//  BMI088_ReadGyr(&imu);
 
 	  		  timerGyr += SAMPLE_TIME_GYR_MS;
 	  	  }
 
 	  	  /* Accelerometer and Kalman filter update */
 	  	  if (HAL_GetTick() - timerAcc >= SAMPLE_TIME_ACC_MS) {
-	  		  BMI088_ReadAcc(&imu);
+	  	//	  BMI088_ReadAcc(&imu);
 
 	  		  timerAcc += SAMPLE_TIME_ACC_MS;
 	  	  }
@@ -209,10 +227,36 @@ void pollSensors() {
 	  	  }
 }
 
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+void pollGPS() {
+	char gpsRxBuf;
+	HAL_UART_Receive(&huart1, (uint8_t *) &gpsRxBuf, 1, HAL_MAX_DELAY);
+
+	GPSNMEAParser_Feed(&gpsData, gpsRxBuf);
+
+
+
+	/* GPS debug output */
+	if (HAL_GetTick() - timerGPSDbg >= SAMPLE_TIME_GPSDBG_MS) {
+
+		/*
+    	if (gpsData.fixQuality > 0 || gpsData.fix == 1) {
+    		HAL_GPIO_WritePin(GPIOB, LEDC_Pin, GPIO_PIN_SET);
+    	} else {
+    		HAL_GPIO_WritePin(GPIOB, LEDC_Pin, GPIO_PIN_RESET);
+    	}
+    	*/
+
+		char gpsDebugBuf[1024];
+		sprintf(gpsDebugBuf, "Fix: %d | Num: %d | Lat: %f | Lon: %f | Alt: %f | Spd: %f | Crs: %f | Mag: %f | MSL: %f\r\n", gpsData.fixQuality, gpsData.numSatellites,
+				gpsData.latitude_dec, gpsData.longitude_dec, gpsData.altitude_m,
+				gpsData.groundSpeed_mps, gpsData.course_deg, gpsData.magVariation_deg, gpsData.meanSeaLevel_m);
+
+		printDebug(gpsDebugBuf);
+
+		timerGPSDbg += SAMPLE_TIME_GPSDBG_MS;
+	}
+}
+
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};

@@ -1,0 +1,2 @@
+KalmanQuatAtt.c:40:6:updateEKFQuatAtt_initialize	16	static
+KalmanQuatAtt.c:98:6:updateEKFQuatAtt	1688	static

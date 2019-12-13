@@ -20,10 +20,10 @@ uint8_t BMI088_Init(BMI088IMU *imu, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *
 	 */
 
 	/* Soft reset */
-	//txBuf[0] = BMI088_ACC_SOFTRESET; txBuf[1] = 0xB6;
-	//HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+//	txBuf[0] = BMI088_ACC_SOFTRESET; txBuf[1] = 0xB6;
+//	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
 
-//	HAL_Delay(5);
+	HAL_Delay(50);
 
 	/* Check chip ID */
 	uint8_t chipID;
@@ -73,7 +73,7 @@ uint8_t BMI088_Init(BMI088IMU *imu, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *
 	HAL_Delay(35);
 
 	/* Check chip ID */
-	HAL_I2C_Mem_Read(imu->I2Chandle, BMI088_ACC_I2C_ADDR, BMI088_ACC_CHIP_ID, I2C_MEMADD_SIZE_8BIT, &chipID, 1, BMI088_I2C_TIMEOUT);
+	HAL_I2C_Mem_Read(imu->I2Chandle, BMI088_GYR_I2C_ADDR, BMI088_GYR_CHIP_ID, I2C_MEMADD_SIZE_8BIT, &chipID, 1, BMI088_I2C_TIMEOUT);
 
 	if (chipID != 0x0F) {
 			return 0;

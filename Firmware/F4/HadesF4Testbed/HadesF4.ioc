@@ -272,4 +272,4 @@ USART3.VirtualMode=VM_ASYNC
 VP_SYS_VS_Systick.Mode=SysTick
 VP_SYS_VS_Systick.Signal=SYS_VS_Systick
 board=custom
-isbadioc=true
+isbadioc=false

@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 		
 		GPSNMEAParser_Feed(&gpsData, c);
 		
-		printf("Fix: %d | Num: %d | Lat: %f | Lon: %f | Alt: %f | Spd: %f | Crs: %f | Mag: %f | MSL %f: |\r\n", gpsData.fixQuality, gpsData.numSatellites, 
+		printf("Fix: %d | Num: %d | Lat: %f | Lon: %f | Alt: %f | Spd: %f | Crs: %f | Mag: %f | MSL: %f \r\n", gpsData.fixQuality, gpsData.numSatellites, 
 																												gpsData.latitude_dec, gpsData.longitude_dec, gpsData.altitude_m,
 																												gpsData.groundSpeed_mps, gpsData.course_deg, gpsData.magVariation_deg, gpsData.meanSeaLevel_m);
 

@@ -24,9 +24,7 @@ typedef struct {
 	I2C_HandleTypeDef *I2Chandle;
 	GPIO_TypeDef *intPinBank;
 	uint16_t intPin;
-	float x;
-	float y;
-	float z;
+	float xyz[3];
 	float tempC;
 } IISMagnetometer;
 

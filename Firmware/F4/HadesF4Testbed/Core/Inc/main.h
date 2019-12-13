@@ -100,11 +100,11 @@ void Error_Handler(void);
 #define GPSPPS_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
 
-/* USER CODE END Private defines */
-
 void initPeripherals();
 void pollSensors();
-void printSensorData();
+void pollGPS();
+
+/* USER CODE END Private defines */
 
 #ifdef __cplusplus
 }

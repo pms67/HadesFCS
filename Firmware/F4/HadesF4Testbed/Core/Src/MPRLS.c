@@ -2,13 +2,13 @@
 
 uint8_t MPRLSBarometer_Init(MPRLSBarometer *bar, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *rstPinBank, uint16_t rstPin, GPIO_TypeDef *intPinBank, uint16_t intPin) {
 	bar->I2Chandle  = I2Chandle;
-	bar->rstPinBank = intPinBank;
-	bar->rstPin     = intPin;
-	bar->intPinBank = rstPinBank;
-	bar->intPin     = rstPin;
+	bar->rstPinBank = rstPinBank;
+	bar->rstPin     = rstPin;
+	bar->intPinBank = intPinBank;
+	bar->intPin     = intPin;
 	bar->pressurePa = 0.0f;
 
-//	MPRLSBarometer_Reset(bar);
+	MPRLSBarometer_Reset(bar);
 
 	HAL_Delay(10);
 
