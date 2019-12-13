@@ -4,9 +4,9 @@ uint8_t IISMagnetometer_Init(IISMagnetometer *mag, I2C_HandleTypeDef *I2Chandle,
 	mag->I2Chandle  = I2Chandle;
 	mag->intPinBank = intPinBank;
 	mag->intPin     = intPin;
-	mag->x          = 0;
-	mag->y          = 0;
-	mag->z          = 0;
+	mag->xyz[0]     = 0;
+	mag->xyz[1]     = 0;
+	mag->xyz[2]     = 0;
 	mag->tempC      = 0.0f;
 
 	/* Check device ID register */
@@ -61,9 +61,9 @@ void IISMagnetomer_Read(IISMagnetometer *mag) {
 	float inorm = 1.0f / ((float) (magRaw[0] * magRaw[0] + magRaw[1] * magRaw[1] + magRaw[2] * magRaw[2]));
 		  inorm = sqrt(inorm);
 
-    mag->x =  magRaw[0] * inorm;
-    mag->y = -magRaw[1] * inorm;
-    mag->z = -magRaw[2] * inorm;
+    mag->xyz[0] =  magRaw[0] * inorm;
+    mag->xyz[1] = -magRaw[1] * inorm;
+    mag->xyz[2] = -magRaw[2] * inorm;
 
 	/* Read temperature */
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_TEMP_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
