@@ -5,6 +5,7 @@
 "Core/Src/KalmanRollPitch.o"
 "Core/Src/MPRLS.o"
 "Core/Src/TMP100.o"
+"Core/Src/UAVDataLink.o"
 "Core/Src/UBLOX.o"
 "Core/Src/freertos.o"
 "Core/Src/main.o"

@@ -1,0 +1,6 @@
+UAVDataLink.c:3:9:UAVDataLink_Pack	40	dynamic
+UAVDataLink.c:53:9:UAVDataLink_Unpack	48	dynamic
+UAVDataLink.c:88:9:UAVDataLink_PayloadToFloats	32	static
+UAVDataLink.c:113:9:UAVDataLink_EncodeCOBS	32	static
+UAVDataLink.c:150:9:UAVDataLink_DecodeCOBS	32	static
+UAVDataLink.c:176:9:UAVDataLink_Checksum	24	static
