@@ -10,7 +10,11 @@
 #include "TMP100.h"
 #include "UBLOX.h"
 
+#include "FIR.h"
+#include "FIRFilterArrays.h"
+
 #include "GPSNMEAParser.h"
+#include "UAVDataLink.h"
 
 
 I2C_HandleTypeDef hi2c1;
@@ -71,10 +75,25 @@ void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart3, (uint8_t *) "\n", 1, HAL_MAX_DELAY);
 }
 
-union SensorDataUnion {
-	float fData[7];
-	uint8_t uiData[28];
-} SensorData;
+struct NavDataStruct {
+	float acc[3];
+	float gyr[3];
+	float mag[3];
+	float bar;
+	float Va;
+	uint8_t fix;
+	float lat;
+	float lon;
+	float Vg;
+	float roll;
+	float pitch;
+	float yaw;
+} NavData;
+
+FIRFilter firGyr[3];
+FIRFilter firAcc[3];
+FIRFilter firMag[3];
+FIRFilter firBar;
 
 int main(void)
 {
@@ -92,8 +111,24 @@ int main(void)
 
   printDebug("NAVC started.\n");
 
-  printDebug("Initialising sensors...\r\n");
+  printDebug("Initialising sensors...\n");
   initPeripherals();
+
+  printDebug("Loading filters...\n");
+
+  FIRFilter_Init(&firGyr[0], firCoeffGyr, firGyrXBuf, FIRGYRN);
+  FIRFilter_Init(&firGyr[1], firCoeffGyr, firGyrYBuf, FIRGYRN);
+  FIRFilter_Init(&firGyr[2], firCoeffGyr, firGyrZBuf, FIRGYRN);
+
+  FIRFilter_Init(&firAcc[0], firCoeffAcc, firAccXBuf, FIRACCN);
+  FIRFilter_Init(&firAcc[1], firCoeffAcc, firAccYBuf, FIRACCN);
+  FIRFilter_Init(&firAcc[2], firCoeffAcc, firAccZBuf, FIRACCN);
+
+  FIRFilter_Init(&firMag[0], firCoeffMag, firMagXBuf, FIRMAGN);
+  FIRFilter_Init(&firMag[1], firCoeffMag, firMagYBuf, FIRMAGN);
+  FIRFilter_Init(&firMag[2], firCoeffMag, firMagZBuf, FIRMAGN);
+
+  FIRFilter_Init(&firBar, firCoeffBar, firBarBuf, FIRBARN);
 
   osThreadDef(heartbeatLEDTask, heartbeatTask, osPriorityNormal, 0, 128);
   heartbeatHandle = osThreadCreate(osThread(heartbeatLEDTask), NULL);
@@ -132,23 +167,16 @@ void heartbeatTask(void const * argument)
 
 }
 
-void barometerReadTask (void const *argument) {
-
-	for (;;) {
-		MPRLSBarometer_ReadPressure(&bar);
-		SensorData.fData[0] = bar.pressurePa;
-		osDelay(10);
-	}
-
-}
-
 void imuGyroReadTask (void const *argument) {
 
 	for (;;) {
 		BMI088_ReadGyr(&imu);
-		SensorData.fData[1] = imu.gyr[0];
-		SensorData.fData[2] = imu.gyr[1];
-		SensorData.fData[3] = imu.gyr[2];
+
+		/* Filter measurements */
+		FIRFilter_Update(&firGyr[0], imu.gyr[0]);
+		FIRFilter_Update(&firGyr[1], imu.gyr[1]);
+		FIRFilter_Update(&firGyr[2], imu.gyr[2]);
+
 		osDelay(1);
 	}
 
@@ -158,17 +186,73 @@ void imuAccReadTask (void const *argument) {
 
 	for (;;) {
 		BMI088_ReadAcc(&imu);
-		SensorData.fData[4] = imu.acc[0];
-		SensorData.fData[5] = imu.acc[1];
-		SensorData.fData[6] = imu.acc[2];
+
+		/* Filter measurements */
+		FIRFilter_Update(&firAcc[0], imu.acc[0]);
+		FIRFilter_Update(&firAcc[1], imu.acc[1]);
+		FIRFilter_Update(&firAcc[2], imu.acc[2]);
+
 		osDelay(5);
+	}
+
+}
+
+void magReadTask (void const *argument) {
+
+	for (;;) {
+		IISMagnetomer_Read(&mag);
+
+		/* Filter measurements */
+		FIRFilter_Update(&firAcc[0], mag.xyz[0]);
+		FIRFilter_Update(&firAcc[1], mag.xyz[1]);
+		FIRFilter_Update(&firAcc[2], mag.xyz[2]);
+
+		osDelay(5);
+	}
+
+}
+
+void barometerReadTask (void const *argument) {
+
+	for (;;) {
+		MPRLSBarometer_ReadPressure(&bar);
+
+		/* Filter measurement */
+		FIRFilter_Update(&firBar, bar.pressurePa);
+
+		osDelay(10);
 	}
 
 }
 
 void debugSerialTask (void const *argument) {
 	for (;;) {
-		printDebug((char *) SensorData.uiData);
+		//printDebug((char *) SensorData.uiData);
+
+		NavData.acc[0] = firAcc[0].out;
+		NavData.acc[1] = firAcc[1].out;
+		NavData.acc[2] = firAcc[2].out;
+		NavData.gyr[0] = firGyr[0].out;
+		NavData.gyr[1] = firGyr[1].out;
+		NavData.gyr[2] = firGyr[2].out;
+		NavData.mag[0] = firMag[0].out;
+		NavData.mag[1] = firMag[1].out;
+		NavData.mag[2] = firMag[2].out;
+		NavData.bar = firBar.out;
+		NavData.Va = 0.0f;
+		NavData.fix = gpsData.fixQuality;
+		NavData.lat = gpsData.latitude_dec;
+		NavData.lon = gpsData.longitude_dec;
+		NavData.Vg = gpsData.groundSpeed_mps;
+		NavData.roll = 0.0f;
+		NavData.pitch = 0.0f;
+		NavData.yaw = 0.0f;
+
+		uint8_t UAVDataPacket[128];
+		uint8_t UAVDataPacketLength = UAVDataLink_Pack(0, 0, sizeof(NavData), (const uint8_t *) &NavData, UAVDataPacket);
+
+		HAL_UART_Transmit(&huart3, UAVDataPacket, UAVDataPacketLength, HAL_MAX_DELAY);
+
 		osDelay(1000);
 	}
 }
