@@ -1,0 +1,4 @@
+GPSNMEAParser.c:3:6:GPSNMEAParser_Init	16	static
+GPSNMEAParser.c:15:6:GPSNMEAParser_ExtractGGA	88	dynamic
+GPSNMEAParser.c:83:6:GPSNMEAParser_ExtractRMC	96	dynamic
+GPSNMEAParser.c:158:6:GPSNMEAParser_Feed	16	static
