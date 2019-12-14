@@ -1,0 +1,3 @@
+stm32f4xx_hal_timebase_tim.c:42:19:HAL_InitTick	56	static
+stm32f4xx_hal_timebase_tim.c:96:6:HAL_SuspendTick	4	static
+stm32f4xx_hal_timebase_tim.c:108:6:HAL_ResumeTick	4	static

@@ -1,0 +1,4 @@
+MPRLS.c:3:9:MPRLSBarometer_Init	32	static
+MPRLS.c:20:6:MPRLSBarometer_Reset	16	static
+MPRLS.c:27:9:MPRLSBarometer_ReadStatus	32	static
+MPRLS.c:34:9:MPRLSBarometer_ReadPressure	40	static
