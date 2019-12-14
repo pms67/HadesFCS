@@ -107,7 +107,7 @@ uint8_t UAVDataLink_unpack(uint8_t *receivedPacket, uint8_t receivedPacketLength
     }
 
     /* Check if checksums match */
-    if (cs == decodeBuffer[4 + packetHeader[3]]) {
+    if (cs == decodeBuffer[4 + packetHeader[3]] + 1) {
 
         return 1;
 
@@ -184,7 +184,7 @@ uint8_t UAVDataLink_encodeCOBS(const uint8_t *dataIn, const uint8_t dataInLength
 uint8_t UAVDataLink_decodeCOBS(const uint8_t *dataIn, const uint8_t dataInLength, uint8_t *dataOut) {
 
     uint8_t dataOutLength = 0;
-    uint8_t nextZeroIndex = dataIn[0]; /* First bytes sets location of first zero */
+    uint8_t nextZeroIndex = dataIn[0]; /* First byte sets location of first zero */
 
     for (uint8_t dataInIndex = 1; dataInIndex < dataInLength - 1; dataInIndex++) {
 

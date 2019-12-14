@@ -6,7 +6,7 @@ uint8_t UAVDataLink_Pack(const uint8_t IDA, const uint8_t IDB, const uint8_t PAY
     uint8_t n;
 
     /* Create array to store packet data */
-    uint8_t rawDataLength = 5 + PAYLOADLENGTH;
+    uint8_t rawDataLength = 4 + PAYLOADLENGTH + 1; /* 4 header bytes, payload bytes, and checksum byte */
     uint8_t rawData[rawDataLength];
 
     /* Set packet header */

@@ -109,12 +109,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
 
-  printDebug("NAVC started.\n");
-
-  printDebug("Initialising sensors...\n");
   initPeripherals();
-
-  printDebug("Loading filters...\n");
 
   FIRFilter_Init(&firGyr[0], firCoeffGyr, firGyrXBuf, FIRGYRN);
   FIRFilter_Init(&firGyr[1], firCoeffGyr, firGyrYBuf, FIRGYRN);
@@ -147,7 +142,6 @@ int main(void)
   osThreadDef(debugSerialTask, debugSerialTask, osPriorityAboveNormal, 0, 2048);
   debugSerialHandle = osThreadCreate(osThread(debugSerialTask), NULL);
 
-  printDebug("Starting RTOS scheduler...\n");
   osKernelStart();
   
   while (1)
@@ -260,34 +254,22 @@ void debugSerialTask (void const *argument) {
 void initPeripherals() {
 	/* Initialise pressure sensor */
 	uint8_t statBar = (MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, INTBAR_GPIO_Port, INTBAR_Pin) == MPRLS_STATUS_POWERED);
-	if (statBar == 1) {
-	  printDebug("Barometer initialised.\r\n");
-	}
 
 	/* Initialise magnetometer */
 	uint8_t statMag = IISMagnetometer_Init(&mag, &hi2c1, GPIOA, INTMAG_Pin);
-	if (statMag == 1) {
-	  printDebug("Magnetometer initialised.\r\n");
-	}
 
 	/* Initialise IMU */
 	uint8_t statIMU = BMI088_Init(&imu, &hi2c1, GPIOA, INTACC_Pin, GPIOA, INTGYR_Pin);
-	if (statIMU == 1) {
-	  printDebug("IMU initialised.\r\n");
-	}
 
 	/* Initialise temperature sensor */
 	TMP100_Init(&tmp, &hi2c1);
-	printDebug("Temperature sensor initialised.\r\n");
 
 	/* Initialise GPS receiver */
 	UBloxGPS_Init(&gps, &huart1, GPIOC, GPSNRST_Pin, GPIOC, GPSPPS_Pin, GPIOC, GPSLNAEN_Pin);
 	UBloxGPS_Reset(&gps);
-	printDebug("GPS receiver initialised.\r\n");
 
 	uint8_t status = statBar + statMag + statIMU;
 	if (status < 3) {
-		printDebug("Error: at least one sensor could not be initialised!\r\n");
 		HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_SET);
 	} else {
 		HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_RESET);
