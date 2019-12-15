@@ -13,8 +13,11 @@
 #include "FIR.h"
 #include "FIRFilterArrays.h"
 
+#include "KalmanRollPitch.h"
+
 #include "GPSNMEAParser.h"
 #include "UAVDataLink.h"
+
 
 
 I2C_HandleTypeDef hi2c1;
@@ -29,6 +32,7 @@ osThreadId heartbeatHandle;
 osThreadId barometerReadHandle;
 osThreadId imuGyroReadHandle;
 osThreadId imuAccReadHandle;
+osThreadId magReadHandle;
 osThreadId debugSerialHandle;
 
 void SystemClock_Config(void);
@@ -44,7 +48,9 @@ void heartbeatTask(void const * argument);
 void barometerReadTask(void const *argument);
 void imuGyroReadTask(void const *argument);
 void imuAccReadTask(void const *argument);
+void magReadTask(void const *argument);
 void debugSerialTask(void const *argument);
+
 
 /* Sensors */
 MPRLSBarometer bar;
@@ -58,15 +64,24 @@ UBloxGPS gps;
 /* GPS parsed data container */
 GPSData gpsData;
 
+/* Kalman filter */
+KalmanRollPitch kal;
+
 /* Sample time definitions */
-const uint32_t SAMPLE_TIME_BAR_MS = 10;
+const uint32_t SAMPLE_TIME_ACC_MS = 10;
+const uint32_t SAMPLE_TIME_GYR_MS = 5;
+
 const uint32_t SAMPLE_TIME_MAG_MS = 10;
-const uint32_t SAMPLE_TIME_ACC_MS = 5;
-const uint32_t SAMPLE_TIME_GYR_MS = 1;
+
+const uint32_t SAMPLE_TIME_BAR_MS = 10;
+
 const uint32_t SAMPLE_TIME_TMP_MS = 320;
+
 const uint32_t SAMPLE_TIME_EKF_MS = 100;
+
 const uint32_t SAMPLE_TIME_GPSDBG_MS = 1000;
-const uint32_t SAMPLE_TIME_DBG_MS = 250;
+const uint32_t SAMPLE_TIME_DBG_MS = 100;
+
 const uint32_t SAMPLE_TIME_LED_MS = 1000;
 
 /* UART-to-USB debug output */
@@ -75,20 +90,7 @@ void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart3, (uint8_t *) "\n", 1, HAL_MAX_DELAY);
 }
 
-struct NavDataStruct {
-	float acc[3];
-	float gyr[3];
-	float mag[3];
-	float bar;
-	float Va;
-	uint8_t fix;
-	float lat;
-	float lon;
-	float Vg;
-	float roll;
-	float pitch;
-	float yaw;
-} NavData;
+float NavDataContainer[20];
 
 FIRFilter firGyr[3];
 FIRFilter firAcc[3];
@@ -102,6 +104,9 @@ int main(void)
   SystemClock_Config();
 
   MX_GPIO_Init();
+
+  HAL_Delay(500);
+
   MX_I2C1_Init();
   MX_I2C2_Init();
   MX_I2C3_Init();
@@ -125,21 +130,29 @@ int main(void)
 
   FIRFilter_Init(&firBar, firCoeffBar, firBarBuf, FIRBARN);
 
-  osThreadDef(heartbeatLEDTask, heartbeatTask, osPriorityNormal, 0, 128);
+  float kalQ[] = {3.0f * 0.000011941f, 2.0f * 0.000011941f};
+  float kalR[] = {0.00024636441f, 0.00024636441f, 0.00034741232f};
+  KalmanRollPitch_Init(&kal, 10.0f, kalQ, kalR);
+
+  /* Heartbeat LED task */
+  osThreadDef(heartbeatLEDTask, heartbeatTask, osPriorityLow, 0, 128);
   heartbeatHandle = osThreadCreate(osThread(heartbeatLEDTask), NULL);
 
   /* Sensor tasks */
-  osThreadDef(barometerReadTask, barometerReadTask, osPriorityNormal, 0, 128);
+  osThreadDef(barometerReadTask, barometerReadTask, osPriorityAboveNormal, 0, 128);
   barometerReadHandle = osThreadCreate(osThread(barometerReadTask), NULL);
 
-  osThreadDef(imuGyroReadTask, imuGyroReadTask, osPriorityNormal, 0, 128);
+  osThreadDef(imuGyroReadTask, imuGyroReadTask, osPriorityRealtime, 0, 128);
   imuGyroReadHandle = osThreadCreate(osThread(imuGyroReadTask), NULL);
 
-  osThreadDef(imuAccReadTask, imuAccReadTask, osPriorityNormal, 0, 128);
+  osThreadDef(imuAccReadTask, imuAccReadTask, osPriorityRealtime, 0, 256);
   imuAccReadHandle = osThreadCreate(osThread(imuAccReadTask), NULL);
 
+  osThreadDef(magReadTask, magReadTask, osPriorityRealtime, 0, 128);
+  magReadHandle = osThreadCreate(osThread(magReadTask), NULL);
+
   /* Serial debug output task */
-  osThreadDef(debugSerialTask, debugSerialTask, osPriorityAboveNormal, 0, 2048);
+  osThreadDef(debugSerialTask, debugSerialTask, osPriorityLow, 0, 256);
   debugSerialHandle = osThreadCreate(osThread(debugSerialTask), NULL);
 
   osKernelStart();
@@ -156,7 +169,7 @@ void heartbeatTask(void const * argument)
   for(;;)
   {
 	HAL_GPIO_TogglePin(GPIOB, LEDA_Pin);
-    osDelay(1000);
+    osDelay(SAMPLE_TIME_LED_MS);
   }
 
 }
@@ -171,7 +184,7 @@ void imuGyroReadTask (void const *argument) {
 		FIRFilter_Update(&firGyr[1], imu.gyr[1]);
 		FIRFilter_Update(&firGyr[2], imu.gyr[2]);
 
-		osDelay(1);
+		osDelay(SAMPLE_TIME_GYR_MS);
 	}
 
 }
@@ -186,7 +199,12 @@ void imuAccReadTask (void const *argument) {
 		FIRFilter_Update(&firAcc[1], imu.acc[1]);
 		FIRFilter_Update(&firAcc[2], imu.acc[2]);
 
-		osDelay(5);
+		/* Update kalman filter */
+		float gyrFilt[] = {firGyr[0].out, firGyr[1].out, firGyr[2].out};
+		float accFilt[] = {firAcc[0].out, firAcc[1].out, firAcc[2].out};
+		KalmanRollPitch_Update(&kal, gyrFilt, accFilt, 0.0f, 0.01f);
+
+		osDelay(SAMPLE_TIME_ACC_MS);
 	}
 
 }
@@ -194,14 +212,14 @@ void imuAccReadTask (void const *argument) {
 void magReadTask (void const *argument) {
 
 	for (;;) {
-		IISMagnetomer_Read(&mag);
+		IISMagnetometer_Read(&mag);
 
 		/* Filter measurements */
-		FIRFilter_Update(&firAcc[0], mag.xyz[0]);
-		FIRFilter_Update(&firAcc[1], mag.xyz[1]);
-		FIRFilter_Update(&firAcc[2], mag.xyz[2]);
+		FIRFilter_Update(&firMag[0], mag.xyz[0]);
+		FIRFilter_Update(&firMag[1], mag.xyz[1]);
+		FIRFilter_Update(&firMag[2], mag.xyz[2]);
 
-		osDelay(5);
+		osDelay(SAMPLE_TIME_MAG_MS);
 	}
 
 }
@@ -214,44 +232,53 @@ void barometerReadTask (void const *argument) {
 		/* Filter measurement */
 		FIRFilter_Update(&firBar, bar.pressurePa);
 
-		osDelay(10);
+		osDelay(SAMPLE_TIME_BAR_MS);
 	}
 
 }
 
 void debugSerialTask (void const *argument) {
-	for (;;) {
-		//printDebug((char *) SensorData.uiData);
 
-		NavData.acc[0] = firAcc[0].out;
-		NavData.acc[1] = firAcc[1].out;
-		NavData.acc[2] = firAcc[2].out;
-		NavData.gyr[0] = firGyr[0].out;
-		NavData.gyr[1] = firGyr[1].out;
-		NavData.gyr[2] = firGyr[2].out;
-		NavData.mag[0] = firMag[0].out;
-		NavData.mag[1] = firMag[1].out;
-		NavData.mag[2] = firMag[2].out;
-		NavData.bar = firBar.out;
-		NavData.Va = 0.0f;
-		NavData.fix = gpsData.fixQuality;
-		NavData.lat = gpsData.latitude_dec;
-		NavData.lon = gpsData.longitude_dec;
-		NavData.Vg = gpsData.groundSpeed_mps;
-		NavData.roll = 0.0f;
-		NavData.pitch = 0.0f;
-		NavData.yaw = 0.0f;
+	for (;;) {
+
+	    NavDataContainer[0] = firAcc[0].out;
+		NavDataContainer[1] = firAcc[1].out;
+		NavDataContainer[2] = firAcc[2].out;
+		NavDataContainer[3] = firGyr[0].out;
+		NavDataContainer[4] = firGyr[1].out;
+		NavDataContainer[5] = firGyr[2].out;
+
+		NavDataContainer[6] = mag.xyz[0]; //firMag[0].out;
+		NavDataContainer[7] = mag.xyz[1]; //firMag[1].out;
+		NavDataContainer[8] = mag.xyz[2]; //firMag[2].out;
+
+		NavDataContainer[9]  = bar.pressurePa; //firBar.out;
+		NavDataContainer[10] = 0.0f;
+
+		NavDataContainer[11] = (float) gpsData.fixQuality;
+		NavDataContainer[12] = gpsData.latitude_dec;
+		NavDataContainer[13] = gpsData.longitude_dec;
+		NavDataContainer[14] = gpsData.altitude_m;
+		NavDataContainer[15] = gpsData.groundSpeed_mps;
+		NavDataContainer[16] = gpsData.course_deg;
+
+		NavDataContainer[17] = kal.phi   * 57.2957795131f;
+		NavDataContainer[18] = kal.theta * 57.2957795131f;
+		NavDataContainer[19] = 0.0f;
 
 		uint8_t UAVDataPacket[128];
-		uint8_t UAVDataPacketLength = UAVDataLink_Pack(0, 0, sizeof(NavData), (const uint8_t *) &NavData, UAVDataPacket);
+		uint8_t UAVDataPacketLength = UAVDataLink_Pack(0, 0, sizeof(NavDataContainer), (const uint8_t *) NavDataContainer, UAVDataPacket);
 
 		HAL_UART_Transmit(&huart3, UAVDataPacket, UAVDataPacketLength, HAL_MAX_DELAY);
 
-		osDelay(1000);
+		osDelay(SAMPLE_TIME_DBG_MS);
 	}
+
 }
 
 void initPeripherals() {
+	uint8_t status = 0;
+
 	/* Initialise pressure sensor */
 	uint8_t statBar = (MPRLSBarometer_Init(&bar, &hi2c1, BARNRST_GPIO_Port, BARNRST_Pin, INTBAR_GPIO_Port, INTBAR_Pin) == MPRLS_STATUS_POWERED);
 
@@ -261,6 +288,8 @@ void initPeripherals() {
 	/* Initialise IMU */
 	uint8_t statIMU = BMI088_Init(&imu, &hi2c1, GPIOA, INTACC_Pin, GPIOA, INTGYR_Pin);
 
+	status = statBar + statMag + statIMU;
+
 	/* Initialise temperature sensor */
 	TMP100_Init(&tmp, &hi2c1);
 
@@ -268,7 +297,6 @@ void initPeripherals() {
 	UBloxGPS_Init(&gps, &huart1, GPIOC, GPSNRST_Pin, GPIOC, GPSPPS_Pin, GPIOC, GPSLNAEN_Pin);
 	UBloxGPS_Reset(&gps);
 
-	uint8_t status = statBar + statMag + statIMU;
 	if (status < 3) {
 		HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_SET);
 	} else {

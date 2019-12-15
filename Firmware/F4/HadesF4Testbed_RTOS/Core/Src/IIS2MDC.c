@@ -38,7 +38,14 @@ uint8_t IISMagnetometer_Init(IISMagnetometer *mag, I2C_HandleTypeDef *I2Chandle,
 	return 1;
 }
 
-void IISMagnetomer_Read(IISMagnetometer *mag) {
+void IISMagnetometer_Reset(IISMagnetometer *mag) {
+	/* Temperature compensation = 0, Reboot = 1, Soft_Rst = 1, Low Power = 0, ODR = 00, MODE CONTINUOUS 00 */
+	uint8_t txBuf[] = {IIS_CFG_REG_A, 0x60};
+	HAL_I2C_Master_Transmit(mag->I2Chandle, IIS_I2C_ADDR, txBuf, 2, IIS_I2C_TIMEOUT);
+	HAL_Delay(50);
+}
+
+void IISMagnetometer_Read(IISMagnetometer *mag) {
 	/* Wait until DRDY pin is set */
 	while (!HAL_GPIO_ReadPin(mag->intPinBank, mag->intPin)) {
 		HAL_Delay(5);

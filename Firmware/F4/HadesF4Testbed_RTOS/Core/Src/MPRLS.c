@@ -22,6 +22,7 @@ void MPRLSBarometer_Reset(MPRLSBarometer *bar) {
 	HAL_GPIO_WritePin(bar->rstPinBank, bar->rstPin, GPIO_PIN_RESET);
 	HAL_Delay(10);
 	HAL_GPIO_WritePin(bar->rstPinBank, bar->rstPin, GPIO_PIN_SET);
+	HAL_Delay(50);
 }
 
 uint8_t MPRLSBarometer_ReadStatus(MPRLSBarometer *bar) {

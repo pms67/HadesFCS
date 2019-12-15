@@ -24,6 +24,22 @@ namespace NAVCDataInterface
         UAVDataLinkHandler packetHandler;
         int numValidPackets;
 
+        /* Sensor, GPS, and EKF data containers */
+        float[] acc;
+        float[] gyr;
+        float[] mag;
+        float bar;
+        float Va;
+        int fixQuality;
+        float lat;
+        float lon;
+        float alt;
+        float Vg;
+        float course;
+        float roll;
+        float pitch;
+        float heading;
+
         public frmMain()
         {
             InitializeComponent();
@@ -34,6 +50,10 @@ namespace NAVCDataInterface
 
             packetHandler = new UAVDataLinkHandler(256);
             numValidPackets = 0;
+
+            acc = new float[3];
+            gyr = new float[3];
+            mag = new float[3];
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -144,7 +164,7 @@ namespace NAVCDataInterface
                 {
                     numValidPackets++;
 
-                    PrintToLog();                                      
+                    ConvertPacket();                                  
                 }                
 
                 numBytesRx += numBytes;
@@ -154,6 +174,46 @@ namespace NAVCDataInterface
 
         }
 
+        private void ConvertPacket()
+        {
+            /* Sensor, GPS, and EKF data packet */
+            if (packetHandler.IDA == 0 && packetHandler.IDB == 0)
+            {
+                byte[] bytes = new byte[4];
+
+                int index = 0;
+
+                float[] NavDataContainer = new float[20];
+                string dataPacketString = "";
+
+                for (int n = 0; n < 20; n++)
+                {
+                    bytes[0] = packetHandler.PAYLOAD[4 * n];
+                    bytes[1] = packetHandler.PAYLOAD[4 * n + 1];
+                    bytes[2] = packetHandler.PAYLOAD[4 * n + 2];
+                    bytes[3] = packetHandler.PAYLOAD[4 * n + 3];
+
+                    NavDataContainer[n] = BytesToFloat(bytes);
+
+
+                    dataPacketString += NavDataContainer[n].ToString();
+                    if (n != 19)
+                    {
+                        dataPacketString += ",";
+                    }
+
+                    index++;
+                }
+
+                /* Print to log */
+                Invoke(new MethodInvoker(delegate () { txtRawOutput.AppendText(dataPacketString); }));
+                Invoke(new MethodInvoker(delegate () { txtRawOutput.AppendText(Environment.NewLine); }));
+            } else
+            {
+                PrintToLog();
+            }
+        }
+
         private void PrintToLog()
         {
             /* Packet header on separate line */
@@ -161,17 +221,23 @@ namespace NAVCDataInterface
             Invoke(new MethodInvoker(delegate () { txtRawOutput.AppendText(dataPacketHeaderString); }));
             Invoke(new MethodInvoker(delegate () { txtRawOutput.AppendText(Environment.NewLine); }));
 
-            /* Packet payload */
+            /* Packet payload */            
             string dataPacketString = "";
             for (int n = 0; n < packetHandler.PAYLOADLENGTH - 1; n++)
             {
                 dataPacketString += packetHandler.PAYLOAD[n].ToString() + ",";
             }
+            
 
             dataPacketString += packetHandler.PAYLOAD[packetHandler.PAYLOADLENGTH - 1];
 
             Invoke(new MethodInvoker(delegate () { txtRawOutput.AppendText(dataPacketString); }));
             Invoke(new MethodInvoker(delegate () { txtRawOutput.AppendText(Environment.NewLine); }));
+        }
+
+        private float BytesToFloat(byte[] bytes)
+        {
+            return BitConverter.ToSingle(bytes, 0);
         }
     }
 }

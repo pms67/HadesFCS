@@ -45,6 +45,8 @@ typedef struct {
 } BMI088IMU;
 
 uint8_t BMI088_Init(BMI088IMU *imu, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *intAccPinBank, uint16_t intAccPin, GPIO_TypeDef *intGyrPinBank, uint16_t intGyrPin);
+void BMI088_ResetAcc(BMI088IMU *imu);
+void BMI088_ResetGyr(BMI088IMU *imu);
 void BMI088_ReadAcc(BMI088IMU *imu);
 void BMI088_ReadGyr(BMI088IMU *imu);
 

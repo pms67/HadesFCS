@@ -26,7 +26,6 @@ typedef struct {
 } KalmanRollPitch;
 
 void KalmanRollPitch_Init(KalmanRollPitch *kal, float Pinit, float *Q, float *R);
-void KalmanRollPitch_Update(KalmanRollPitch *kal, float *gyr, float T);
-void KalmanRollPitch_UpdateMeasurement(KalmanRollPitch *kal, float *gyr, float *acc, float Va);
+void KalmanRollPitch_Update(KalmanRollPitch *kal, float *gyr, float *acc, float Va, float T);
 
 #endif

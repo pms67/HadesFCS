@@ -14,16 +14,9 @@ uint8_t BMI088_Init(BMI088IMU *imu, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *
 	imu->gyr[2] = 0.0f;
 
 	uint8_t txBuf[2];
-
 	/*
 	 * ACCELEROMETER
 	 */
-
-	/* Soft reset */
-//	txBuf[0] = BMI088_ACC_SOFTRESET; txBuf[1] = 0xB6;
-//	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	HAL_Delay(50);
 
 	/* Check chip ID */
 	uint8_t chipID;
@@ -31,79 +24,86 @@ uint8_t BMI088_Init(BMI088IMU *imu, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *
 
 	if (chipID != 0x1E) {
 		return 0;
+	} else {
+		/* Configure accelerometer LPF bandwidth (Normal, 1010) and ODR (100 Hz, 1000) --> Actual bandwidth = 40 Hz */
+		uint8_t accConf = 0xA8;
+		txBuf[0] = BMI088_ACC_CONF; txBuf[1] = accConf;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		/* Accelerometer range (+-6G = 0x01) */
+		uint8_t accRange = 0x01;
+		txBuf[0] = BMI088_ACC_RANGE; txBuf[1] = accRange;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		/* Configure INT1 and INT2 pin */
+		uint8_t intConf = 0x0A;
+		txBuf[0] = BMI088_INT1_IO_CONF; txBuf[1] = intConf;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		txBuf[0] = BMI088_INT2_IO_CONF;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		txBuf[0] = BMI088_INT1_INT2_MAP_DATA; txBuf[1] = 0x44;
+
+		/* Set accelerometer to active mode */
+		txBuf[0] = BMI088_ACC_PWR_CONF; txBuf[1] = 0x00;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		/* Switch accelerometer on */
+		txBuf[0] = BMI088_ACC_PWR_CTRL; txBuf[1] = 0x04;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+		HAL_Delay(5);
 	}
-
-	/* Configure accelerometer LPF bandwidth (OSR4, 1000) and ODR (200 Hz, 1001) --> Actual bandwidth = 20 Hz */
-	uint8_t accConf = 0x89;
-	txBuf[0] = BMI088_ACC_CONF; txBuf[1] = accConf;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	/* Accelerometer range (+-6G = 0x01) */
-	uint8_t accRange = 0x01;
-	txBuf[0] = BMI088_ACC_RANGE; txBuf[1] = accRange;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	/* Configure INT1 and INT2 pin */
-	uint8_t intConf = 0x0A;
-	txBuf[0] = BMI088_INT1_IO_CONF; txBuf[1] = intConf;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	txBuf[0] = BMI088_INT2_IO_CONF;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	txBuf[0] = BMI088_INT1_INT2_MAP_DATA; txBuf[1] = 0x44;
-
-	/* Set accelerometer to active mode */
-	txBuf[0] = BMI088_ACC_PWR_CONF; txBuf[1] = 0x00;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	/* Switch accelerometer on */
-	txBuf[0] = BMI088_ACC_PWR_CTRL; txBuf[1] = 0x04;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
 
 
 	/*
 	 * GYROSCOPE
 	 */
 
-	/* Soft reset */
-//	txBuf[0] = BMI088_GYR_SOFTRESET; txBuf[1] = 0xB6;
-//	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	HAL_Delay(35);
-
 	/* Check chip ID */
 	HAL_I2C_Mem_Read(imu->I2Chandle, BMI088_GYR_I2C_ADDR, BMI088_GYR_CHIP_ID, I2C_MEMADD_SIZE_8BIT, &chipID, 1, BMI088_I2C_TIMEOUT);
 
 	if (chipID != 0x0F) {
-			return 0;
+		return 0;
+	} else {
+		/* Gyro range (+- 500deg/s) */
+		uint8_t gyrRange = 0x02;
+		txBuf[0] = BMI088_GYR_RANGE; txBuf[1] = gyrRange;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		/* Gyro bandwidth/ODR (ODR = 200 Hz --> Filter bandwidth = 47 Hz) */
+		uint8_t gyrBandwidth = 0x83;
+		txBuf[0] = BMI088_GYR_BANDWIDTH; txBuf[1] = gyrBandwidth;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		/* Gyro power mode */
+		txBuf[0] = BMI088_GYR_LPM1; txBuf[1] = 0x00;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		/* Enable gyro interrupt and map to pins */
+		txBuf[0] = BMI088_GYR_INT_CTRL; txBuf[1] = 0x80;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		txBuf[0] = BMI088_GYR_INT3_INT4_IO_CONF; txBuf[1] = 0x05;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+
+		txBuf[0] = BMI088_GYR_INT3_INT4_IO_MAP; txBuf[1] = 0x81;
+		HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
 	}
 
-	/* Gyro range (+- 500deg/s) */
-	uint8_t gyrRange = 0x01;
-	txBuf[0] = BMI088_GYR_RANGE; txBuf[1] = gyrRange;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	/* Gyro bandwidth/ODR (116Hz / 1000 Hz) */
-	uint8_t gyrBandwidth = 0x02;
-	txBuf[0] = BMI088_GYR_BANDWIDTH; txBuf[1] = gyrBandwidth;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	/* Gyro power mode */
-	txBuf[0] = BMI088_GYR_LPM1; txBuf[1] = 0x00;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	/* Enable gyro interrupt and map to pins */
-	txBuf[0] = BMI088_GYR_INT_CTRL; txBuf[1] = 0x80;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	txBuf[0] = BMI088_GYR_INT3_INT4_IO_CONF; txBuf[1] = 0x05;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
-	txBuf[0] = BMI088_GYR_INT3_INT4_IO_MAP; txBuf[1] = 0x81;
-	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
-
 	return 1;
+}
+
+void BMI088_ResetAcc(BMI088IMU *imu) {
+	uint8_t txBuf[] = {BMI088_ACC_SOFTRESET,0xB6};
+	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_ACC_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+	HAL_Delay(1);
+}
+
+void BMI088_ResetGyr(BMI088IMU *imu) {
+	uint8_t txBuf[] = {BMI088_GYR_SOFTRESET, 0xB6};
+	HAL_I2C_Master_Transmit(imu->I2Chandle, BMI088_GYR_I2C_ADDR, txBuf, 2, BMI088_I2C_TIMEOUT);
+	HAL_Delay(1);
 }
 
 void BMI088_ReadAcc(BMI088IMU *imu) {
