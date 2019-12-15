@@ -29,6 +29,8 @@ typedef struct {
 } IISMagnetometer;
 
 uint8_t IISMagnetometer_Init(IISMagnetometer *mag, I2C_HandleTypeDef *I2Chandle, GPIO_TypeDef *intPinBank, uint16_t intPin);
-void IISMagnetomer_Read(IISMagnetometer *mag);
+void IISMagnetometer_Reset(IISMagnetometer *mag);
+void IISMagnetometer_Read(IISMagnetometer *mag);
+
 
 #endif

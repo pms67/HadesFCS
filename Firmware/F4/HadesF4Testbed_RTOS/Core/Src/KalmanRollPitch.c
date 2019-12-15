@@ -9,11 +9,15 @@ void KalmanRollPitch_Init(KalmanRollPitch *kal, float Pinit, float *Q, float *R)
 	kal->R[0] = R[0];  kal->R[1] = R[1]; kal->R[2] = R[2];
 }
 
-void KalmanRollPitch_Update(KalmanRollPitch *kal, float *gyr, float T) {
+void KalmanRollPitch_Update(KalmanRollPitch *kal, float *gyr, float *acc, float Va, float T) {
 	/* Extract measurements */
 	float p = gyr[0];
 	float q = gyr[1];
 	float r = gyr[2];
+
+	float ax = acc[0];
+	float ay = acc[1];
+	float az = acc[2];
 
 	/* Predict */
 
@@ -39,21 +43,13 @@ void KalmanRollPitch_Update(KalmanRollPitch *kal, float *gyr, float T) {
 
 	kal->P[0] = kal->P[0] + Ptmp[0]; kal->P[1] = kal->P[1] + Ptmp[1];
 	kal->P[2] = kal->P[2] + Ptmp[2]; kal->P[3] = kal->P[3] + Ptmp[3];
-}
 
-void KalmanRollPitch_UpdateMeasurement(KalmanRollPitch *kal, float *gyr, float *acc, float Va) {
-	/* Extract measurements */
-	float p = gyr[0];
-	float q = gyr[1];
-	float r = gyr[2];
 
-	float ax = acc[0];
-	float ay = acc[1];
-	float az = acc[2];
+	/* Update */
 
-	/* Compute common trig terms */
-	float sp = sin(kal->phi);   float cp = cos(kal->phi);
-	float st = sin(kal->theta); float ct = cos(kal->theta);
+	/* Re-compute common trig terms */
+	sp = sin(kal->phi);   cp = cos(kal->phi);
+	st = sin(kal->theta); ct = cos(kal->theta);
 
 	/* Output function h(x,u) */
 	float h[3] = { q * Va * st               + g * st,
@@ -80,7 +76,6 @@ void KalmanRollPitch_UpdateMeasurement(KalmanRollPitch *kal, float *gyr, float *
 				   Ginv[3]*(C[2]*kal->P[2] + C[3]*kal->P[3]) + Ginv[6]*(C[4]*kal->P[2] + C[5]*kal->P[3]) + C[1]*Ginv[0]*kal->P[3], Ginv[4]*(C[2]*kal->P[2] + C[3]*kal->P[3]) + Ginv[7]*(C[4]*kal->P[2] + C[5]*kal->P[3]) + C[1]*Ginv[1]*kal->P[3], Ginv[5]*(C[2]*kal->P[2] + C[3]*kal->P[3]) + Ginv[8]*(C[4]*kal->P[2] + C[5]*kal->P[3]) + C[1]*Ginv[2]*kal->P[3] };
 
 	/* Update covariance matrix P++ = (I - K * C) * P+ */
-	float Ptmp[4];
 	Ptmp[0] = -kal->P[2]*(C[1]*K[0] + C[3]*K[1] + C[5]*K[2]) - kal->P[0]*(C[2]*K[1] + C[4]*K[2] - 1.0f); Ptmp[1] = -kal->P[3]*(C[1]*K[0] + C[3]*K[1] + C[5]*K[2]) - kal->P[1]*(C[2]*K[1] + C[4]*K[2] - 1.0f);
 	Ptmp[2] = -kal->P[2]*(C[1]*K[3] + C[3]*K[4] + C[5]*K[5] - 1.0f) - kal->P[0]*(C[2]*K[4] + C[4]*K[5]); Ptmp[3] = -kal->P[3]*(C[1]*K[3] + C[3]*K[4] + C[5]*K[5] - 1.0f) - kal->P[1]*(C[2]*K[4] + C[4]*K[5]);
 
