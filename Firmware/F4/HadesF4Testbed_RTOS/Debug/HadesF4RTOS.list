@@ -5589,9 +5589,9 @@ static void MX_USART3_UART_Init(void)
  800338c:	4b11      	ldr	r3, [pc, #68]	; (80033d4 <MX_USART3_UART_Init+0x4c>)
  800338e:	4a12      	ldr	r2, [pc, #72]	; (80033d8 <MX_USART3_UART_Init+0x50>)
  8003390:	601a      	str	r2, [r3, #0]
-  huart3.Init.BaudRate = 115200;
+  huart3.Init.BaudRate = 256000;
  8003392:	4b10      	ldr	r3, [pc, #64]	; (80033d4 <MX_USART3_UART_Init+0x4c>)
- 8003394:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
+ 8003394:	f44f 327a 	mov.w	r2, #256000	; 0x3e800
  8003398:	605a      	str	r2, [r3, #4]
   huart3.Init.WordLength = UART_WORDLENGTH_8B;
  800339a:	4b0e      	ldr	r3, [pc, #56]	; (80033d4 <MX_USART3_UART_Init+0x4c>)
