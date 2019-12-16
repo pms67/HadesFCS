@@ -1,0 +1,36 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# CH340E
+#
+DEF CH340E U 0 40 Y Y 1 L N
+F0 "U" -150 -600 50 H V L BNN
+F1 "CH340E" 0 0 50 H I L BNN
+F2 "MSOP10" 0 0 50 H I L BNN
+F3 "USB to serial chip CH340" 0 0 50 H I L BNN
+F4 "CH340E" 0 0 50 H I L BNN
+F5 "Unavailable" 0 0 50 H I L BNN
+F6 "None" 0 0 50 H I L BNN
+F7 "WCH" 0 0 50 H I L BNN
+F8 "Package Analog Devices" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 -350 500 -350 -500 N
+P 2 0 0 10 -350 -500 350 -500 N
+P 2 0 0 10 350 -500 350 500 N
+P 2 0 0 10 350 500 -350 500 N
+X UD+ 1 -550 400 200 R 40 40 0 0 B 
+X UD- 2 -550 200 200 R 40 40 0 0 B 
+X GND 3 -550 0 200 R 40 40 0 0 W 
+X RTS 4 -550 -200 200 R 40 40 0 0 O 
+X CTS 5 -550 -400 200 R 40 40 0 0 I 
+X TNOW 6 550 -400 200 L 40 40 0 0 O 
+X VCC 7 550 -200 200 L 40 40 0 0 W 
+X TX 8 550 0 200 L 40 40 0 0 O 
+X RX 9 550 200 200 L 40 40 0 0 I 
+X V3 10 550 400 200 L 40 40 0 0 W 
+ENDDRAW
+ENDDEF
+#
+# End Library

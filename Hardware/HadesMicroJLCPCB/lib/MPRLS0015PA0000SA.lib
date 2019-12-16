@@ -1,0 +1,37 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model MPRLS0015PA0000SA
+#/1111103/200272/2.44/12/4/Integrated Circuit
+DEF MPRLS0015PA0000SA IC 0 30 Y Y 1 F N
+F0 "IC" 850 600 50 H V L CNN
+F1 "MPRLS0015PA0000SA" 850 500 50 H V L CNN
+F2 "MPRLS0015PA0000SA" 850 400 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/2/MPRLS0015PA0000SA.pdf" 850 300 50 H I L CNN
+F4 "Presure Sensor Long Port 14-bit 15psi" 850 200 50 H I L CNN "Description"
+F5 "5" 850 100 50 H I L CNN "Height"
+F6 "Honeywell" 850 0 50 H I L CNN "Manufacturer_Name"
+F7 "MPRLS0015PA0000SA" 850 -100 50 H I L CNN "Manufacturer_Part_Number"
+F8 "785-MPRLS0015PA0000S" 850 -200 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.com/Search/Refine.aspx?Keyword=785-MPRLS0015PA0000S" 850 -300 50 H I L CNN "Mouser Price/Stock"
+F10 "1503957P" 850 -400 50 H I L CNN "RS Part Number"
+F11 "http://uk.rs-online.com/web/p/products/1503957P" 850 -500 50 H I L CNN "RS Price/Stock"
+F12 "71218603" 850 -600 50 H I L CNN "Allied_Number"
+F13 "https://www.alliedelec.com/honeywell-mprls0015pa0000sa/71218603/" 850 -700 50 H I L CNN "Allied Price/Stock"
+DRAW
+X SS 1 600 -1000 200 U 50 50 0 0 U
+X MOSI/SDA 2 500 -1000 200 U 50 50 0 0 U
+X SCLK/SCL 3 400 -1000 200 U 50 50 0 0 U
+X VO+ 4 0 -200 200 R 50 50 0 0 U
+X NC2 5 0 -100 200 R 50 50 0 0 U
+X VO- 6 0 0 200 R 50 50 0 0 U
+X MISO 7 400 600 200 D 50 50 0 0 U
+X EOC 8 500 600 200 D 50 50 0 0 U
+X RES 9 600 600 200 D 50 50 0 0 U
+X VSS 10 1000 0 200 L 50 50 0 0 U
+X NC1 11 1000 -100 200 L 50 50 0 0 U
+X VDD 12 1000 -200 200 L 50 50 0 0 U
+P 5 0 1 6 200 400 800 400 800 -800 200 -800 200 400 N
+ENDDRAW
+ENDDEF
+#
+#End Library

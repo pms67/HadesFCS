@@ -1,0 +1,26 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model TDD01H0SB1R
+#/737821/71446/2.44/3/4/Switch
+DEF TDD01H0SB1R S 0 30 Y Y 1 F N
+F0 "S" 650 300 50 H V L CNN
+F1 "TDD01H0SB1R" 650 200 50 H V L CNN
+F2 "SOT175P420X230-3N" 650 100 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/1/TDD01H0SB1R.pdf" 650 0 50 H I L CNN
+F4 "DIP Switches / SIP Switches Jumper Switch 2 positions" 650 -100 50 H I L CNN "Description"
+F5 "2.3" 650 -200 50 H I L CNN "Height"
+F6 "C & K COMPONENTS" 650 -300 50 H I L CNN "Manufacturer_Name"
+F7 "TDD01H0SB1R" 650 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "611-TDD01H0SB1R" 650 -500 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.com/Search/Refine.aspx?Keyword=611-TDD01H0SB1R" 650 -600 50 H I L CNN "Mouser Price/Stock"
+F10 "" 650 -700 50 H I L CNN "RS Part Number"
+F11 "" 650 -800 50 H I L CNN "RS Price/Stock"
+DRAW
+X 1 1 0 0 200 R 50 50 0 0 U
+X 2 2 0 -100 200 R 50 50 0 0 U
+X C 3 800 0 200 L 50 50 0 0 U
+P 5 0 1 6 200 100 600 100 600 -200 200 -200 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library

@@ -1,0 +1,166 @@
+PCBNEW-LibModule-V1  2019-12-15 11:55:25
+# encoding utf-8
+Units mm
+$INDEX
+LGA_PACKAGE_20_PINS
+$EndINDEX
+$MODULE LGA_PACKAGE_20_PINS
+Po 0 0 0 15 5df61f2d 00000000 ~~
+Li LGA_PACKAGE_20_PINS
+Cd LGA package 20 pins
+Kw Integrated Circuit
+Sc 0
+At SMD
+AR 
+Op 0 0 0
+T0 0 0 1.27 1.27 0 0.254 N V 21 N "IC**"
+T1 0 0 1.27 1.27 0 0.254 N I 21 N "LGA_PACKAGE_20_PINS"
+DS -1.5 2.25 1.5 2.25 0.001 24
+DS 1.5 2.25 1.5 -2.25 0.001 24
+DS 1.5 -2.25 -1.5 -2.25 0.001 24
+DS -1.5 -2.25 -1.5 2.25 0.001 24
+DS -1.75 2.5 1.75 2.5 0.05 24
+DS 1.75 2.5 1.75 -2.5 0.05 24
+DS 1.75 -2.5 -1.75 -2.5 0.05 24
+DS -1.75 -2.5 -1.75 2.5 0.05 24
+DS 0 0.5 0 -0.5 0.05 24
+DS -0.5 0 0.5 0 0.05 24
+DS -1.5 2.25 1.5 2.25 0.1 24
+DS 1.5 2.25 1.5 -2.25 0.1 24
+DS 1.5 -2.25 -1.5 -2.25 0.1 24
+DS -1.5 -2.25 -1.5 2.25 0.1 24
+DS -1.4 -2.25 -1.5 -2.15 0.1 24
+DS -1.2 -2.25 -1.5 -1.95 0.1 24
+DS -1.5 -2 -1.5 -2.05 0.2 21
+DS -1.5 -2.05 -1.3 -2.25 0.2 21
+DS -1.3 -2.25 -1 -2.25 0.2 21
+DS 1.5 -2 1.5 -2.25 0.2 21
+DS 1.5 -2.25 1 -2.25 0.2 21
+DS -1.5 2 -1.5 2.25 0.2 21
+DS -1.5 2.25 -1 2.25 0.2 21
+DS 1.5 2 1.5 2.25 0.2 21
+DS 1.5 2.25 1 2.25 0.2 21
+DS 1.1795 -2.2245 1.4795 -1.9245 0.1 24
+DC 2.26 -1.529 2.135 -1.529 0.254 21
+$PAD
+Po 1.15 -1.5
+Sh "1" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 1.15 -1
+Sh "2" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 1.15 -0.5
+Sh "3" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 1.15 0
+Sh "4" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 1.15 0.5
+Sh "5" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 1.15 1
+Sh "6" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 1.15 1.5
+Sh "7" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 0.5 1.9
+Sh "8" R 0.3 0.6 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 0 1.9
+Sh "9" R 0.3 0.6 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -0.5 1.9
+Sh "10" R 0.3 0.6 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -1.15 1.5
+Sh "11" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -1.15 1
+Sh "12" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -1.15 0.5
+Sh "13" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -1.15 0
+Sh "14" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -1.15 -0.5
+Sh "15" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -1.15 -1
+Sh "16" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -1.15 -1.5
+Sh "17" R 0.3 0.6 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -0.5 -1.9
+Sh "18" R 0.3 0.6 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 0 -1.9
+Sh "19" R 0.3 0.6 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 0.5 -1.9
+Sh "20" R 0.3 0.6 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$EndMODULE LGA_PACKAGE_20_PINS
+$EndLIBRARY
