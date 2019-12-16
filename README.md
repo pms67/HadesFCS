@@ -1,5 +1,5 @@
 # HADES Flight Control System
-**Complete flight control system designed (FCS) from scratch.** The flight control system is primarily designed for fixed-wing, autonomous drones to enable them to perform tasks autonomously, such as take-off, landing, waypoint navigation, payload delivery, etc.
+**Complete flight control system designed from scratch.** The flight control system is primarily designed for fixed-wing, autonomous drones to enable them to perform tasks autonomously, such as take-off, landing, waypoint navigation, payload delivery, etc.
 
 Every part of this system is designed from first principles! This includes the hardware, firmware (using FreeRTOS), Kalman filtering for state estimation, control algorithms, base station, communication protocol, flight simulator, signal processing, and much, much more.
 
