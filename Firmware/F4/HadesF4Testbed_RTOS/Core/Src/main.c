@@ -33,6 +33,7 @@ osThreadId barometerReadHandle;
 osThreadId imuGyroReadHandle;
 osThreadId imuAccReadHandle;
 osThreadId magReadHandle;
+osThreadId gpsReadHandle;
 osThreadId debugSerialHandle;
 
 void SystemClock_Config(void);
@@ -49,6 +50,7 @@ void barometerReadTask(void const *argument);
 void imuGyroReadTask(void const *argument);
 void imuAccReadTask(void const *argument);
 void magReadTask(void const *argument);
+void gpsReadTask(void const *argument);
 void debugSerialTask(void const *argument);
 
 
@@ -77,11 +79,11 @@ const uint32_t SAMPLE_TIME_BAR_MS = 10;
 
 const uint32_t SAMPLE_TIME_TMP_MS = 320;
 
-const uint32_t SAMPLE_TIME_EKF_MS = 100;
+const uint32_t SAMPLE_TIME_EKF_MS = 10;
 
-const uint32_t SAMPLE_TIME_GPSDBG_MS = 1000;
+const uint32_t SAMPLE_TIME_GPS_MS = 1000;
+
 const uint32_t SAMPLE_TIME_DBG_MS = 100;
-
 const uint32_t SAMPLE_TIME_LED_MS = 1000;
 
 /* UART-to-USB debug output */
@@ -134,6 +136,8 @@ int main(void)
   float kalR[] = {0.00024636441f, 0.00024636441f, 0.00034741232f};
   KalmanRollPitch_Init(&kal, 10.0f, kalQ, kalR);
 
+  GPSNMEAParser_Init(&gpsData);
+
   /* Heartbeat LED task */
   osThreadDef(heartbeatLEDTask, heartbeatTask, osPriorityLow, 0, 128);
   heartbeatHandle = osThreadCreate(osThread(heartbeatLEDTask), NULL);
@@ -150,6 +154,9 @@ int main(void)
 
   osThreadDef(magReadTask, magReadTask, osPriorityRealtime, 0, 128);
   magReadHandle = osThreadCreate(osThread(magReadTask), NULL);
+
+  osThreadDef(gpsReadTask, gpsReadTask, osPriorityNormal, 0, 128);
+  gpsReadHandle = osThreadCreate(osThread(gpsReadTask), NULL);
 
   /* Serial debug output task */
   osThreadDef(debugSerialTask, debugSerialTask, osPriorityLow, 0, 256);
@@ -220,6 +227,21 @@ void magReadTask (void const *argument) {
 		FIRFilter_Update(&firMag[2], mag.xyz[2]);
 
 		osDelay(SAMPLE_TIME_MAG_MS);
+	}
+
+}
+
+void gpsReadTask (void const *argument) {
+
+	for (;;) {
+		char rxBuf[128];
+		HAL_UART_Receive(&huart1, (uint8_t *) rxBuf, 128, 100);
+
+		for (int n = 0; n < 128; n++) {
+			GPSNMEAParser_Feed(&gpsData, rxBuf[n]);
+		}
+
+		osDelay(SAMPLE_TIME_GPS_MS);
 	}
 
 }

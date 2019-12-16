@@ -1,0 +1,1 @@
+- Barometer reset and EOC pins (and pull-up resistor) mixed up (fixable in software however)

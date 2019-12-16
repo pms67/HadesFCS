@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP LD39200PU33R
+D LDO Voltage Regulators 2 A high PSRR ultra low drop linear regulator with reverse current protection
+K
+F https://www.st.com/resource/en/datasheet/ld39200.pdf
+$ENDCMP
+#
+#End Doc Library

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP BMX055
+D Small versatile 9-axis sensor module
+K
+F http://www.mouser.com/ds/2/621/BST-BMX055-DS000-02-586421.pdf
+$ENDCMP
+#
+#End Doc Library

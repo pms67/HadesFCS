@@ -1,0 +1,29 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model USBLC6-2SC6Y
+#/269918/200272/2.44/6/4/Diode
+DEF USBLC6-2SC6Y D 0 30 Y Y 1 F N
+F0 "D" 1150 300 50 H V L CNN
+F1 "USBLC6-2SC6Y" 1150 200 50 H V L CNN
+F2 "SOT95P280X145-6N" 1150 100 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/1/USBLC6-2SC6Y.pdf" 1150 0 50 H I L CNN
+F4 "Low Cap. ESD Protection Auto SOT-23-6 STMicroelectronics USBLC6-2SC6Y, Dual Uni-Directional TVS Diode Array, 6-Pin SOT-23" 1150 -100 50 H I L CNN "Description"
+F5 "1.45" 1150 -200 50 H I L CNN "Height"
+F6 "STMicroelectronics" 1150 -300 50 H I L CNN "Manufacturer_Name"
+F7 "USBLC6-2SC6Y" 1150 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "511-USBLC6-2SC6Y" 1150 -500 50 H I L CNN "Mouser Part Number"
+F9 "https://www.mouser.com/Search/Refine.aspx?Keyword=511-USBLC6-2SC6Y" 1150 -600 50 H I L CNN "Mouser Price/Stock"
+F10 "8805525P" 1150 -700 50 H I L CNN "RS Part Number"
+F11 "http://uk.rs-online.com/web/p/products/8805525P" 1150 -800 50 H I L CNN "RS Price/Stock"
+DRAW
+X I/O1_1 1 0 0 200 R 50 50 0 0 U
+X GND 2 0 -100 200 R 50 50 0 0 U
+X I/O2_1 3 0 -200 200 R 50 50 0 0 U
+X I/O1_2 6 1300 0 200 L 50 50 0 0 U
+X VBUS 5 1300 -100 200 L 50 50 0 0 U
+X I/O2_2 4 1300 -200 200 L 50 50 0 0 U
+P 5 0 1 6 200 100 1100 100 1100 -300 200 -300 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library
