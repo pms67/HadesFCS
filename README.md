@@ -11,6 +11,8 @@ Every part of this system is designed from first principles! This includes the h
   margin-left: auto;
   margin-right: auto;
   width: 50%;"/>
+  
+Intro video: https://www.youtube.com/watch?v=rLDqQ2L_mUQ
        
 ---
 
@@ -47,3 +49,5 @@ Every part of this system is designed from first principles! This includes the h
 ---
 
 **Disclaimer:** This flight control system is work in progress. Use the files, hardware, and software given in this repository **at your own risk** - especially when conducting live flight tests.
+
+BSD 3-Clause License - Copyright (c) 2019, Philip Salmony - All rights reserved.
