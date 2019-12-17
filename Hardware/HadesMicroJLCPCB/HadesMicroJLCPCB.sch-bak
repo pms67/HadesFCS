@@ -230,7 +230,7 @@ L Device:R R10
 U 1 1 5DE8FBCC
 P 6300 5800
 F 0 "R10" V 6093 5800 50  0000 C CNN
-F 1 "1k" V 6184 5800 50  0000 C CNN
+F 1 "470" V 6184 5800 50  0000 C CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 6230 5800 50  0001 C CNN
 F 3 "~" H 6300 5800 50  0001 C CNN
 	1    6300 5800
@@ -2399,9 +2399,6 @@ F 3 "http://www.nxp.com/documents/data_sheet/PCA9685.pdf" H 10700 2750 50  0001 
 	1    11100 2050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	11000 3150 11100 3150
-Connection ~ 11100 3150
 Wire Wire Line
 	11100 3150 12750 3150
 Text GLabel 7650 8550 0    50   Input ~ 0

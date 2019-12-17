@@ -1,4 +1,4 @@
-16759809096483053
+16764538733565042
 24CW1280T-I_OT
 SOT95P280X145-5N
 24CW1280T-I/OT-1
@@ -6,13 +6,13 @@ Integrated Circuit
 0
 5
 5
-74LVC1G04GX4Z
-74AUP1G04GX4Z
-SOT1269-2 (X2SON4)
+74AHC1GU04GW_125
+SOT65P212X110-5N
+SOT353-1
 Integrated Circuit
 0
-4
-4
+5
+5
 BMI088
 PQFN50P450X300X100-16N
 
@@ -27,6 +27,13 @@ PQFN50P200X200X80-10N
 0
 10
 10
+BMX055
+LGA_PACKAGE_20_PINS
+LGA package 20 pins
+Integrated Circuit
+0
+20
+20
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -2239,6 +2246,13 @@ SMD 8540
 0
 4
 4
+CH340E
+MSOP10
+<b>10-Lead Mini Small Outline Package [MSOP]</b> (RM-10)<p>Source: http://www.analog.com/UploadedFiles/Data_Sheets/35641221898805SSM2167_b.pdf<br>COMPLIANT TO JEDEC STANDARDS MO-187BA
+
+0
+10
+10
 Calibration_Scale
 Gauge_10mm_Type1_CopperTop
 Gauge, Massstab, 10mm, CopperTop, Type 1,
@@ -51134,6 +51148,13 @@ Yellow 5381 Series LED
 0
 2
 2
+MPRLS0015PA0000SA
+MPRLS0015PA0000SA
+MPRLS0015PA0000SA
+Integrated Circuit
+0
+12
+12
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet

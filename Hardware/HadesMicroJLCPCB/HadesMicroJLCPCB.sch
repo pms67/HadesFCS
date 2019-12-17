@@ -6,8 +6,8 @@ encoding utf-8
 Sheet 1 1
 Title "Hades Micro"
 Date "2019-12-05"
-Rev ""
-Comp ""
+Rev "v0.1"
+Comp "Philip Salmony"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -2399,9 +2399,6 @@ F 3 "http://www.nxp.com/documents/data_sheet/PCA9685.pdf" H 10700 2750 50  0001 
 	1    11100 2050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	11000 3150 11100 3150
-Connection ~ 11100 3150
 Wire Wire Line
 	11100 3150 12750 3150
 Text GLabel 7650 8550 0    50   Input ~ 0
