@@ -64,13 +64,10 @@ void IISMagnetometer_Read(IISMagnetometer *mag) {
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_OUTZ_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);
 	magRaw[2] = ((rxBuf[1] << 8) | rxBuf[0]);
 
-	/* Convert to unit vector and re-map axes */
-	float inorm = 1.0f / ((float) (magRaw[0] * magRaw[0] + magRaw[1] * magRaw[1] + magRaw[2] * magRaw[2]));
-		  inorm = sqrt(inorm);
-
-    mag->xyz[0] =  magRaw[0] * inorm;
-    mag->xyz[1] = -magRaw[1] * inorm;
-    mag->xyz[2] = -magRaw[2] * inorm;
+	/* Sensitivity is 1.5 (+-7%) milli Gauss per LSB */
+    mag->xyz[0] =  magRaw[0] * 1.5f;
+    mag->xyz[1] = -magRaw[1] * 1.5f;
+    mag->xyz[2] = -magRaw[2] * 1.5f;
 
 	/* Read temperature */
 	HAL_I2C_Mem_Read(mag->I2Chandle, IIS_I2C_ADDR, IIS_TEMP_LOW, I2C_MEMADD_SIZE_8BIT, rxBuf, 2, IIS_I2C_TIMEOUT);

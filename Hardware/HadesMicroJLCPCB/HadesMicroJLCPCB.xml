@@ -2,13 +2,13 @@
 <export version="D">
   <design>
     <source>C:\Users\phili\OneDrive\UAV\Hardware\HadesMicroJLCPCB\HadesMicroJLCPCB.sch</source>
-    <date>16/12/2019 14:51:35</date>
+    <date>17/12/2019 15:55:30</date>
     <tool>Eeschema (5.1.5)-3</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>Hades Micro</title>
-        <company/>
-        <rev/>
+        <company>Philip Salmony</company>
+        <rev>v0.1</rev>
         <date>2019-12-05</date>
         <source>HadesMicroJLCPCB.sch</source>
         <comment number="1" value=""/>
@@ -1474,36 +1474,40 @@
     </library>
   </libraries>
   <nets>
-    <net code="1" name="VCC">
-      <node ref="C1" pin="1"/>
-      <node ref="D6" pin="1"/>
-      <node ref="U1" pin="1"/>
-      <node ref="U1" pin="3"/>
-      <node ref="D1" pin="1"/>
-      <node ref="VIN1" pin="1"/>
+    <net code="1" name="Net-(SWD1-Pad4)">
+      <node ref="SWD1" pin="4"/>
     </net>
-    <net code="2" name="Net-(D1-Pad2)">
+    <net code="2" name="VCC">
+      <node ref="D6" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="U1" pin="1"/>
+      <node ref="VIN1" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="3" name="Net-(D1-Pad2)">
       <node ref="JP1" pin="2"/>
       <node ref="D1" pin="2"/>
     </net>
-    <net code="3" name="GND">
-      <node ref="FLASH1" pin="9"/>
+    <net code="4" name="GND">
       <node ref="R15" pin="1"/>
+      <node ref="MCU1" pin="12"/>
       <node ref="MCU1" pin="18"/>
       <node ref="IC1" pin="10"/>
       <node ref="R1" pin="1"/>
       <node ref="VIN1" pin="2"/>
-      <node ref="C3" pin="2"/>
-      <node ref="C22" pin="2"/>
       <node ref="C23" pin="2"/>
       <node ref="U6" pin="3"/>
+      <node ref="FLASH1" pin="9"/>
       <node ref="MCU1" pin="63"/>
-      <node ref="MCU1" pin="12"/>
       <node ref="C20" pin="2"/>
+      <node ref="C3" pin="2"/>
       <node ref="FLASH1" pin="4"/>
+      <node ref="C22" pin="2"/>
       <node ref="USB1" pin="5"/>
       <node ref="USB1" pin="6"/>
       <node ref="U4" pin="2"/>
+      <node ref="U2" pin="2"/>
       <node ref="U2" pin="5"/>
       <node ref="U2" pin="4"/>
       <node ref="U2" pin="3"/>
@@ -1511,7 +1515,6 @@
       <node ref="U2" pin="24"/>
       <node ref="U2" pin="23"/>
       <node ref="C5" pin="2"/>
-      <node ref="U2" pin="2"/>
       <node ref="C6" pin="2"/>
       <node ref="C7" pin="2"/>
       <node ref="C8" pin="2"/>
@@ -1520,62 +1523,59 @@
       <node ref="C10" pin="2"/>
       <node ref="U2" pin="1"/>
       <node ref="C11" pin="2"/>
-      <node ref="C12" pin="2"/>
-      <node ref="SWD1" pin="5"/>
       <node ref="U3" pin="7"/>
       <node ref="U3" pin="4"/>
       <node ref="U3" pin="3"/>
       <node ref="U3" pin="2"/>
       <node ref="U3" pin="1"/>
-      <node ref="U1" pin="2"/>
       <node ref="C14" pin="2"/>
       <node ref="C15" pin="2"/>
+      <node ref="U1" pin="2"/>
       <node ref="C1" pin="2"/>
       <node ref="C2" pin="2"/>
       <node ref="R5" pin="2"/>
+      <node ref="C12" pin="2"/>
       <node ref="HSE1" pin="2"/>
       <node ref="HSE1" pin="4"/>
       <node ref="C21" pin="2"/>
-      <node ref="C26" pin="2"/>
-      <node ref="BOOT1" pin="2"/>
-      <node ref="BOOT2" pin="2"/>
+      <node ref="SERVO1" pin="2"/>
+      <node ref="C18" pin="2"/>
+      <node ref="C19" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="C27" pin="2"/>
+      <node ref="PWM_PWR1" pin="6"/>
+      <node ref="PWM_PWR1" pin="4"/>
       <node ref="C25" pin="1"/>
       <node ref="PWM_PWR1" pin="8"/>
-      <node ref="PWM_PWR1" pin="6"/>
       <node ref="C16" pin="2"/>
+      <node ref="U5" pin="3"/>
+      <node ref="C28" pin="2"/>
+      <node ref="IMU1" pin="7"/>
+      <node ref="IMU1" pin="6"/>
+      <node ref="IMU1" pin="4"/>
+      <node ref="SWD1" pin="3"/>
+      <node ref="SWD1" pin="5"/>
+      <node ref="SWD1" pin="2"/>
+      <node ref="RESET1" pin="4"/>
+      <node ref="RESET1" pin="3"/>
+      <node ref="BOOT2" pin="2"/>
+      <node ref="BOOT1" pin="2"/>
+      <node ref="C26" pin="2"/>
+      <node ref="PWM_PWR1" pin="14"/>
+      <node ref="PWM_PWR1" pin="12"/>
+      <node ref="PWM_PWR1" pin="10"/>
+      <node ref="C30" pin="2"/>
+      <node ref="C29" pin="2"/>
+      <node ref="PWM_PWR1" pin="16"/>
+      <node ref="TELEM1" pin="2"/>
+      <node ref="GPS1" pin="2"/>
+      <node ref="I2C1" pin="2"/>
+      <node ref="SBUS1" pin="2"/>
+      <node ref="C17" pin="2"/>
+      <node ref="PWM_PWR1" pin="2"/>
       <node ref="R2" pin="2"/>
       <node ref="R3" pin="2"/>
       <node ref="R4" pin="2"/>
-      <node ref="U5" pin="3"/>
-      <node ref="C18" pin="2"/>
-      <node ref="IMU1" pin="7"/>
-      <node ref="IMU1" pin="6"/>
-      <node ref="C27" pin="2"/>
-      <node ref="IMU1" pin="4"/>
-      <node ref="SERVO1" pin="2"/>
-      <node ref="C19" pin="2"/>
-      <node ref="C13" pin="2"/>
-      <node ref="RESET1" pin="3"/>
-      <node ref="RESET1" pin="4"/>
-      <node ref="C28" pin="2"/>
-      <node ref="C30" pin="2"/>
-      <node ref="C17" pin="2"/>
-      <node ref="SWD1" pin="2"/>
-      <node ref="SWD1" pin="3"/>
-      <node ref="PWM_PWR1" pin="4"/>
-      <node ref="PWM_PWR1" pin="16"/>
-      <node ref="PWM_PWR1" pin="14"/>
-      <node ref="I2C1" pin="2"/>
-      <node ref="TELEM1" pin="2"/>
-      <node ref="GPS1" pin="2"/>
-      <node ref="PWM_PWR1" pin="2"/>
-      <node ref="SBUS1" pin="2"/>
-      <node ref="PWM_PWR1" pin="12"/>
-      <node ref="C29" pin="2"/>
-      <node ref="PWM_PWR1" pin="10"/>
-    </net>
-    <net code="4" name="Net-(SWD1-Pad4)">
-      <node ref="SWD1" pin="4"/>
     </net>
     <net code="5" name="Net-(SWD1-Pad7)">
       <node ref="SWD1" pin="7"/>
@@ -1583,64 +1583,64 @@
     <net code="6" name="Net-(SWD1-Pad8)">
       <node ref="SWD1" pin="8"/>
     </net>
-    <net code="7" name="+3V3">
-      <node ref="C4" pin="1"/>
-      <node ref="C13" pin="1"/>
-      <node ref="C10" pin="1"/>
-      <node ref="C8" pin="1"/>
+    <net code="7" name="Net-(BOOT1-Pad3)">
+      <node ref="BOOT1" pin="3"/>
+      <node ref="R16" pin="1"/>
+    </net>
+    <net code="8" name="+3V3">
+      <node ref="C7" pin="1"/>
       <node ref="C9" pin="1"/>
-      <node ref="C5" pin="1"/>
+      <node ref="C10" pin="1"/>
       <node ref="C11" pin="1"/>
       <node ref="C12" pin="1"/>
-      <node ref="C6" pin="1"/>
-      <node ref="C7" pin="1"/>
-      <node ref="FLASH1" pin="8"/>
-      <node ref="C3" pin="1"/>
-      <node ref="FB2" pin="2"/>
+      <node ref="I2C1" pin="1"/>
       <node ref="MCU1" pin="64"/>
       <node ref="MCU1" pin="48"/>
       <node ref="MCU1" pin="32"/>
+      <node ref="C6" pin="1"/>
       <node ref="MCU1" pin="19"/>
-      <node ref="MCU1" pin="1"/>
-      <node ref="I2C1" pin="1"/>
+      <node ref="C8" pin="1"/>
+      <node ref="C4" pin="1"/>
       <node ref="PWR1" pin="2"/>
-      <node ref="C18" pin="1"/>
-      <node ref="C28" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="MCU1" pin="1"/>
       <node ref="C2" pin="1"/>
-      <node ref="C19" pin="1"/>
-      <node ref="R6" pin="1"/>
-      <node ref="R7" pin="1"/>
-      <node ref="R8" pin="1"/>
-      <node ref="R9" pin="1"/>
-      <node ref="R14" pin="2"/>
-      <node ref="C25" pin="2"/>
-      <node ref="C16" pin="1"/>
       <node ref="R12" pin="1"/>
+      <node ref="R14" pin="2"/>
+      <node ref="C18" pin="1"/>
+      <node ref="C19" pin="1"/>
+      <node ref="FB2" pin="2"/>
+      <node ref="R6" pin="1"/>
+      <node ref="C28" pin="1"/>
+      <node ref="C25" pin="2"/>
+      <node ref="FLASH1" pin="8"/>
+      <node ref="C16" pin="1"/>
+      <node ref="C13" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="R9" pin="1"/>
+      <node ref="R8" pin="1"/>
+      <node ref="R7" pin="1"/>
       <node ref="IMU1" pin="3"/>
       <node ref="IC1" pin="12"/>
       <node ref="U6" pin="7"/>
-      <node ref="U5" pin="5"/>
       <node ref="IMU1" pin="13"/>
       <node ref="TELEM1" pin="1"/>
       <node ref="GPS1" pin="1"/>
       <node ref="SBUS1" pin="1"/>
       <node ref="U1" pin="5"/>
       <node ref="C29" pin="1"/>
-      <node ref="U2" pin="28"/>
-      <node ref="U3" pin="8"/>
-      <node ref="SWD1" pin="1"/>
-      <node ref="BOOT2" pin="1"/>
       <node ref="BOOT1" pin="1"/>
+      <node ref="BOOT2" pin="1"/>
+      <node ref="U2" pin="28"/>
+      <node ref="SWD1" pin="1"/>
+      <node ref="U3" pin="8"/>
       <node ref="C27" pin="1"/>
+      <node ref="U5" pin="5"/>
     </net>
-    <net code="8" name="FLASH_!WP">
-      <node ref="FLASH1" pin="3"/>
+    <net code="9" name="FLASH_!WP">
       <node ref="MCU1" pin="24"/>
+      <node ref="FLASH1" pin="3"/>
       <node ref="R12" pin="2"/>
-    </net>
-    <net code="9" name="Net-(BOOT1-Pad3)">
-      <node ref="BOOT1" pin="3"/>
-      <node ref="R16" pin="1"/>
     </net>
     <net code="10" name="Net-(BOOT2-Pad3)">
       <node ref="BOOT2" pin="3"/>
@@ -1655,34 +1655,34 @@
     <net code="13" name="Net-(MCU1-Pad45)">
       <node ref="MCU1" pin="45"/>
     </net>
-    <net code="14" name="Net-(JP1-Pad1)">
-      <node ref="JP1" pin="1"/>
+    <net code="14" name="Net-(IMU1-Pad10)">
+      <node ref="IMU1" pin="10"/>
+    </net>
+    <net code="15" name="Net-(JP1-Pad1)">
       <node ref="PWM_PWR1" pin="3"/>
       <node ref="PWM_PWR1" pin="15"/>
+      <node ref="JP1" pin="1"/>
       <node ref="PWM_PWR1" pin="13"/>
       <node ref="PWM_PWR1" pin="11"/>
       <node ref="PWM_PWR1" pin="1"/>
-      <node ref="PWM_PWR1" pin="5"/>
       <node ref="PWM_PWR1" pin="9"/>
       <node ref="PWM_PWR1" pin="7"/>
+      <node ref="PWM_PWR1" pin="5"/>
       <node ref="SERVO1" pin="1"/>
     </net>
-    <net code="15" name="Net-(IMU1-Pad1)">
+    <net code="16" name="Net-(IMU1-Pad1)">
       <node ref="IMU1" pin="1"/>
     </net>
-    <net code="16" name="INT_MAG">
-      <node ref="IMU1" pin="2"/>
+    <net code="17" name="INT_MAG">
       <node ref="MCU1" pin="4"/>
+      <node ref="IMU1" pin="2"/>
     </net>
-    <net code="17" name="SPI3_CSGYR">
+    <net code="18" name="SPI3_CSGYR">
       <node ref="IMU1" pin="5"/>
       <node ref="MCU1" pin="56"/>
     </net>
-    <net code="18" name="Net-(IMU1-Pad8)">
+    <net code="19" name="Net-(IMU1-Pad8)">
       <node ref="IMU1" pin="8"/>
-    </net>
-    <net code="19" name="Net-(IMU1-Pad10)">
-      <node ref="IMU1" pin="10"/>
     </net>
     <net code="20" name="Net-(IMU1-Pad15)">
       <node ref="IMU1" pin="15"/>
@@ -1703,8 +1703,8 @@
       <node ref="U5" pin="4"/>
     </net>
     <net code="25" name="Net-(F1-Pad1)">
-      <node ref="F1" pin="1"/>
       <node ref="FB1" pin="2"/>
+      <node ref="F1" pin="1"/>
     </net>
     <net code="26" name="Net-(F1-Pad2)">
       <node ref="USB1" pin="1"/>
@@ -1714,18 +1714,18 @@
       <node ref="USB1" pin="4"/>
     </net>
     <net code="28" name="Net-(C17-Pad1)">
-      <node ref="FB1" pin="1"/>
+      <node ref="U4" pin="5"/>
       <node ref="D6" pin="2"/>
       <node ref="C17" pin="1"/>
-      <node ref="U4" pin="5"/>
+      <node ref="FB1" pin="1"/>
     </net>
     <net code="29" name="Net-(C26-Pad1)">
       <node ref="C26" pin="1"/>
       <node ref="U6" pin="10"/>
     </net>
     <net code="30" name="FLASH_!H">
-      <node ref="FLASH1" pin="7"/>
       <node ref="R14" pin="1"/>
+      <node ref="FLASH1" pin="7"/>
       <node ref="MCU1" pin="25"/>
     </net>
     <net code="31" name="USB_CONV_D+">
@@ -1733,8 +1733,8 @@
       <node ref="U6" pin="1"/>
     </net>
     <net code="32" name="USB_CONV_D-">
-      <node ref="U6" pin="2"/>
       <node ref="U4" pin="3"/>
+      <node ref="U6" pin="2"/>
     </net>
     <net code="33" name="Net-(U6-Pad4)">
       <node ref="U6" pin="4"/>
@@ -1743,12 +1743,12 @@
       <node ref="U6" pin="5"/>
     </net>
     <net code="35" name="Net-(D7-Pad2)">
-      <node ref="D7" pin="2"/>
       <node ref="U6" pin="6"/>
+      <node ref="D7" pin="2"/>
     </net>
     <net code="36" name="Net-(R13-Pad2)">
-      <node ref="R13" pin="2"/>
       <node ref="U6" pin="8"/>
+      <node ref="R13" pin="2"/>
     </net>
     <net code="37" name="Net-(R11-Pad2)">
       <node ref="R11" pin="2"/>
@@ -1777,127 +1777,127 @@
       <node ref="MCU1" pin="36"/>
     </net>
     <net code="44" name="Net-(C24-Pad2)">
-      <node ref="C24" pin="2"/>
       <node ref="IC1" pin="4"/>
+      <node ref="C24" pin="2"/>
     </net>
-    <net code="45" name="SPI2_SCK">
-      <node ref="MCU1" pin="34"/>
+    <net code="45" name="Net-(PWM_SIGNAL1-Pad4)">
+      <node ref="U2" pin="9"/>
+      <node ref="PWM_SIGNAL1" pin="4"/>
+    </net>
+    <net code="46" name="SPI2_SCK">
       <node ref="IC1" pin="3"/>
+      <node ref="MCU1" pin="34"/>
     </net>
-    <net code="46" name="Net-(MCU1-Pad54)">
+    <net code="47" name="Net-(MCU1-Pad54)">
       <node ref="MCU1" pin="54"/>
     </net>
-    <net code="47" name="Net-(U1-Pad4)">
+    <net code="48" name="Net-(U1-Pad4)">
       <node ref="U1" pin="4"/>
     </net>
-    <net code="48" name="Net-(MCU1-Pad50)">
+    <net code="49" name="Net-(MCU1-Pad50)">
       <node ref="MCU1" pin="50"/>
     </net>
-    <net code="49" name="Net-(MCU1-Pad33)">
+    <net code="50" name="Net-(MCU1-Pad33)">
       <node ref="MCU1" pin="33"/>
     </net>
-    <net code="50" name="Net-(MCU1-Pad26)">
+    <net code="51" name="Net-(MCU1-Pad26)">
       <node ref="MCU1" pin="26"/>
     </net>
-    <net code="51" name="Net-(MCU1-Pad27)">
+    <net code="52" name="Net-(MCU1-Pad27)">
       <node ref="MCU1" pin="27"/>
     </net>
-    <net code="52" name="Net-(D5-Pad1)">
+    <net code="53" name="Net-(D5-Pad1)">
       <node ref="D5" pin="1"/>
       <node ref="R5" pin="1"/>
     </net>
-    <net code="53" name="Net-(U2-Pad21)">
-      <node ref="U2" pin="21"/>
+    <net code="54" name="Net-(U2-Pad20)">
+      <node ref="U2" pin="20"/>
     </net>
-    <net code="54" name="Net-(PWM_SIGNAL1-Pad5)">
-      <node ref="PWM_SIGNAL1" pin="5"/>
+    <net code="55" name="Net-(PWM_SIGNAL1-Pad5)">
       <node ref="U2" pin="10"/>
+      <node ref="PWM_SIGNAL1" pin="5"/>
     </net>
-    <net code="55" name="Net-(PWM_SIGNAL1-Pad6)">
-      <node ref="U2" pin="11"/>
+    <net code="56" name="Net-(PWM_SIGNAL1-Pad6)">
       <node ref="PWM_SIGNAL1" pin="6"/>
+      <node ref="U2" pin="11"/>
     </net>
-    <net code="56" name="Net-(PWM_SIGNAL1-Pad7)">
+    <net code="57" name="Net-(PWM_SIGNAL1-Pad7)">
       <node ref="PWM_SIGNAL1" pin="7"/>
       <node ref="U2" pin="12"/>
     </net>
-    <net code="57" name="Net-(PWM_SIGNAL1-Pad8)">
-      <node ref="U2" pin="13"/>
+    <net code="58" name="Net-(PWM_SIGNAL1-Pad8)">
       <node ref="PWM_SIGNAL1" pin="8"/>
+      <node ref="U2" pin="13"/>
     </net>
-    <net code="58" name="Net-(U2-Pad15)">
+    <net code="59" name="Net-(U2-Pad15)">
       <node ref="U2" pin="15"/>
     </net>
-    <net code="59" name="Net-(U2-Pad16)">
+    <net code="60" name="Net-(U2-Pad16)">
       <node ref="U2" pin="16"/>
     </net>
-    <net code="60" name="Net-(U2-Pad17)">
+    <net code="61" name="Net-(U2-Pad17)">
       <node ref="U2" pin="17"/>
     </net>
-    <net code="61" name="Net-(U2-Pad18)">
+    <net code="62" name="Net-(U2-Pad18)">
       <node ref="U2" pin="18"/>
     </net>
-    <net code="62" name="Net-(U2-Pad19)">
+    <net code="63" name="Net-(U2-Pad19)">
       <node ref="U2" pin="19"/>
     </net>
-    <net code="63" name="Net-(U2-Pad20)">
-      <node ref="U2" pin="20"/>
+    <net code="64" name="Net-(U2-Pad21)">
+      <node ref="U2" pin="21"/>
     </net>
-    <net code="64" name="Net-(U2-Pad22)">
+    <net code="65" name="Net-(U2-Pad22)">
       <node ref="U2" pin="22"/>
     </net>
-    <net code="65" name="Net-(U2-Pad25)">
+    <net code="66" name="Net-(U2-Pad25)">
       <node ref="U2" pin="25"/>
     </net>
-    <net code="66" name="I2C1_SCL">
-      <node ref="MCU1" pin="61"/>
+    <net code="67" name="I2C1_SCL">
       <node ref="U3" pin="6"/>
-      <node ref="R6" pin="2"/>
+      <node ref="MCU1" pin="61"/>
       <node ref="U2" pin="26"/>
+      <node ref="R6" pin="2"/>
     </net>
-    <net code="67" name="I2C1_SDA">
-      <node ref="R7" pin="2"/>
-      <node ref="U2" pin="27"/>
-      <node ref="U3" pin="5"/>
+    <net code="68" name="I2C1_SDA">
       <node ref="MCU1" pin="62"/>
+      <node ref="R7" pin="2"/>
+      <node ref="U3" pin="5"/>
+      <node ref="U2" pin="27"/>
     </net>
-    <net code="68" name="Net-(PWM_SIGNAL1-Pad1)">
-      <node ref="U2" pin="6"/>
+    <net code="69" name="Net-(PWM_SIGNAL1-Pad1)">
       <node ref="PWM_SIGNAL1" pin="1"/>
+      <node ref="U2" pin="6"/>
     </net>
-    <net code="69" name="Net-(PWM_SIGNAL1-Pad2)">
-      <node ref="U2" pin="7"/>
+    <net code="70" name="Net-(PWM_SIGNAL1-Pad2)">
       <node ref="PWM_SIGNAL1" pin="2"/>
+      <node ref="U2" pin="7"/>
     </net>
-    <net code="70" name="Net-(PWM_SIGNAL1-Pad3)">
-      <node ref="PWM_SIGNAL1" pin="3"/>
+    <net code="71" name="Net-(PWM_SIGNAL1-Pad3)">
       <node ref="U2" pin="8"/>
-    </net>
-    <net code="71" name="Net-(PWM_SIGNAL1-Pad4)">
-      <node ref="PWM_SIGNAL1" pin="4"/>
-      <node ref="U2" pin="9"/>
+      <node ref="PWM_SIGNAL1" pin="3"/>
     </net>
     <net code="72" name="HSE_IN">
-      <node ref="C20" pin="1"/>
-      <node ref="HSE1" pin="1"/>
       <node ref="MCU1" pin="5"/>
+      <node ref="HSE1" pin="1"/>
+      <node ref="C20" pin="1"/>
     </net>
     <net code="73" name="HSE_OUT">
       <node ref="R10" pin="1"/>
       <node ref="MCU1" pin="6"/>
     </net>
     <net code="74" name="Net-(C21-Pad1)">
-      <node ref="C21" pin="1"/>
-      <node ref="HSE1" pin="3"/>
       <node ref="R10" pin="2"/>
+      <node ref="HSE1" pin="3"/>
+      <node ref="C21" pin="1"/>
     </net>
     <net code="75" name="Net-(C14-Pad1)">
       <node ref="MCU1" pin="31"/>
       <node ref="C14" pin="1"/>
     </net>
     <net code="76" name="Net-(C15-Pad1)">
-      <node ref="MCU1" pin="47"/>
       <node ref="C15" pin="1"/>
+      <node ref="MCU1" pin="47"/>
     </net>
     <net code="77" name="SPI2_CS">
       <node ref="IC1" pin="1"/>
@@ -1912,21 +1912,21 @@
       <node ref="D3" pin="2"/>
     </net>
     <net code="80" name="SPI3_SCK">
-      <node ref="MCU1" pin="51"/>
       <node ref="IMU1" pin="9"/>
+      <node ref="MCU1" pin="51"/>
     </net>
     <net code="81" name="SPI3_MISO">
-      <node ref="IMU1" pin="12"/>
-      <node ref="IMU1" pin="17"/>
       <node ref="MCU1" pin="52"/>
+      <node ref="IMU1" pin="17"/>
+      <node ref="IMU1" pin="12"/>
     </net>
     <net code="82" name="SPI3_MOSI">
-      <node ref="IMU1" pin="11"/>
       <node ref="MCU1" pin="53"/>
+      <node ref="IMU1" pin="11"/>
     </net>
     <net code="83" name="INT_ACC">
-      <node ref="IMU1" pin="19"/>
       <node ref="MCU1" pin="2"/>
+      <node ref="IMU1" pin="19"/>
     </net>
     <net code="84" name="INT_GYR">
       <node ref="IMU1" pin="14"/>
@@ -1937,45 +1937,45 @@
       <node ref="MCU1" pin="10"/>
     </net>
     <net code="86" name="LED_D">
-      <node ref="D5" pin="2"/>
       <node ref="MCU1" pin="11"/>
+      <node ref="D5" pin="2"/>
     </net>
     <net code="87" name="INT_BAR">
-      <node ref="MCU1" pin="38"/>
       <node ref="IC1" pin="8"/>
+      <node ref="MCU1" pin="38"/>
     </net>
     <net code="88" name="BAR_NRST">
       <node ref="MCU1" pin="39"/>
       <node ref="IC1" pin="9"/>
     </net>
     <net code="89" name="I2C3_SDA">
-      <node ref="MCU1" pin="40"/>
-      <node ref="I2C1" pin="4"/>
       <node ref="R9" pin="2"/>
+      <node ref="I2C1" pin="4"/>
+      <node ref="MCU1" pin="40"/>
     </net>
     <net code="90" name="SPI1_MOSI">
       <node ref="MCU1" pin="23"/>
       <node ref="FLASH1" pin="5"/>
     </net>
     <net code="91" name="NRST">
-      <node ref="RESET1" pin="1"/>
-      <node ref="RESET1" pin="2"/>
       <node ref="C30" pin="1"/>
       <node ref="SWD1" pin="6"/>
       <node ref="MCU1" pin="7"/>
+      <node ref="RESET1" pin="1"/>
+      <node ref="RESET1" pin="2"/>
     </net>
     <net code="92" name="TIM2_CH1">
-      <node ref="RC1" pin="1"/>
       <node ref="MCU1" pin="14"/>
+      <node ref="RC1" pin="1"/>
     </net>
     <net code="93" name="TIM2_CH2">
-      <node ref="RC1" pin="2"/>
       <node ref="MCU1" pin="15"/>
+      <node ref="RC1" pin="2"/>
     </net>
     <net code="94" name="UART1_RX">
-      <node ref="R13" pin="1"/>
-      <node ref="TELEM1" pin="4"/>
       <node ref="MCU1" pin="43"/>
+      <node ref="TELEM1" pin="4"/>
+      <node ref="R13" pin="1"/>
     </net>
     <net code="95" name="SWDIO">
       <node ref="MCU1" pin="46"/>
@@ -1986,64 +1986,64 @@
       <node ref="MCU1" pin="49"/>
     </net>
     <net code="97" name="UART2_TX">
-      <node ref="GPS1" pin="3"/>
       <node ref="MCU1" pin="16"/>
+      <node ref="GPS1" pin="3"/>
     </net>
     <net code="98" name="UART2_RX">
       <node ref="GPS1" pin="4"/>
       <node ref="MCU1" pin="17"/>
     </net>
     <net code="99" name="SPI1_CS">
-      <node ref="MCU1" pin="20"/>
       <node ref="FLASH1" pin="1"/>
+      <node ref="MCU1" pin="20"/>
     </net>
     <net code="100" name="SPI1_SCK">
-      <node ref="FLASH1" pin="6"/>
       <node ref="MCU1" pin="21"/>
+      <node ref="FLASH1" pin="6"/>
     </net>
     <net code="101" name="SPI1_MISO">
-      <node ref="MCU1" pin="22"/>
       <node ref="FLASH1" pin="2"/>
+      <node ref="MCU1" pin="22"/>
     </net>
     <net code="102" name="I2C3_SCL">
-      <node ref="R8" pin="2"/>
       <node ref="MCU1" pin="41"/>
       <node ref="I2C1" pin="3"/>
+      <node ref="R8" pin="2"/>
     </net>
     <net code="103" name="UART1_TX">
+      <node ref="R11" pin="1"/>
       <node ref="MCU1" pin="42"/>
       <node ref="TELEM1" pin="3"/>
-      <node ref="R11" pin="1"/>
     </net>
     <net code="104" name="UART3_TX">
       <node ref="SBUS1" pin="3"/>
       <node ref="MCU1" pin="29"/>
     </net>
     <net code="105" name="BOOT1">
-      <node ref="R17" pin="2"/>
       <node ref="MCU1" pin="28"/>
+      <node ref="R17" pin="2"/>
     </net>
     <net code="106" name="SPI3_CSMAG">
-      <node ref="MCU1" pin="57"/>
       <node ref="IMU1" pin="20"/>
+      <node ref="MCU1" pin="57"/>
     </net>
     <net code="107" name="VDDA">
-      <node ref="MCU1" pin="13"/>
-      <node ref="FB2" pin="1"/>
       <node ref="C22" pin="1"/>
+      <node ref="MCU1" pin="13"/>
       <node ref="C23" pin="1"/>
+      <node ref="FB2" pin="1"/>
     </net>
     <net code="108" name="USB_CONN_D-">
       <node ref="U4" pin="4"/>
       <node ref="USB1" pin="2"/>
     </net>
     <net code="109" name="USB_CONN_D+">
-      <node ref="USB1" pin="3"/>
       <node ref="U4" pin="6"/>
+      <node ref="USB1" pin="3"/>
     </net>
     <net code="110" name="Net-(PWR1-Pad1)">
-      <node ref="PWR1" pin="1"/>
       <node ref="R1" pin="2"/>
+      <node ref="PWR1" pin="1"/>
     </net>
     <net code="111" name="TIM4_CH1">
       <node ref="RC1" pin="3"/>
@@ -2053,17 +2053,17 @@
       <node ref="RC1" pin="4"/>
       <node ref="MCU1" pin="59"/>
     </net>
-    <net code="113" name="Net-(D4-Pad1)">
-      <node ref="D4" pin="1"/>
-      <node ref="R4" pin="1"/>
-    </net>
-    <net code="114" name="Net-(D2-Pad1)">
-      <node ref="R2" pin="1"/>
+    <net code="113" name="Net-(D2-Pad1)">
       <node ref="D2" pin="1"/>
+      <node ref="R2" pin="1"/>
     </net>
-    <net code="115" name="Net-(D3-Pad1)">
+    <net code="114" name="Net-(D3-Pad1)">
       <node ref="R3" pin="1"/>
       <node ref="D3" pin="1"/>
+    </net>
+    <net code="115" name="Net-(D4-Pad1)">
+      <node ref="R4" pin="1"/>
+      <node ref="D4" pin="1"/>
     </net>
     <net code="116" name="BOOT0">
       <node ref="MCU1" pin="60"/>

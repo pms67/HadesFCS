@@ -2079,7 +2079,7 @@ U 1 1 5DF2B719
 P 14650 1250
 F 0 "SERVO1" H 14730 1242 50  0000 L CNN
 F 1 "TrmnlBlck" H 14730 1151 50  0000 L CNN
-F 2 "Connector_Molex:Molex_PicoBlade_53048-0210_1x02_P1.25mm_Horizontal" H 14650 1250 50  0001 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-3.5-H_1x02_P3.50mm_Horizontal" H 14650 1250 50  0001 C CNN
 F 3 "~" H 14650 1250 50  0001 C CNN
 	1    14650 1250
 	1    0    0    -1  

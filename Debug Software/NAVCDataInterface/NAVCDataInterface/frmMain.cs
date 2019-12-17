@@ -27,6 +27,16 @@ namespace NAVCDataInterface
         /* NAVC data container */
         float[] NavDataContainer;
 
+        /* Chart series arrays */
+        const int seriesLength = 128;
+        float[][] seriesAcc;
+        float[][] seriesGyr;
+        float[][] seriesMag;
+        float[] seriesAltitude;
+        float[] seriesAirspeed;
+        float[] seriesTemperature;
+        float[][] seriesEKF;
+
         public frmMain()
         {
             InitializeComponent();
@@ -39,6 +49,29 @@ namespace NAVCDataInterface
             numValidPackets = 0;
 
             NavDataContainer = new float[20];
+
+            seriesAcc = new float[3][];
+            seriesGyr = new float[3][];
+            seriesMag = new float[3][];
+            seriesAltitude = new float[seriesLength];
+            seriesAirspeed = new float[seriesLength];
+            seriesTemperature = new float[seriesLength];
+            seriesEKF = new float[3][];
+            for (int i = 0; i < 3; i++)
+            {
+                seriesAcc[i] = new float[seriesLength];
+                seriesGyr[i] = new float[seriesLength];
+                seriesMag[i] = new float[seriesLength];
+                seriesEKF[i] = new float[seriesLength];
+
+                for (int j = 0; j < seriesLength; j++)
+                {
+                    seriesAcc[i][j] = 0.0f;
+                    seriesGyr[i][j] = 0.0f;
+                    seriesMag[i][j] = 0.0f;
+                    seriesEKF[i][j] = 0.0f;
+                }
+            }            
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -190,6 +223,9 @@ namespace NAVCDataInterface
 
                 /* Update GUI */
                 UpdateGUIText();
+
+                /* Update plots */
+                UpdatePlots();
             } else
             {
                 PrintToLog();
@@ -238,6 +274,91 @@ namespace NAVCDataInterface
             float altitude = -((float) Math.Log(pressure / 101325.0f)) * 8.3144598f * 288.15f / (9.80665f * 0.0289644f);
 
             return altitude;
+        }
+
+        private void UpdatePlots()
+        {
+            ShiftSeries();
+
+            seriesAcc[0][0] = NavDataContainer[0];
+            seriesAcc[1][0] = NavDataContainer[1];
+            seriesAcc[2][0] = NavDataContainer[2];
+            seriesGyr[0][0] = NavDataContainer[3];
+            seriesGyr[1][0] = NavDataContainer[4];
+            seriesGyr[2][0] = NavDataContainer[5];
+            seriesMag[0][0] = NavDataContainer[6];
+            seriesMag[1][0] = NavDataContainer[7];
+            seriesMag[2][0] = NavDataContainer[8];
+
+            seriesAltitude[0] = AltitudeFromPressure(NavDataContainer[9]);
+            seriesAirspeed[0] = 0.0f;
+            seriesTemperature[0] = 0.0f;
+
+            seriesEKF[0][0] = NavDataContainer[17];
+            seriesEKF[1][0] = NavDataContainer[18];
+            seriesEKF[2][0] = NavDataContainer[19];
+
+            Invoke(new MethodInvoker(delegate ()
+            {
+                chrtAcc.Series[0].Points.Clear();
+                chrtAcc.Series[1].Points.Clear();
+                chrtAcc.Series[2].Points.Clear();
+                chrtGyr.Series[0].Points.Clear();
+                chrtGyr.Series[1].Points.Clear();
+                chrtGyr.Series[2].Points.Clear();
+                chrtMag.Series[0].Points.Clear();
+                chrtMag.Series[1].Points.Clear();
+                chrtMag.Series[2].Points.Clear();
+
+                chrtAltitude.Series[0].Points.Clear();
+                chrtAirspeed.Series[0].Points.Clear();
+                chrtTemperature.Series[0].Points.Clear();
+
+                chrtRoll.Series[0].Points.Clear();
+                chrtPitch.Series[0].Points.Clear();
+                chrtHeading.Series[0].Points.Clear();
+
+                for (int i = 0; i < seriesLength; i++)
+                {
+                    chrtAcc.Series[0].Points.AddY(seriesAcc[0][seriesLength - i - 1]);
+                    chrtAcc.Series[1].Points.AddY(seriesAcc[1][seriesLength - i - 1]);
+                    chrtAcc.Series[2].Points.AddY(seriesAcc[2][seriesLength - i - 1]);
+                    chrtGyr.Series[0].Points.AddY(seriesGyr[0][seriesLength - i - 1]);
+                    chrtGyr.Series[1].Points.AddY(seriesGyr[1][seriesLength - i - 1]);
+                    chrtGyr.Series[2].Points.AddY(seriesGyr[2][seriesLength - i - 1]);
+                    chrtMag.Series[0].Points.AddY(seriesMag[0][seriesLength - i - 1]);
+                    chrtMag.Series[1].Points.AddY(seriesMag[1][seriesLength - i - 1]);
+                    chrtMag.Series[2].Points.AddY(seriesMag[2][seriesLength - i - 1]);
+
+                    chrtAltitude.Series[0].Points.AddY(seriesAltitude[seriesLength - i - 1]);
+                    chrtAirspeed.Series[0].Points.AddY(seriesAirspeed[seriesLength - i - 1]);
+                    chrtTemperature.Series[0].Points.AddY(seriesTemperature[seriesLength - i - 1]);
+
+                    chrtRoll.Series[0].Points.AddY(seriesEKF[0][seriesLength - i - 1]);
+                    chrtPitch.Series[0].Points.AddY(seriesEKF[1][seriesLength - i - 1]);
+                    chrtHeading.Series[0].Points.AddY(seriesEKF[2][seriesLength - i - 1]);
+                }
+            }));      
+        }
+
+        private void ShiftSeries()
+        {
+
+            for (int j = seriesLength - 1; j > 0; j--)
+            {
+                for (int i = 0; i < 3; i++) {
+                    seriesAcc[i][j] = seriesAcc[i][j - 1];
+                    seriesGyr[i][j] = seriesGyr[i][j - 1];
+                    seriesMag[i][j] = seriesMag[i][j - 1];
+                    seriesEKF[i][j] = seriesEKF[i][j - 1];
+                }
+                seriesAltitude[j] = seriesAltitude[j - 1];
+                seriesAirspeed[j] = seriesAirspeed[j - 1];
+                seriesTemperature[j] = seriesTemperature[j - 1];
+            }
+                
+            
+            
         }
     }
 }

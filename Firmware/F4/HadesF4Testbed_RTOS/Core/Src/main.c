@@ -68,6 +68,7 @@ GPSData gpsData;
 
 /* Kalman filter */
 KalmanRollPitch kal;
+float heading;
 
 /* Sample time definitions */
 const uint32_t SAMPLE_TIME_ACC_MS = 10;
@@ -226,6 +227,11 @@ void magReadTask (void const *argument) {
 		FIRFilter_Update(&firMag[1], mag.xyz[1]);
 		FIRFilter_Update(&firMag[2], mag.xyz[2]);
 
+		/* Update heading estimate */
+		float sp = sin(kal.phi);
+		float cp = cos(kal.phi);
+		heading = atan2(-mag.xyz[1] * cp + mag.xyz[2] * sp, mag.xyz[0] * cos(kal.theta) + (mag.xyz[1] * sp + mag.xyz[2] * cp) * sin(kal.theta));
+
 		osDelay(SAMPLE_TIME_MAG_MS);
 	}
 
@@ -234,10 +240,10 @@ void magReadTask (void const *argument) {
 void gpsReadTask (void const *argument) {
 
 	for (;;) {
-		char rxBuf[128];
-		HAL_UART_Receive(&huart1, (uint8_t *) rxBuf, 128, 100);
+		char rxBuf[64];
+		HAL_UART_Receive(&huart1, (uint8_t *) rxBuf, 64, 100);
 
-		for (int n = 0; n < 128; n++) {
+		for (int n = 0; n < 64; n++) {
 			GPSNMEAParser_Feed(&gpsData, rxBuf[n]);
 		}
 
@@ -286,7 +292,7 @@ void debugSerialTask (void const *argument) {
 
 		NavDataContainer[17] = kal.phi   * 57.2957795131f;
 		NavDataContainer[18] = kal.theta * 57.2957795131f;
-		NavDataContainer[19] = 0.0f;
+		NavDataContainer[19] = heading   * 57.2957795131f;
 
 		uint8_t UAVDataPacket[128];
 		uint8_t UAVDataPacketLength = UAVDataLink_Pack(0, 0, sizeof(NavDataContainer), (const uint8_t *) NavDataContainer, UAVDataPacket);
