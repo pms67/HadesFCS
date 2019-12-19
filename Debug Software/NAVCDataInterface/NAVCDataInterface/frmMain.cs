@@ -48,7 +48,7 @@ namespace NAVCDataInterface
             packetHandler = new UAVDataLinkHandler(256);
             numValidPackets = 0;
 
-            NavDataContainer = new float[21];
+            NavDataContainer = new float[20];
 
             seriesAcc = new float[3][];
             seriesGyr = new float[3][];
@@ -201,7 +201,7 @@ namespace NAVCDataInterface
 
                 string dataPacketString = "";
 
-                for (int n = 0; n < 21; n++)
+                for (int n = 0; n < 20; n++)
                 {
                     bytes[0] = packetHandler.PAYLOAD[4 * n];
                     bytes[1] = packetHandler.PAYLOAD[4 * n + 1];
@@ -241,7 +241,6 @@ namespace NAVCDataInterface
                 lblPitotPressure.Text = NavDataContainer[10].ToString("F2"); lblPitotAirspeed.Text = "0.0";
                 lblGPSFix.Text = NavDataContainer[11].ToString("F0"); lblGPSLat.Text = NavDataContainer[12].ToString(); lblGPSLon.Text = NavDataContainer[13].ToString(); lblGPSAlt.Text = NavDataContainer[14].ToString("F2"); lblGPSGroundSpeed.Text = NavDataContainer[15].ToString("F2"); lblGPSCourse.Text = NavDataContainer[16].ToString("F2");
                 lblEKFRoll.Text = NavDataContainer[17].ToString("F2"); lblEKFPitch.Text = NavDataContainer[18].ToString("F2"); lblEKFHeading.Text = NavDataContainer[19].ToString("F2");
-                statusLabel.Text += "[NAVC CPU Usage: " + NavDataContainer[20].ToString() + "]";
             }));
         }
 
@@ -299,8 +298,6 @@ namespace NAVCDataInterface
             seriesEKF[0][0] = NavDataContainer[17];
             seriesEKF[1][0] = NavDataContainer[18];
             seriesEKF[2][0] = NavDataContainer[19];
-
-            seriesTemperature[0] = NavDataContainer[20];
 
             Invoke(new MethodInvoker(delegate ()
             {

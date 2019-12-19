@@ -18,8 +18,6 @@
 #include "GPSNMEAParser.h"
 #include "UAVDataLink.h"
 
-
-
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
@@ -27,6 +25,7 @@ I2C_HandleTypeDef hi2c3;
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart1_rx;
 
 osThreadId heartbeatHandle;
 osThreadId barometerReadHandle;
@@ -36,15 +35,6 @@ osThreadId magReadHandle;
 osThreadId gpsReadHandle;
 osThreadId debugSerialHandle;
 
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_I2C1_Init(void);
-static void MX_I2C2_Init(void);
-static void MX_I2C3_Init(void);
-static void MX_USART1_UART_Init(void);
-static void MX_USART2_UART_Init(void);
-static void MX_USART3_UART_Init(void);
-
 void heartbeatTask(void const * argument);
 void barometerReadTask(void const *argument);
 void imuGyroReadTask(void const *argument);
@@ -53,6 +43,16 @@ void magReadTask(void const *argument);
 void gpsReadTask(void const *argument);
 void debugSerialTask(void const *argument);
 
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_I2C2_Init(void);
+static void MX_I2C3_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART3_UART_Init(void);
+static void MX_DMA_Init(void);
+void StartDefaultTask(void const * argument);
 
 /* Sensors */
 MPRLSBarometer bar;
@@ -93,12 +93,28 @@ void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart3, (uint8_t *) "\n", 1, HAL_MAX_DELAY);
 }
 
-float NavDataContainer[21];
+float NavDataContainer[20];
 
 FIRFilter firGyr[3];
 FIRFilter firAcc[3];
 FIRFilter firMag[3];
 FIRFilter firBar;
+
+/* GPS RX buffer */
+const uint8_t GPSRXBUF_SIZE = 16;
+char gpsRxBuf[16];
+
+void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart) {
+
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	for (uint8_t n = 0; n < 16; n++) {
+		GPSNMEAParser_Feed(&gpsData, gpsRxBuf[n]);
+	}
+
+	HAL_UART_Receive_DMA(&huart1, (uint8_t *) gpsRxBuf, 16);
+}
 
 int main(void)
 {
@@ -108,14 +124,16 @@ int main(void)
 
   MX_GPIO_Init();
 
-  HAL_Delay(500);
-
   MX_I2C1_Init();
   MX_I2C2_Init();
   MX_I2C3_Init();
+  MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
+
+
+  HAL_UART_Receive_DMA(&huart1, (uint8_t *) gpsRxBuf, 16);
 
   initPeripherals();
 
@@ -136,6 +154,7 @@ int main(void)
   float kalQ[] = {3.0f * 0.000011941f, 2.0f * 0.000011941f};
   float kalR[] = {0.00024636441f, 0.00024636441f, 0.00034741232f};
   KalmanRollPitch_Init(&kal, 10.0f, kalQ, kalR);
+
 
   GPSNMEAParser_Init(&gpsData);
 
@@ -164,11 +183,11 @@ int main(void)
   debugSerialHandle = osThreadCreate(osThread(debugSerialTask), NULL);
 
   osKernelStart();
-  
+
   while (1)
   {
-  }
 
+  }
 }
 
 void heartbeatTask(void const * argument)
@@ -240,12 +259,6 @@ void magReadTask (void const *argument) {
 void gpsReadTask (void const *argument) {
 
 	for (;;) {
-		char rxBuf[64];
-		HAL_UART_Receive(&huart1, (uint8_t *) rxBuf, 64, 100);
-
-		for (int n = 0; n < 64; n++) {
-			GPSNMEAParser_Feed(&gpsData, rxBuf[n]);
-		}
 
 		osDelay(SAMPLE_TIME_GPS_MS);
 	}
@@ -294,8 +307,6 @@ void debugSerialTask (void const *argument) {
 		NavDataContainer[18] = kal.theta * 57.2957795131f;
 		NavDataContainer[19] = heading   * 57.2957795131f;
 
-		NavDataContainer[20] = tmp.temp_C;
-
 		uint8_t UAVDataPacket[128];
 		uint8_t UAVDataPacketLength = UAVDataLink_Pack(0, 0, sizeof(NavDataContainer), (const uint8_t *) NavDataContainer, UAVDataPacket);
 
@@ -333,8 +344,6 @@ void initPeripherals() {
 		HAL_GPIO_WritePin(GPIOB, LEDB_Pin, GPIO_PIN_RESET);
 	}
 }
-
-
 
 /**
   * @brief System Clock Configuration
@@ -496,7 +505,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 9800;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -579,6 +588,22 @@ static void MX_USART3_UART_Init(void)
 
 }
 
+/** 
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void) 
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream5_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream5_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream5_IRQn);
+
+}
+
 /**
   * @brief GPIO Initialization Function
   * @param None
@@ -649,7 +674,27 @@ static void MX_GPIO_Init(void)
 
 }
 
+/* USER CODE BEGIN 4 */
 
+/* USER CODE END 4 */
+
+/* USER CODE BEGIN Header_StartDefaultTask */
+/**
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used 
+  * @retval None
+  */
+/* USER CODE END Header_StartDefaultTask */
+void StartDefaultTask(void const * argument)
+{
+  /* USER CODE BEGIN 5 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END 5 */ 
+}
 
 /**
   * @brief  Period elapsed callback in non blocking mode

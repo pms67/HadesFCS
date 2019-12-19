@@ -37,7 +37,7 @@ namespace NAVCDataInterface
 
             rxBufIndex = 0;
 
-            packetBuf = new byte[256];
+            packetBuf = new byte[rxBufSize];
             packetLength = 0;
         }
 
