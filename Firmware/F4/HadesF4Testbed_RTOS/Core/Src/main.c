@@ -93,7 +93,7 @@ void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart3, (uint8_t *) "\n", 1, HAL_MAX_DELAY);
 }
 
-float NavDataContainer[20];
+float NavDataContainer[21];
 
 FIRFilter firGyr[3];
 FIRFilter firAcc[3];
@@ -293,6 +293,8 @@ void debugSerialTask (void const *argument) {
 		NavDataContainer[17] = kal.phi   * 57.2957795131f;
 		NavDataContainer[18] = kal.theta * 57.2957795131f;
 		NavDataContainer[19] = heading   * 57.2957795131f;
+
+		NavDataContainer[20] = tmp.temp_C;
 
 		uint8_t UAVDataPacket[128];
 		uint8_t UAVDataPacketLength = UAVDataLink_Pack(0, 0, sizeof(NavDataContainer), (const uint8_t *) NavDataContainer, UAVDataPacket);
