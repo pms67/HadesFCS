@@ -60,7 +60,7 @@ all: HadesF4RTOS.elf secondary-outputs
 
 # Tool invocations
 HadesF4RTOS.elf: $(OBJS) $(USER_OBJS) C:\Users\phili\OneDrive\UAV\Firmware\F4\HadesF4Testbed_RTOS\STM32F405RGTX_FLASH.ld
-	arm-none-eabi-g++ -o "HadesF4RTOS.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\phili\OneDrive\UAV\Firmware\F4\HadesF4Testbed_RTOS\STM32F405RGTX_FLASH.ld" -Wl,-Map="HadesF4RTOS.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+	arm-none-eabi-g++ -o "HadesF4RTOS.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\phili\OneDrive\UAV\Firmware\F4\HadesF4Testbed_RTOS\STM32F405RGTX_FLASH.ld" -Wl,-Map="HadesF4RTOS.map" -Wl,--gc-sections -static --specs=nano_c_standard_cpp.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

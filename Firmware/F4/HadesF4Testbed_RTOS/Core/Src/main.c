@@ -10,10 +10,8 @@
 #include "TMP100.h"
 #include "UBLOX.h"
 
-#include "FIR.h"
-#include "FIRFilterArrays.h"
-
 #include "KalmanRollPitch.h"
+#include "ButterworthLPF.h"
 
 #include "GPSNMEAParser.h"
 #include "UAVDataLink.h"
@@ -70,6 +68,13 @@ GPSData gpsData;
 KalmanRollPitch kal;
 float heading;
 
+/* Low-Pass filters */
+ButterworthLPF lpfGyr[3];
+ButterworthLPF lpfAcc[3];
+ButterworthLPF lpfMag[3];
+ButterworthLPF lpfBar;
+
+
 /* Sample time definitions */
 const uint32_t SAMPLE_TIME_ACC_MS = 10;
 const uint32_t SAMPLE_TIME_GYR_MS = 5;
@@ -93,20 +98,13 @@ void printDebug(char *buf) {
 	HAL_UART_Transmit(&huart3, (uint8_t *) "\n", 1, HAL_MAX_DELAY);
 }
 
-float NavDataContainer[20];
 
-FIRFilter firGyr[3];
-FIRFilter firAcc[3];
-FIRFilter firMag[3];
-FIRFilter firBar;
+float NavDataContainer[20];
 
 /* GPS RX buffer */
 const uint8_t GPSRXBUF_SIZE = 16;
 char gpsRxBuf[16];
 
-void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart) {
-
-}
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	for (uint8_t n = 0; n < 16; n++) {
@@ -118,7 +116,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
 int main(void)
 {
-  HAL_Init();
+	HAL_Init();
 
   SystemClock_Config();
 
@@ -132,31 +130,32 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
 
-
+  /* Initialise DMA for GPS UART */
   HAL_UART_Receive_DMA(&huart1, (uint8_t *) gpsRxBuf, 16);
 
+  /* Initialise GPS parser */
+  GPSNMEAParser_Init(&gpsData);
+
+  /* Initialise peripherals/sensors */
   initPeripherals();
 
-  FIRFilter_Init(&firGyr[0], firCoeffGyr, firGyrXBuf, FIRGYRN);
-  FIRFilter_Init(&firGyr[1], firCoeffGyr, firGyrYBuf, FIRGYRN);
-  FIRFilter_Init(&firGyr[2], firCoeffGyr, firGyrZBuf, FIRGYRN);
-
-  FIRFilter_Init(&firAcc[0], firCoeffAcc, firAccXBuf, FIRACCN);
-  FIRFilter_Init(&firAcc[1], firCoeffAcc, firAccYBuf, FIRACCN);
-  FIRFilter_Init(&firAcc[2], firCoeffAcc, firAccZBuf, FIRACCN);
-
-  FIRFilter_Init(&firMag[0], firCoeffMag, firMagXBuf, FIRMAGN);
-  FIRFilter_Init(&firMag[1], firCoeffMag, firMagYBuf, FIRMAGN);
-  FIRFilter_Init(&firMag[2], firCoeffMag, firMagZBuf, FIRMAGN);
-
-  FIRFilter_Init(&firBar, firCoeffBar, firBarBuf, FIRBARN);
-
+  /* Initialise Kalman filter */
   float kalQ[] = {3.0f * 0.000011941f, 2.0f * 0.000011941f};
   float kalR[] = {0.00024636441f, 0.00024636441f, 0.00034741232f};
   KalmanRollPitch_Init(&kal, 10.0f, kalQ, kalR);
 
+  heading = 0.0f;
 
-  GPSNMEAParser_Init(&gpsData);
+
+  /* Initialise filters */
+  for (int n = 0; n < 3; n++) {
+	  ButterworthLPF_Init(&lpfGyr[n], 30.0f, 0.005f);
+	  ButterworthLPF_Init(&lpfAcc[n],  5.0f, 0.010f);
+	  ButterworthLPF_Init(&lpfMag[n],  5.0f, 0.010f);
+  }
+
+  ButterworthLPF_Init(&lpfBar, 1.0f, 0.010f);
+
 
   /* Heartbeat LED task */
   osThreadDef(heartbeatLEDTask, heartbeatTask, osPriorityLow, 0, 128);
@@ -207,9 +206,11 @@ void imuGyroReadTask (void const *argument) {
 		BMI088_ReadGyr(&imu);
 
 		/* Filter measurements */
-		FIRFilter_Update(&firGyr[0], imu.gyr[0]);
-		FIRFilter_Update(&firGyr[1], imu.gyr[1]);
-		FIRFilter_Update(&firGyr[2], imu.gyr[2]);
+		float gyrFilt[] = {ButterworthLPF_Update(&lpfGyr[0], imu.gyr[0]),
+						   ButterworthLPF_Update(&lpfGyr[1], imu.gyr[1]),
+						   ButterworthLPF_Update(&lpfGyr[2], imu.gyr[2])};
+
+		KalmanRollPitch_Predict(&kal, gyrFilt, 0.005f);
 
 		osDelay(SAMPLE_TIME_GYR_MS);
 	}
@@ -222,14 +223,12 @@ void imuAccReadTask (void const *argument) {
 		BMI088_ReadAcc(&imu);
 
 		/* Filter measurements */
-		FIRFilter_Update(&firAcc[0], imu.acc[0]);
-		FIRFilter_Update(&firAcc[1], imu.acc[1]);
-		FIRFilter_Update(&firAcc[2], imu.acc[2]);
+		float accFilt[] = {ButterworthLPF_Update(&lpfAcc[0], imu.acc[0]),
+						   ButterworthLPF_Update(&lpfAcc[1], imu.acc[1]),
+						   ButterworthLPF_Update(&lpfAcc[2], imu.acc[2])};
 
 		/* Update kalman filter */
-		float gyrFilt[] = {firGyr[0].out, firGyr[1].out, firGyr[2].out};
-		float accFilt[] = {firAcc[0].out, firAcc[1].out, firAcc[2].out};
-		KalmanRollPitch_Update(&kal, gyrFilt, accFilt, 0.0f, 0.01f);
+		KalmanRollPitch_Update(&kal, accFilt, 0.0f);
 
 		osDelay(SAMPLE_TIME_ACC_MS);
 	}
@@ -242,14 +241,28 @@ void magReadTask (void const *argument) {
 		IISMagnetometer_Read(&mag);
 
 		/* Filter measurements */
-		FIRFilter_Update(&firMag[0], mag.xyz[0]);
-		FIRFilter_Update(&firMag[1], mag.xyz[1]);
-		FIRFilter_Update(&firMag[2], mag.xyz[2]);
+		float magFilt[] = {ButterworthLPF_Update(&lpfMag[0], mag.xyz[0]),
+						   ButterworthLPF_Update(&lpfMag[1], mag.xyz[1]),
+						   ButterworthLPF_Update(&lpfMag[2], mag.xyz[2])};
 
-		/* Update heading estimate */
+		/* Convert to unit vector */
+		float inorm = 1.0f / sqrt(magFilt[0] * magFilt[0] + magFilt[1] * magFilt[1] + magFilt[2] * magFilt[2]);
+
+		magFilt[0] *= inorm;
+		magFilt[1] *= inorm;
+		magFilt[2] *= inorm;
+
+		/* Estimate heading from magnetometer only */
 		float sp = sin(kal.phi);
 		float cp = cos(kal.phi);
-		heading = atan2(-mag.xyz[1] * cp + mag.xyz[2] * sp, mag.xyz[0] * cos(kal.theta) + (mag.xyz[1] * sp + mag.xyz[2] * cp) * sin(kal.theta));
+		float ct = cos(kal.theta);
+
+		float magHeading = atan2(-magFilt[1] * cp + magFilt[2] * sp, magFilt[0] * ct + (magFilt[1] * sp + magFilt[2] * cp) * sin(kal.theta));
+
+		/* Complementary filter to fuse magnetometer estimate with gyro rates */
+		float phiDotGyr = (sp * lpfGyr[1].out + cp * lpfGyr[2].out) / ct;
+
+		heading = 0.05f * magHeading + 0.95f * (heading + 0.01f * phiDotGyr);
 
 		osDelay(SAMPLE_TIME_MAG_MS);
 	}
@@ -271,7 +284,7 @@ void barometerReadTask (void const *argument) {
 		MPRLSBarometer_ReadPressure(&bar);
 
 		/* Filter measurement */
-		FIRFilter_Update(&firBar, bar.pressurePa);
+		ButterworthLPF_Update(&lpfBar, bar.pressurePa);
 
 		osDelay(SAMPLE_TIME_BAR_MS);
 	}
@@ -282,18 +295,18 @@ void debugSerialTask (void const *argument) {
 
 	for (;;) {
 
-	    NavDataContainer[0] = firAcc[0].out;
-		NavDataContainer[1] = firAcc[1].out;
-		NavDataContainer[2] = firAcc[2].out;
-		NavDataContainer[3] = firGyr[0].out;
-		NavDataContainer[4] = firGyr[1].out;
-		NavDataContainer[5] = firGyr[2].out;
+	    NavDataContainer[0] = lpfAcc[0].out;
+		NavDataContainer[1] = lpfAcc[1].out;
+		NavDataContainer[2] = lpfAcc[2].out;
+		NavDataContainer[3] = lpfGyr[0].out;
+		NavDataContainer[4] = lpfGyr[1].out;
+		NavDataContainer[5] = lpfGyr[2].out;
 
-		NavDataContainer[6] = mag.xyz[0]; //firMag[0].out;
-		NavDataContainer[7] = mag.xyz[1]; //firMag[1].out;
-		NavDataContainer[8] = mag.xyz[2]; //firMag[2].out;
+		NavDataContainer[6] = lpfMag[0].out;
+		NavDataContainer[7] = lpfMag[1].out;
+		NavDataContainer[8] = lpfMag[2].out;
 
-		NavDataContainer[9]  = bar.pressurePa; //firBar.out;
+		NavDataContainer[9]  = lpfBar.out;
 		NavDataContainer[10] = 0.0f;
 
 		NavDataContainer[11] = (float) gpsData.fixQuality;
@@ -303,9 +316,9 @@ void debugSerialTask (void const *argument) {
 		NavDataContainer[15] = gpsData.groundSpeed_mps;
 		NavDataContainer[16] = gpsData.course_deg;
 
-		NavDataContainer[17] = kal.phi   * 57.2957795131f;
-		NavDataContainer[18] = kal.theta * 57.2957795131f;
-		NavDataContainer[19] = heading   * 57.2957795131f;
+		NavDataContainer[17] = kal.phi    * 57.2957795131f;
+		NavDataContainer[18] = kal.theta  * 57.2957795131f;
+		NavDataContainer[19] = heading    * 57.2957795131f;
 
 		uint8_t UAVDataPacket[128];
 		uint8_t UAVDataPacketLength = UAVDataLink_Pack(0, 0, sizeof(NavDataContainer), (const uint8_t *) NavDataContainer, UAVDataPacket);

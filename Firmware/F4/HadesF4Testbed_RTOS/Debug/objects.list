@@ -1,7 +1,7 @@
 "Core/Src/BMI088.o"
 "Core/Src/GPSNMEAParser.o"
 "Core/Src/IIS2MDC.o"
-"Core/Src/KalmanQuatAtt.o"
+"Core/Src/KalmanAHRSQuat.o"
 "Core/Src/KalmanRollPitch.o"
 "Core/Src/MPRLS.o"
 "Core/Src/TMP100.o"

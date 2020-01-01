@@ -12,4 +12,5 @@
   (lib (name BMP388)(type Legacy)(uri ${KIPRJMOD}/lib/BMP388.lib)(options "")(descr ""))
   (lib (name CH340E)(type Legacy)(uri ${KIPRJMOD}/lib/CH340E.lib)(options "")(descr ""))
   (lib (name MPRLS0015PA0000SA)(type Legacy)(uri ${KIPRJMOD}/lib/MPRLS0015PA0000SA.lib)(options "")(descr ""))
+  (lib (name HadesMicroJLCPCB-rescue)(type Legacy)(uri ${KIPRJMOD}/HadesMicroJLCPCB-rescue.lib)(options "")(descr ""))
 )

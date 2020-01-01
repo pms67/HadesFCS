@@ -47,9 +47,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  ../Core/Inc/MPRLS.h ../Core/Inc/IIS2MDC.h ../Core/Inc/BMI088.h \
- ../Core/Inc/TMP100.h ../Core/Inc/UBLOX.h ../Core/Inc/FIR.h \
- ../Core/Inc/FIRFilterArrays.h ../Core/Inc/KalmanRollPitch.h \
- ../Core/Inc/GPSNMEAParser.h ../Core/Inc/UAVDataLink.h
+ ../Core/Inc/TMP100.h ../Core/Inc/UBLOX.h ../Core/Inc/KalmanRollPitch.h \
+ ../Core/Inc/ButterworthLPF.h ../Core/Inc/GPSNMEAParser.h \
+ ../Core/Inc/UAVDataLink.h
 
 ../Core/Inc/main.h:
 
@@ -157,11 +157,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Inc/UBLOX.h:
 
-../Core/Inc/FIR.h:
-
-../Core/Inc/FIRFilterArrays.h:
-
 ../Core/Inc/KalmanRollPitch.h:
+
+../Core/Inc/ButterworthLPF.h:
 
 ../Core/Inc/GPSNMEAParser.h:
 

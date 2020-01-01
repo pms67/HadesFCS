@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Code Generation Report</title>
+<link rel="stylesheet" type="text/css" href="resources/eml_report.css" />
+<link rel="stylesheet" type="text/css" href="resources/jQuery/ui.resizable.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<style>
+	pre.code{
+		-moz-tab-size: 4; /* For Firefox */
+		-o-tab-size: 4; /* For Opera 10.6-12.1 */
+		tab-size: 4; /* For Chrome */
+	}
+</style>
+<script type="text/javascript" src="resources/jQuery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery-ui-1.7.custom.min.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery.tablesorter.mod.js"></script>
+<script type="text/javascript" src="resources/jQuery/jquery.hotkeys-0.7.8.js"></script>
+<script type="text/javascript" src="resources/eml_report_interactions.js"></script>
+<script type="text/javascript" src="resources/eml_report_layout.js"></script>
+<script type="text/javascript" src="rtwshrink.js"></script>
+<script type="text/javascript">
+var localizedMessages = {
+    callSelectPrompt: "Select a function call:",
+    callSelectSource: "Calls from this function",
+    callSelectTarget: "Calls to this function",
+    infoForExpression: "Information for the selected expression:",
+    infoForVarType: "Information for the selected variable:",
+    infoForVarConst: "Information for the selected compile-time constant:",
+    infoForVarNone: "This variable does not have information associated with it.",
+    infoForFilter: "Matched {0}/{1} functions, {2}/{3} methods",
+    autoExtrinsicCall: "Only supported within the MATLAB environment."
+};
+var keyBindings = {
+        selectMCodeTab: "Ctrl+m",
+    selectCallStackTab: "Ctrl+k",
+        selectCCodeTab: "Ctrl+c",
+       selectReportTab: "Ctrl+r",
+     selectCenterPanel: "Ctrl+w",
+      selectSummaryTab: "Ctrl+s",
+     selectMessagesTab: "Ctrl+a",
+    selectWatchListTab: "Ctrl+v",
+     selectBuildLogTab: "Ctrl+t",
+    clearAllHighlights: "Esc"
+};
+var functionInfoTable = {
+ MATLABcode1: "ekfRollPitchYaw1_mcode.html",
+ fpath1: "C:/Users/phili/OneDrive/UAV/State Estimation/Matlab/ekfRollPitchYaw.m",
+ lines1: [1, 1, 109],
+ watch1: "ekfRollPitchYaw1_watch.html",
+ title1: "Function: <span class='functionname'><a title='C:&nbsp;\\Users\\phili\\OneDrive\\UAV\\State&nbsp;Estimation\\Matlab\\ekfRollPitchYaw.m' class='functionlink' href=\"matlab: open('C:\\Users\\phili\\OneDrive\\UAV\\State Estimation\\Matlab\\ekfRollPitchYaw.m')\">ekfRollPitchYaw</a></span>",
+ tcall1: [  ],
+ scall1: [  ],
+ rootFcnID: "1",
+ firstPage: "ekfRollPitchYaw_c.html",
+ htmlRoot: "C:/Users/phili/OneDrive/UAV/State%20Estimation/Matlab/codegen/lib/ekfRollPitchYaw/html/"
+};
+var scriptInfoTable = {
+ fpath1: "C:/Users/phili/OneDrive/UAV/State Estimation/Matlab/ekfRollPitchYaw.m",
+ fpath2: "D:/R2016b/toolbox/eml/eml/+coder/+internal/isBuiltInNumeric.m",
+ fpath3: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+scalar/floor.m",
+ fpath4: "D:/R2016b/toolbox/eml/eml/+coder/+internal/applyScalarFunctionInPlace.m",
+ fpath5: "D:/R2016b/toolbox/eml/lib/matlab/elfun/floor.m",
+ fpath6: "D:/R2016b/toolbox/shared/coder/coder/+coder/+internal/narginchk.m",
+ fpath7: "D:/R2016b/toolbox/eml/lib/matlab/elmat/intmax.m",
+ fpath8: "D:/R2016b/toolbox/eml/lib/matlab/elmat/intmin.m",
+ fpath9: "D:/R2016b/toolbox/eml/eml/+coder/+internal/floatModel.m",
+ fpath10: "D:/R2016b/toolbox/eml/lib/fixedpoint/isnumerictype.m",
+ fpath11: "D:/R2016b/toolbox/eml/lib/fixedpoint/isfi.m",
+ fpath12: "D:/R2016b/toolbox/eml/lib/matlab/eml/eml_int_forloop_overflow_check.m",
+ fpath13: "D:/R2016b/toolbox/eml/lib/matlab/elmat/eye.m",
+ fpath14: "D:/R2016b/toolbox/eml/lib/matlab/ops/eml_mtimes_helper.m",
+ fpath15: "D:/R2016b/toolbox/eml/lib/matlab/elmat/ismatrix.m",
+ fpath16: "D:/R2016b/toolbox/eml/eml/+coder/+internal/scalarEg.m",
+ fpath17: "D:/R2016b/toolbox/eml/lib/fixedpoint/isfimath.m",
+ fpath18: "D:/R2016b/toolbox/eml/eml/+coder/+internal/scalexpAllocNoCheck.m",
+ fpath19: "D:/R2016b/toolbox/eml/eml/+coder/+internal/scalexpAlloc.m",
+ fpath20: "D:/R2016b/toolbox/eml/lib/matlab/ops/power.m",
+ fpath21: "D:/R2016b/toolbox/eml/eml/+coder/+internal/applyScalarFunction.m",
+ fpath22: "D:/R2016b/toolbox/eml/lib/matlab/elmat/isnan.m",
+ fpath23: "D:/R2016b/toolbox/eml/eml/+coder/+internal/error.m",
+ fpath24: "D:/R2016b/toolbox/eml/lib/matlab/ops/mpower.m",
+ fpath25: "D:/R2016b/toolbox/eml/lib/matlab/elmat/diag.m",
+ fpath26: "D:/R2016b/toolbox/eml/eml/+coder/+internal/isDomainError.m",
+ fpath27: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+scalar/sqrt.m",
+ fpath28: "D:/R2016b/toolbox/eml/lib/matlab/elfun/sqrt.m",
+ fpath29: "D:/R2016b/toolbox/eml/eml/+coder/+internal/scalexpCompatible.m",
+ fpath30: "D:/R2016b/toolbox/eml/eml/+coder/+internal/div.m",
+ fpath31: "D:/R2016b/toolbox/eml/lib/matlab/ops/rdivide.m",
+ fpath32: "D:/R2016b/toolbox/eml/lib/matlab/ops/mrdivide.p",
+ fpath33: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/inline.m",
+ fpath34: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/use_refblas.m",
+ fpath35: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+refblas/xgemm.m",
+ fpath36: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/xgemm.m",
+ fpath37: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+scalar/atan2.m",
+ fpath38: "D:/R2016b/toolbox/eml/lib/matlab/elfun/atan2.m",
+ fpath39: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+lapack/use_lapack.m",
+ fpath40: "D:/R2016b/toolbox/eml/lib/matlab/elmat/private/eml_realmin.m",
+ fpath41: "D:/R2016b/toolbox/eml/lib/matlab/elmat/realmin.m",
+ fpath42: "D:/R2016b/toolbox/eml/eml/+coder/+internal/isFloatClass.m",
+ fpath43: "D:/R2016b/toolbox/eml/lib/matlab/elmat/private/eml_eps.m",
+ fpath44: "D:/R2016b/toolbox/eml/lib/matlab/elmat/eps.m",
+ fpath45: "D:/R2016b/toolbox/eml/eml/+coder/+internal/minOrMax.m",
+ fpath46: "D:/R2016b/toolbox/eml/lib/matlab/datafun/min.m",
+ fpath47: "D:/R2016b/toolbox/eml/lib/matlab/ops/colon.m",
+ fpath48: "D:/R2016b/toolbox/eml/eml/+coder/+internal/isaUint.m",
+ fpath49: "D:/R2016b/toolbox/eml/eml/+coder/+internal/unsignedClass.m",
+ fpath50: "D:/R2016b/toolbox/eml/eml/+coder/+internal/indexPlus.m",
+ fpath51: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+lapack/info_t.m",
+ fpath52: "D:/R2016b/toolbox/eml/eml/+coder/+internal/indexMinus.m",
+ fpath53: "D:/R2016b/toolbox/eml/eml/+coder/+internal/indexTimes.m",
+ fpath54: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+scalar/abs.m",
+ fpath55: "D:/R2016b/toolbox/eml/lib/matlab/elfun/abs.m",
+ fpath56: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+refblas/xcabs1.m",
+ fpath57: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+refblas/ixamax.m",
+ fpath58: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/ixamax.m",
+ fpath59: "D:/R2016b/toolbox/eml/lib/matlab/elmat/private/eml_isequal_core.m",
+ fpath60: "D:/R2016b/toolbox/eml/lib/matlab/elmat/isequal.m",
+ fpath61: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/isNullEmpty.m",
+ fpath62: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+refblas/xswap.m",
+ fpath63: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/xswap.m",
+ fpath64: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+refblas/xgerx.m",
+ fpath65: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+refblas/xger.m",
+ fpath66: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/xger.m",
+ fpath67: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/xgeru.m",
+ fpath68: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+reflapack/xzgetrf.m",
+ fpath69: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+lapack/xgetrf.m",
+ fpath70: "D:/R2016b/toolbox/shared/coder/coder/+coder/+internal/warning.m",
+ fpath71: "D:/R2016b/toolbox/eml/eml/+coder/+internal/lusolve.m",
+ fpath72: "D:/R2016b/toolbox/eml/eml/+coder/+internal/recip.m",
+ fpath73: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+refblas/xtrsm.m",
+ fpath74: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+blas/xtrsm.m",
+ fpath75: "D:/R2016b/toolbox/eml/eml/+coder/+internal/+scalar/asin.m",
+ fpath76: "D:/R2016b/toolbox/eml/lib/matlab/elfun/asin.m"
+};
+</script>
+</head>
+<body>
+
+<div class="west">
+<ul class="ui-tabs-nav">
+<li class="ui-tabs-nav-item ui-tabs-selected"><span class="tab-link" id="MATLABcode"><span>MATLAB code</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="callstack"><span>Call stack</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="ccode"><span>C code</span></span></li>
+</ul>
+<div id="MATLABcodebody" class="ui-tabs-panel">
+<!-- Begin Filter -->
+<div class="grayline methodset" onclick="filterClick(event);">
+<a class="collapsed">Filter</a>
+</div>
+<div id="filterbody" class="hidden">
+<table class="myfunc-filter-tbl">
+<tr>
+<td title="Use this filter to display only functions and methods that contain variables or expressions with the specified attributes." colspan="2" class="checkbox">
+<div class="myfunc-filterby-chk"><input type="checkbox" class="filterenable" />
+<div class="filter-enable-lbl">Filter functions and methods</div></div></td></tr><tr>
+<td class="label"><div class="myfunc-filterby-lbl">Filter by:</div></td>
+<td class="select">
+<div class="filters">
+<select class="myfunc-filterby">
+<option id="size">Size</option>
+<option id="complex">Complexity</option>
+<option id="class">Class</option>
+</select>
+</div>
+</td>
+</tr>
+
+<tr>
+<td class="label"><div class="myfunc-filterstr-lbl">Filter:</div></td>
+<td class="input"><div>
+
+<div class="size">
+<select class="myfunc-filter size">
+<option value="1">1 x 1</option>
+<option value="1">3 x 1</option>
+<option value="1">4 x 1</option>
+<option value="1">4 x 4</option>
+<option value="1">4 x 7</option>
+<option value="1">7 x 1</option>
+<option value="1">7 x 4</option>
+<option value="1">7 x 7</option>
+</select>
+</div>
+
+<div class="complex">
+<select class="myfunc-filter complex">
+<option value="">Complex values</option>
+<option value="1">Real values</option>
+</select>
+</div>
+<!-- Begin Class Filter -->
+<div class="class">
+<select class="myfunc-filter class">
+<option value="1">double</option>
+</select>
+</div>
+<!-- End Class Filter -->
+</div>
+</td>
+</tr>
+</table>
+<div class="myfunc-count"></div>
+</div>
+<!-- End Filter -->
+<div class="grayline methodset" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="functionSetClick(event);">
+<a class="expanded">Functions</a>
+</div>
+<!-- Begin Function Tree -->
+<div id="functiontreebody">
+<div class="functionwrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="functionTreeClick(event);">
+<ol class="tree">
+<!-- Begin Function Tree Roots -->
+<li class="leaf  passed"><a href="#" class="fcn  " id="F1N3:F1">ekfRollPitchYaw</a></li>
+<!-- End Function Tree Roots -->
+</ol>
+<!-- Function Tree Nodes -->
+<div class="functiontreenodes hidden">
+</div>
+<!-- End Function Tree Nodes -->
+</div>
+</div>
+<!-- End Function Tree -->
+</div>
+<!-- Begin Call Tree -->
+<div id="callstackbody" class="ui-tabs-panel hidden">
+<div class="treewrapper" onmouseover="callTreeMouseOver(event);" onmouseout="callTreeMouseOut(event);" onclick="callTreeClick(event);">
+<ol class="tree">
+<!-- Call Tree Root -->
+<li class="leaf passed"><a href="#" class="fcn " id="F1N3:L1">ekfRollPitchYaw</a>
+</li>
+</ol>
+<!-- Call Tree Nodes -->
+<div class="callstacknodes hidden">
+<ol class="callstacknode" id="callstacknode1">
+
+<li class="leaf passed"><a href="#" class="fcn " id="F1N3:l1">ekfRollPitchYaw</a>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<!-- End Call Tree -->
+<!-- Begin C Code -->
+<div id="ccodebody" class="ui-tabs-panel hidden">
+
+<table class="myfunc-list" cellspacing="0" cellpadding="0" onclick="reportFileClick(event);">
+<tbody>
+<tr class="report" id="metrics.html"><td class="report"><a href="#">Static Code Metrics Report</a></td></tr>
+</tbody>
+</table><div class="grayline methodset" onclick="ccodeClick(event,1);">
+<a class="expanded">Target Source Files</a>
+</div>
+<!-- Begin C Code List -->
+<div id="ccodelistbody1" class="visible">
+<table class="myfunc-list" cellspacing="0" cellpadding="0" onclick="cFileClick(event);">
+<tbody>
+<tr class="ccode" id="ekfRollPitchYaw_c.html"><td class="ccode"><a href="#">ekfRollPitchYaw.c</a></td></tr>
+<tr class="ccode" id="ekfRollPitchYaw_h.html"><td class="ccode"><a href="#">ekfRollPitchYaw.h</a></td></tr>
+<tr class="ccode" id="ekfRollPitchYaw_types_h.html"><td class="ccode"><a href="#">ekfRollPitchYaw_types.h</a></td></tr>
+<tr class="ccode" id="rtwtypes_h.html"><td class="ccode"><a href="#">rtwtypes.h</a></td></tr>
+</tbody>
+</table>
+</div>
+<!-- End C Code List -->
+</div>
+<!-- End C Code -->
+</div>
+<!-- Tooltips -->
+<div class="aux hidden">
+<div class="tooltips">
+<div class="tooltip" id="TT1"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT2"><table class="tooltip"><tr><th>Size</th><td>3 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT3"><table class="tooltip"><tr><th>Size</th><td>7 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT4"><table class="tooltip"><tr><th>Size</th><td>7 x 7</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT5"><table class="tooltip"><tr><th>Size</th><td>4 x 4</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT6"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>logical</td></tr></table></div>
+<div class="tooltip" id="TT7"><table class="tooltip"><tr><th>Size</th><td>1 x 7</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT8"><table class="tooltip"><tr><th>Size</th><td>1 x 4</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT9"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT10"><table class="tooltip"><tr><th>Size</th><td>4 x 1</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT11"><table class="tooltip"><tr><th>Size</th><td>4 x 7</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT12"><table class="tooltip"><tr><th>Size</th><td>7 x 4</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT13"><table class="tooltip"><tr><th>Size</th><td>1 x 5</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT14"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT15"><table class="tooltip"><tr><th>Size</th><td>1 x 0</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT16"><table class="tooltip"><tr><th>Size</th><td>1 x 23</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT17"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>int32</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT18"><table class="tooltip"><tr><th>Size</th><td>1 x 6</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT19"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT20"><table class="tooltip"><tr><th>Size</th><td>1 x 2</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT21"><table class="tooltip"><tr><th>Size</th><td>1 x 14</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT22"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT23"><table class="tooltip"><tr><th>Size</th><td>1 x 31</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT24"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT25"><table class="tooltip"><tr><th>Size</th><td>1 x 30</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT26"><table class="tooltip"><tr><th>Size</th><td>1 x 4</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT27"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT28"><table class="tooltip"><tr><th>Size</th><td>1 x 7</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT29"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT30"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT31"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>mxArray</td></tr></table></div>
+<div class="tooltip" id="TT32"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT33"><table class="tooltip"><tr><th>Size</th><td>1 x 3</td></tr><tr><th>Class</th><td>cell</td></tr></table></div>
+<div class="tooltip" id="TT34"><table class="tooltip"><tr><th>Size</th><td>1 x 4</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT35"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT36"><table class="tooltip"><tr><th>Size</th><td>0 x 0</td></tr><tr><th>Class</th><td>double</td></tr><tr><th>Complex</th><td>No</td></tr></table></div>
+<div class="tooltip" id="TT37"><table class="tooltip"><tr><th>Size</th><td>1 x 27</td></tr><tr><th>Class</th><td>char</td></tr></table></div>
+<div class="tooltip" id="TT38"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT39"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+<div class="tooltip" id="TT40"><table class="tooltip"><tr><th>Size</th><td>1 x 1</td></tr><tr><th>Class</th><td>function_handle</td></tr></table></div>
+</div>
+</div>
+<!-- End Tooltips -->
+
+<div class="south">
+<ul class="ui-tabs-nav">
+<li class="ui-tabs-nav-item ui-tabs-selected"><span class="tab-link" id="summary"><span>Summary</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="messages"><span>All Messages (0)</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="watchlist"><span>Variables</span></span></li>
+<li class="ui-tabs-nav-item hidden"><span class="tab-link" id="watchload"><span>Variables</span></span></li>
+<li class="ui-tabs-nav-item"><span class="tab-link" id="buildlog1"><span>Target Build Log</span></span></li>
+</ul>
+
+<!-- Compilation Summary -->
+<div id="summarybody" class="ui-tabs-panel">
+<table cellpadding="1" cellspacing="4">
+<tr><td>C source code generated on:</td><td>27-Dec-2019 22:11:24</td></tr>
+<tr><td>Coding target:</td><td>Static Library</td></tr>
+<tr><td>Number of errors:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+<tr><td>Number of warnings:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+<tr><td>Number of notices:</td><td><a href="javascript:selectMessagesTab();">0</a></td></tr>
+</table>
+<p/><p/><table>
+<tr><td><b>Tell Us What You Think</b></td></tr>
+<tr><td>We value your feedback. Please take a few minutes to answer this short questionnaire regarding the Code Generation Report.</td></tr>
+<tr><td><a href="matlab: emlcprivate('launchReportSurvey');">&gt;&gt;Provide Feedback</a></td></tr>
+</table>
+</div>
+
+<!-- Message Table -->
+<div id="messagesbody" class="ui-tabs-panel hidden">
+<div>
+<div class="msgsuccess">Code generation successful. Click here to <a href="javaScript:selectSummaryTab();">view summary</a>.</div>
+</div>
+</div>
+<!-- Watchlist Table -->
+<div id="watchlistbody" class="ui-tabs-panel hidden">
+</div>
+<div id="watchloadbody" class="ui-tabs-panel hidden">
+Loading Variables table ...
+</div>
+
+<!-- Target Build Log -->
+<div id="buildlog1body" class="ui-tabs-panel hidden">
+<div class="grayline"></div>
+<table cellpadding="4" cellspacing="1"><tr>
+<td align="left" class="td-linebottomrt-gray" colspan="2">Build Parameters</td>
+</tr>
+<tr><td align="left" valign="top" class="td-linebottomrt">Build directory</td>
+<td align="left" valign="top" class="td-linebottomrt-link"><a href="matlab: cd('C:\Users\phili\OneDrive\UAV\State Estimation\Matlab\codegen\lib\ekfRollPitchYaw')">C:\Users\phili\OneDrive\UAV\State Estimation\Matlab\codegen\lib\ekfRollPitchYaw</a></td></tr>
+<tr><td align="left" valign="top" class="td-linebottomrt">Make wrapper</td>
+<td align="left" valign="top" class="td-linebottomrt-link">.\ekfRollPitchYaw_rtw.bat</td></tr>
+<tr><td align="left" valign="top" class="td-linebottomrt">Make command</td>
+<td align="left" valign="top" class="td-linebottomrt-link">D:\R2016b\bin\win64\gmake  -f ekfRollPitchYaw_rtw.mk all</td></tr>
+</table>
+<br/>
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td align="left" class="td-linebottomrt-gray">Build Log</td></tr>
+<tr><td valign="top" class="td-script">
+<pre>
+<span class="td-line-number">    1   </span><span class="td-line-normal">Compilation suppressed: generating code only.</span>
+</pre>
+</td></tr></table>
+
+</div>
+</div>
+<!-- Begin MATLAB Code Panel -->
+<div class="center">
+<div class="center-title">
+<div class="ui-tabs-nav-item ui-tabs-selected">
+<span class="functiontitle">
+</span>
+<!-- Begin Call Sites -->
+<span id="callsiteselecttable" class="call-sites-tbl">
+<span id="callsiteselectlabel" class="filtered">Calls:</span>
+<select id="callsiteselect" onchange="callSiteChange(event)">
+<option value="callsiteprompt">Select a function call:</option>
+</select>
+</span>
+<!-- End Call Sites -->
+</div>
+</div>
+<div class="ui-tabs-panel">
+<div class="code" onmouseover="mcodeMouseOver(event);" onmouseout="mcodeMouseOut(event);"onclick="mcodeClick(event);">
+</div>
+</div>
+</div>
+<!-- End MATLAB Code Panel -->
+</body>
+</html>
