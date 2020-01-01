@@ -4,9 +4,12 @@
 #include <stdio.h>
 
 #include "BMX055.h"
+#include "MPRLS_SPI.h"
+#include "PCA9685.h"
 
 #include "LowPassFilter.h"
 #include "KalmanRollPitch.h"
+#include "PIController.h"
 
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c3;
@@ -23,6 +26,9 @@ osThreadId heartbeatTaskHandle;
 osThreadId accelerometerTaskHandle;
 osThreadId gyroscopeTaskHandle;
 osThreadId magnetometerTaskHandle;
+osThreadId barometerTaskHandle;
+osThreadId pwmTaskHandle;
+osThreadId controllerTaskHandle;
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -38,9 +44,14 @@ void startHeartbeatTask(void const * argument);
 void startAccelerometerTask(void const * argument);
 void startGyroscopeTask(void const * argument);
 void startMagnetometerTask(void const * argument);
+void startBarometerTask(void const * argument);
+void startPWMTask(void const * argument);
+void startControllerTask(void const * argument);
 
 /* Peripherals */
 BMX055 imu;
+MPRLS bar;
+PCA9685 pwm;
 
 /* Filters */
 LPFTwoPole lpfAcc[3];
@@ -51,6 +62,10 @@ LPFTwoPole lpfMag[3];
 KalmanRollPitch ekf;
 float psi;
 float psiMag;
+
+/* Controllers */
+PIController ctrlRoll;
+PIController ctrlPitch;
 
 int main(void)
 {
@@ -80,10 +95,25 @@ int main(void)
   osThreadDef(magnetometerTask, startMagnetometerTask, osPriorityHigh, 0, 128);
   magnetometerTaskHandle = osThreadCreate(osThread(magnetometerTask), NULL);
 
+  osThreadDef(barometerTask, startBarometerTask, osPriorityHigh, 0, 128);
+  barometerTaskHandle = osThreadCreate(osThread(barometerTask), NULL);
+
+  osThreadDef(pwmTask, startPWMTask, osPriorityHigh, 0, 128);
+  pwmTaskHandle = osThreadCreate(osThread(pwmTask), NULL);
+
+  osThreadDef(controllerTask, startControllerTask, osPriorityHigh, 0, 128);
+  controllerTaskHandle = osThreadCreate(osThread(controllerTask), NULL);
+
+
+
   /* Initialise peripherals */
   if (BMX055_Init(&imu, &hspi3, GPIOB, SPI3_CSACC_Pin, SPI3_CSGYR_Pin, SPI3_CSMAG_Pin) == 0) {
 	  HAL_GPIO_WritePin(GPIOC, LED_C_Pin, GPIO_PIN_SET);
   }
+
+  MPRLS_Init(&bar, &hspi2, GPIOC, SPI2_CS_Pin, GPIOC, BAR_NRST_Pin, GPIOC, INT_BAR_Pin);
+
+  PCA9685_Init(&pwm, &hi2c1, 50);
 
   /* Initialise filters */
   for (int n = 0; n < 3; n++) {
@@ -97,6 +127,10 @@ int main(void)
   float Q[] = {0.00000573168f, 0.00000382112f};
   float R[] = {0.000067666f, 0.000067666f, 0.000067666f};
   KalmanRollPitch_Init(&ekf, PInit, Q, R);
+
+  /* Initialise controllers */
+  PI_Init(&ctrlRoll,  1000.0f, 50.0f, -250.0f, 250.0f);
+  PI_Init(&ctrlPitch, 1000.0f, 50.0f, -250.0f, 250.0f);
 
   osKernelStart();
 
@@ -133,7 +167,7 @@ void startAccelerometerTask(void const * argument)
 	  }
 
 	  /* Update Kalman filter */
-	  KalmanRollPitch_Update(&ekf, accFilt, 0.00f);
+	  uint8_t kalResult = KalmanRollPitch_Update(&ekf, accFilt, 0.00f);
 
 	  osDelay(16); /* Output data rate is 62.5 Hz */
 	}
@@ -153,7 +187,7 @@ void startGyroscopeTask(void const * argument)
 		/* Update Kalman filter */
 		KalmanRollPitch_Predict(&ekf, gyrFilt, 0.010f);
 
-		/* Update yaw complementary filter */
+		///* Update yaw complementary filter */
 		psi = 0.05f * psiMag + 0.95f * (psi + 0.01f * (sin(ekf.phi) * gyrFilt[1] + cos(ekf.phi) * gyrFilt[2]) / cos(ekf.theta));
 
 		osDelay(10); /* Output data rate is 100 Hz */
@@ -171,14 +205,70 @@ void startMagnetometerTask(void const * argument)
 		  magFilt[n] = LPFTwoPole_Update(&lpfMag[n], imu.mag[n]);
 		}
 
-		/* Estimate yaw angle using magnetometer readings */
-		float sp = sin(ekf.phi); float cp = cos(ekf.phi);
-								 float ct = cos(ekf.theta);
+		float sp = sin(ekf.phi);   float cp = cos(ekf.phi);
+		float st = sin(ekf.theta); float ct = cos(ekf.theta);
 
-		psiMag = atan2(-magFilt[1] * cp + magFilt[2] * sp,
-							magFilt[0] * ct + (magFilt[1] * sp + magFilt[2] * cp) * sin(ekf.theta));
+		/* De-rotate readings to flat plane */
+		float mx =  magFilt[0] * ct + magFilt[1] * st * sp + magFilt[2] * st * cp;
+		float my = 					  magFilt[1]	  * cp - magFilt[2]		 * sp;
+		float mz = -magFilt[0] * st + magFilt[1] * ct * sp + magFilt[2] * ct * cp;
+
+		/* Convert to unit vector */
+		float inorm = 1.0f / sqrt(mx * mx + my * my + mz * mz);
+		mx *= inorm;
+		my *= inorm;
+		mz *= inorm;
+
+		/* Estimate yaw angle */
+		psiMag = atan2(-my, mx);
 
 		osDelay(100); /* Output data rate is 10 Hz */
+	}
+}
+
+void startBarometerTask(void const * argument)
+{
+	for(;;) {
+		MPRLS_ReadPressure(&bar);
+
+		osDelay(20); /* 50 Hz */
+	}
+}
+
+/* PWM driver: Control motor outputs */
+void startPWMTask(void const * argument)
+{
+	for(;;) {
+		/* Limit PWM values and set PWM driver outputs */
+		for (int n = 0; n < 4; n++) {
+			if (pwm.setting[n] < 2048) {
+				pwm.setting[n] = 2048;
+			} else if (pwm.setting[n] > 4095) {
+				pwm.setting[n] = 4095;
+			}
+
+			PCA9685_Set(&pwm, n, pwm.setting[n]);
+		}
+
+		osDelay(20); /* 50 Hz */
+	}
+}
+
+void startControllerTask(void const * argument)
+{
+	for (;;) {
+		PI_Update(&ctrlRoll, 0.0f, ekf.phi, 0.010f);
+		PI_Update(&ctrlPitch, 0.0f, ekf.theta, 0.01f);
+
+		float base = 2048;
+		float throttle = 250;
+
+		pwm.setting[0] = (uint16_t) (base + throttle + ctrlRoll.output + ctrlPitch.output);
+		pwm.setting[1] = (uint16_t) (base + throttle - ctrlRoll.output + ctrlPitch.output);
+		pwm.setting[2] = (uint16_t) (base + throttle - ctrlRoll.output - ctrlPitch.output);
+		pwm.setting[3] = (uint16_t) (base + throttle + ctrlRoll.output - ctrlPitch.output);
+
+		osDelay(10); /* 100 Hz */
 	}
 }
 

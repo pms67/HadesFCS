@@ -24,14 +24,14 @@ typedef struct {
 	float psi;
 	float P[9];
 	float Q[3];
-	float R[3];
+	float Racc;
 	float Rpsi;
 	float gyr[3];
 } KalmanRollPitchYaw;
 
-void KalmanRollPitchYaw_Init(KalmanRollPitchYaw *kal, float Pinit, float *Q, float *R, float Rpsi);
+void KalmanRollPitchYaw_Init(KalmanRollPitchYaw *kal, float Pinit, float *Q, float Racc, float Rpsi);
 void KalmanRollPitchYaw_Predict(KalmanRollPitchYaw *kal, float *gyr, float T);
-uint8_t KalmanRollPitchYaw_Update(KalmanRollPitchYaw *kal, float *acc, float Va);
-uint8_t KalmanRollPitchYaw_UpdateYaw(KalmanRollPitchYaw *kal, float psi);
+uint8_t KalmanRollPitchYaw_UpdateAcc(KalmanRollPitchYaw *kal, float *acc, float Va);
+uint8_t KalmanRollPitchYaw_UpdatePsi(KalmanRollPitchYaw *kal, float psi);
 
 #endif
