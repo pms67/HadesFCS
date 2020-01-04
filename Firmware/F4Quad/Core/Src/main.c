@@ -4,12 +4,14 @@
 #include <stdio.h>
 
 #include "BMX055.h"
-#include "MPRLS_SPI.h"
+//#include "MPRLS_SPI.h"
 #include "PCA9685.h"
 
 #include "LowPassFilter.h"
 #include "KalmanRollPitch.h"
 #include "PIController.h"
+
+#include "defines.h"
 
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c3;
@@ -27,6 +29,7 @@ osThreadId accelerometerTaskHandle;
 osThreadId gyroscopeTaskHandle;
 osThreadId magnetometerTaskHandle;
 osThreadId barometerTaskHandle;
+osThreadId rcTaskHandle;
 osThreadId pwmTaskHandle;
 osThreadId controllerTaskHandle;
 
@@ -45,18 +48,20 @@ void startAccelerometerTask(void const * argument);
 void startGyroscopeTask(void const * argument);
 void startMagnetometerTask(void const * argument);
 void startBarometerTask(void const * argument);
+void startRCTask(void const * argument);
 void startPWMTask(void const * argument);
 void startControllerTask(void const * argument);
 
 /* Peripherals */
 BMX055 imu;
-MPRLS bar;
+//MPRLS bar;
 PCA9685 pwm;
 
 /* Filters */
 LPFTwoPole lpfAcc[3];
 LPFTwoPole lpfGyr[3];
 LPFTwoPole lpfMag[3];
+LPFTwoPole lpfRC[4];
 
 /* State estimation */
 KalmanRollPitch ekf;
@@ -67,12 +72,67 @@ float psiMag;
 PIController ctrlRoll;
 PIController ctrlPitch;
 
+/* PWM input */
+volatile uint32_t pwmRisingEdgeStart[] = {0,0,0,0};
+volatile uint32_t pwmOnPeriod[] = {0,0,0,0};
+float rcThrottle, rcRoll, rcPitch, rcYaw;
+
+/* RC channel 1 interrupt */
+void EXTI0_IRQHandler(void)
+{
+	if(GPIOA->IDR & RC1_Pin) { /* Rising edge */
+		pwmRisingEdgeStart[0] = TIM5->CNT;
+	} else { /* Falling edge */
+		pwmOnPeriod[0] = (TIM5->CNT - pwmRisingEdgeStart[0]) / 2;
+	}
+
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+}
+
+/* RC channel 2 interrupt */
+void EXTI1_IRQHandler(void)
+{
+	if (GPIOA->IDR & RC2_Pin) {
+		pwmRisingEdgeStart[1] = TIM5->CNT;
+	} else { /* Falling edge */
+		pwmOnPeriod[1] = (TIM5->CNT - pwmRisingEdgeStart[1]) / 2;
+	}
+
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
+}
+
+/* RC channel 3 and 4 interrupts */
+void EXTI9_5_IRQHandler(void)
+{
+	if (EXTI->PR & (1 << 6)) {
+
+		if (GPIOB->IDR & RC3_Pin) {
+		  pwmRisingEdgeStart[2] = TIM5->CNT;
+		} else if ((GPIOB->IDR & RC3_Pin) == 0) {
+		  pwmOnPeriod[2] = (TIM5->CNT - pwmRisingEdgeStart[2]) / 2;
+		}
+		HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
+
+	} else if (EXTI->PR & (1 << 7)) {
+
+		if (GPIOB->IDR & RC4_Pin) {
+		  pwmRisingEdgeStart[3] = TIM5->CNT;
+		} else if ((GPIOB->IDR & RC4_Pin) == 0) {
+		  pwmOnPeriod[3] = (TIM5->CNT - pwmRisingEdgeStart[3]) / 2;
+		}
+		HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
+
+	}
+}
+
 int main(void)
 {
   HAL_Init();
 
+  /* Initialise clocks */
   SystemClock_Config();
 
+  /* Initialise hardware interfaces */
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_I2C3_Init();
@@ -83,6 +143,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
 
+  /* Create task handles */
   osThreadDef(heartbeatTask, startHeartbeatTask, osPriorityLow, 0, 128);
   heartbeatTaskHandle = osThreadCreate(osThread(heartbeatTask), NULL);
 
@@ -95,8 +156,11 @@ int main(void)
   osThreadDef(magnetometerTask, startMagnetometerTask, osPriorityHigh, 0, 128);
   magnetometerTaskHandle = osThreadCreate(osThread(magnetometerTask), NULL);
 
-  osThreadDef(barometerTask, startBarometerTask, osPriorityHigh, 0, 128);
-  barometerTaskHandle = osThreadCreate(osThread(barometerTask), NULL);
+  //osThreadDef(barometerTask, startBarometerTask, osPriorityHigh, 0, 128);
+  //barometerTaskHandle = osThreadCreate(osThread(barometerTask), NULL);
+
+  osThreadDef(rcTask, startRCTask, osPriorityNormal, 0, 128);
+  rcTaskHandle = osThreadCreate(osThread(rcTask), NULL);
 
   osThreadDef(pwmTask, startPWMTask, osPriorityHigh, 0, 128);
   pwmTaskHandle = osThreadCreate(osThread(pwmTask), NULL);
@@ -104,33 +168,42 @@ int main(void)
   osThreadDef(controllerTask, startControllerTask, osPriorityHigh, 0, 128);
   controllerTaskHandle = osThreadCreate(osThread(controllerTask), NULL);
 
-
-
   /* Initialise peripherals */
   if (BMX055_Init(&imu, &hspi3, GPIOB, SPI3_CSACC_Pin, SPI3_CSGYR_Pin, SPI3_CSMAG_Pin) == 0) {
 	  HAL_GPIO_WritePin(GPIOC, LED_C_Pin, GPIO_PIN_SET);
   }
 
-  MPRLS_Init(&bar, &hspi2, GPIOC, SPI2_CS_Pin, GPIOC, BAR_NRST_Pin, GPIOC, INT_BAR_Pin);
+  //MPRLS_Init(&bar, &hspi2, GPIOC, SPI2_CS_Pin, GPIOC, BAR_NRST_Pin, GPIOC, INT_BAR_Pin);
 
   PCA9685_Init(&pwm, &hi2c1, 50);
 
   /* Initialise filters */
-  for (int n = 0; n < 3; n++) {
-	  LPFTwoPole_Init(&lpfAcc[n], LPF_TYPE_BESSEL, 10.0f, 0.016f);
-	  LPFTwoPole_Init(&lpfGyr[n], LPF_TYPE_BESSEL, 32.0f, 0.010f);
-	  LPFTwoPole_Init(&lpfMag[n], LPF_TYPE_BESSEL,  5.0f, 0.100f);
+  int n;
+  for (n = 0; n < 3; n++) {
+	  LPFTwoPole_Init(&lpfAcc[n], LPF_TYPE_BESSEL, LPF_ACC_CUTOFF_HZ, 0.001f * SAMPLE_TIME_ACC_MS);
+	  LPFTwoPole_Init(&lpfGyr[n], LPF_TYPE_BESSEL, LPF_GYR_CUTOFF_HZ, 0.001f * SAMPLE_TIME_GYR_MS);
+	  LPFTwoPole_Init(&lpfMag[n], LPF_TYPE_BESSEL, LPF_MAG_CUTOFF_HZ, 0.001f * SAMPLE_TIME_MAG_MS);
+  }
+
+  for (n = 0; n < 4; n++) {
+	  LPFTwoPole_Init(&lpfRC[n], LPF_TYPE_BESSEL, LPF_RC_CUTOFF_HZ, 0.001f * SAMPLE_TIME_RC_MS);
   }
 
   /* Initialise Kalman filter */
-  float PInit = 10.0f;
-  float Q[] = {0.00000573168f, 0.00000382112f};
-  float R[] = {0.000067666f, 0.000067666f, 0.000067666f};
-  KalmanRollPitch_Init(&ekf, PInit, Q, R);
+  float Q[] = {3.0f * EKF_N_GYR, 2.0f * EKF_N_GYR};
+  float R[] = {EKF_N_ACC, EKF_N_ACC, EKF_N_ACC};
+  KalmanRollPitch_Init(&ekf, EKF_P_INIT, Q, R);
 
   /* Initialise controllers */
-  PI_Init(&ctrlRoll,  1000.0f, 50.0f, -250.0f, 250.0f);
-  PI_Init(&ctrlPitch, 1000.0f, 50.0f, -250.0f, 250.0f);
+  PI_Init(&ctrlRoll,  CTRL_ROLL_P, CTRL_ROLL_I, CTRL_ROLL_LIM_MIN, CTRL_ROLL_LIM_MAX);
+  PI_Init(&ctrlPitch, CTRL_PITCH_P, CTRL_PITCH_I, CTRL_PITCH_LIM_MIN, CTRL_PITCH_LIM_MAX);
+
+  /* Enable TIM5 for elapsed microseconds count (reading PWM RC input) */
+  __HAL_RCC_TIM5_CLK_ENABLE();
+  TIM5->PSC = HAL_RCC_GetPCLK1Freq()/1000000 - 1;
+  TIM5->CR1 = TIM_CR1_CEN;
+  TIM5->ARR = 0xFFFFFFFF;
+  TIM5->CNT = 0xFFFFFFFE; /* Dirty fix... PWM values are only correct once timer overruns once. */
 
   osKernelStart();
 
@@ -154,29 +227,45 @@ int main(void)
  *
  */
 
+uint32_t readingCountGyr = 0;
+float gyrAverage[] = {0.0f, 0.0f, 0.0f};
 
 void startAccelerometerTask(void const * argument)
 {
 	for (;;) {
-	  BMX055_ReadAccelerometer(&imu);
+		/* Acquire measurements from sensor */
+		BMX055_ReadAccelerometer(&imu);
 
-	  /* Filter measurements */
-	  float accFilt[3];
-	  for (int n = 0; n < 3; n++) {
+		/* Correct scale and bias errors */
+		imu.acc[0] = CALIB_ACC_SCALE_X * imu.acc[0] + CALIB_ACC_BIAS_X;
+		imu.acc[1] = CALIB_ACC_SCALE_Y * imu.acc[1] + CALIB_ACC_BIAS_Y;
+		imu.acc[2] = CALIB_ACC_SCALE_Z * imu.acc[2] + CALIB_ACC_BIAS_Z;
+
+		/* Filter measurements */
+		float accFilt[3];
+		for (int n = 0; n < 3; n++) {
 		  accFilt[n] = LPFTwoPole_Update(&lpfAcc[n], imu.acc[n]);
-	  }
+		}
 
-	  /* Update Kalman filter */
-	  uint8_t kalResult = KalmanRollPitch_Update(&ekf, accFilt, 0.00f);
+		/* Update Kalman filter */
+		KalmanRollPitch_Update(&ekf, accFilt, 0.001f * SAMPLE_TIME_ACC_MS);
 
-	  osDelay(16); /* Output data rate is 62.5 Hz */
+		osDelay(SAMPLE_TIME_ACC_MS); /* Output data rate is 62.5 Hz */
 	}
 }
+
 
 void startGyroscopeTask(void const * argument)
 {
 	for (;;) {
+		/* Acquire measurements from sensor */
 		BMX055_ReadGyroscope(&imu);
+
+		/* Calculate mean value */
+		readingCountGyr++;
+		for (int n = 0; n < 3; n++) {
+			gyrAverage[n] = (gyrAverage[n] * (readingCountGyr - 1) + imu.gyr[n]) / ((float) readingCountGyr);
+		}
 
 		/* Filter measurements */
 		float gyrFilt[3];
@@ -185,18 +274,19 @@ void startGyroscopeTask(void const * argument)
 		}
 
 		/* Update Kalman filter */
-		KalmanRollPitch_Predict(&ekf, gyrFilt, 0.010f);
+		KalmanRollPitch_Predict(&ekf, gyrFilt, 0.001f * SAMPLE_TIME_GYR_MS);
 
 		///* Update yaw complementary filter */
-		psi = 0.05f * psiMag + 0.95f * (psi + 0.01f * (sin(ekf.phi) * gyrFilt[1] + cos(ekf.phi) * gyrFilt[2]) / cos(ekf.theta));
+		psi = CF_ALPHA * psiMag + (1.0f - CF_ALPHA) * (psi + 0.001f * SAMPLE_TIME_GYR_MS * (sin(ekf.phi) * gyrFilt[1] + cos(ekf.phi) * gyrFilt[2]) / cos(ekf.theta));
 
-		osDelay(10); /* Output data rate is 100 Hz */
+		osDelay(SAMPLE_TIME_GYR_MS);
 	}
 }
 
 void startMagnetometerTask(void const * argument)
 {
 	for (;;) {
+		/* Acquire measurements from sensor */
 		BMX055_ReadMagnetometer(&imu);
 
 		/* Filter measurements */
@@ -222,16 +312,64 @@ void startMagnetometerTask(void const * argument)
 		/* Estimate yaw angle */
 		psiMag = atan2(-my, mx);
 
-		osDelay(100); /* Output data rate is 10 Hz */
+		osDelay(SAMPLE_TIME_MAG_MS);
 	}
 }
 
+/*
 void startBarometerTask(void const * argument)
 {
+	uint8_t dataRequested = 0;
 	for(;;) {
-		MPRLS_ReadPressure(&bar);
+		if (dataRequested == 1) {
+			if (MPRLS_DataReady(&bar) == 1) {
+				MPRLS_ReadPressure(&bar);
+				dataRequested = 0;
+			}
+		} else {
+			MPRLS_RequestData(&bar);
+			dataRequested = 1;
+		}
 
-		osDelay(20); /* 50 Hz */
+		osDelay(SAMPLE_TIME_BAR_MS);
+	}
+}
+*/
+
+void startRCTask(void const * argument) {
+	for(;;) {
+		/* Filter radio control inputs */
+		rcThrottle =  0.001f * LPFTwoPole_Update(&lpfRC[0], (float) pwmOnPeriod[3]) - 1.0f; /* Min:  0, Max: 1 */
+		rcRoll	   =  0.002f * LPFTwoPole_Update(&lpfRC[1], (float) pwmOnPeriod[1]) - 3.0f; /* Min: -1, Max: 1 */
+		rcPitch	   = -0.002f * LPFTwoPole_Update(&lpfRC[2], (float) pwmOnPeriod[2]) + 3.0f; /* Min: -1, Max: 1 */
+		rcYaw      =  0.002f * LPFTwoPole_Update(&lpfRC[3], (float) pwmOnPeriod[0]) - 3.0f; /* Min: -1, Max: 1 */
+
+		/* Constrain values */
+		if (rcThrottle < 0.0f) {
+			rcThrottle = 0.0f;
+		} else if (rcThrottle > 1.0f) {
+			rcThrottle = 1.0f;
+		}
+
+		if (rcRoll < -1.0f) {
+			rcRoll = -1.0f;
+		} else if (rcRoll > 1.0f) {
+			rcRoll =  1.0f;
+		}
+
+		if (rcPitch < -1.0f) {
+			rcPitch = -1.0f;
+		} else if (rcPitch > 1.0f) {
+			rcPitch =  1.0f;
+		}
+
+		if (rcYaw < -1.0f) {
+			rcYaw = -1.0f;
+		} else if (rcYaw > 1.0f) {
+			rcYaw =  1.0f;
+		}
+
+		osDelay(SAMPLE_TIME_RC_MS); /* 100 Hz */
 	}
 }
 
@@ -239,36 +377,45 @@ void startBarometerTask(void const * argument)
 void startPWMTask(void const * argument)
 {
 	for(;;) {
-		/* Limit PWM values and set PWM driver outputs */
 		for (int n = 0; n < 4; n++) {
-			if (pwm.setting[n] < 2048) {
-				pwm.setting[n] = 2048;
-			} else if (pwm.setting[n] > 4095) {
-				pwm.setting[n] = 4095;
+			/* Limit PWM values */
+			if (pwm.setting[n] > PWM_MAX_MICROS) {
+				pwm.setting[n] = PWM_MAX_MICROS;
+			} else if (pwm.setting[n] < PWM_BASE_MICROS) {
+				pwm.setting[n] = PWM_BASE_MICROS;
 			}
 
-			PCA9685_Set(&pwm, n, pwm.setting[n]);
+			/* Send microsecond settings to PWM driver */
+			PCA9685_SetMicros(&pwm, n, pwm.setting[n]);
 		}
 
-		osDelay(20); /* 50 Hz */
+		osDelay(SAMPLE_TIME_PWM_MS);
 	}
 }
 
 void startControllerTask(void const * argument)
 {
+
 	for (;;) {
-		PI_Update(&ctrlRoll, 0.0f, ekf.phi, 0.010f);
-		PI_Update(&ctrlPitch, 0.0f, ekf.theta, 0.01f);
+		/* Calculate throttle microseconds */
+		int16_t throttleOutput = (uint16_t) (PWM_THR_LIMIT * rcThrottle);
+		if (throttleOutput > PWM_THR_LIMIT) {
+			throttleOutput = PWM_THR_LIMIT;
+		} else if (throttleOutput < 0) {
+			throttleOutput = 0;
+		}
 
-		float base = 2048;
-		float throttle = 250;
+		/* Get roll and pitch controller outputs */
+		int16_t rollOutput  = (int16_t) (PWM_MICROS_PER_UNIT_FORCE * PI_Update(&ctrlRoll,  rcRoll  * 0.17453292519f, ekf.phi,   0.001f * SAMPLE_TIME_CTRL_MS));
+		int16_t pitchOutput = (int16_t) (PWM_MICROS_PER_UNIT_FORCE * PI_Update(&ctrlPitch, rcPitch * 0.17453292519f, ekf.theta, 0.001f * SAMPLE_TIME_CTRL_MS));
 
-		pwm.setting[0] = (uint16_t) (base + throttle + ctrlRoll.output + ctrlPitch.output);
-		pwm.setting[1] = (uint16_t) (base + throttle - ctrlRoll.output + ctrlPitch.output);
-		pwm.setting[2] = (uint16_t) (base + throttle - ctrlRoll.output - ctrlPitch.output);
-		pwm.setting[3] = (uint16_t) (base + throttle + ctrlRoll.output - ctrlPitch.output);
+		/* Motor mixing (0 = Front Left, 1 = Front Right, 2 = Rear Right, 3 = Rear Left) */
+		pwm.setting[0] = (uint16_t) (PWM_BASE_MICROS + throttleOutput + rollOutput + pitchOutput);
+		pwm.setting[1] = (uint16_t) (PWM_BASE_MICROS + throttleOutput - rollOutput + pitchOutput);
+		pwm.setting[2] = (uint16_t) (PWM_BASE_MICROS + throttleOutput - rollOutput - pitchOutput);
+		pwm.setting[3] = (uint16_t) (PWM_BASE_MICROS + throttleOutput + rollOutput - pitchOutput);
 
-		osDelay(10); /* 100 Hz */
+		osDelay(SAMPLE_TIME_CTRL_MS);
 	}
 }
 
@@ -277,23 +424,9 @@ void startHeartbeatTask(void const * argument)
 {
 	for(;;) {
 	  HAL_GPIO_TogglePin(GPIOC, LED_D_Pin);
-	  osDelay(500);
+	  osDelay(SAMPLE_TIME_LED_MS);
 	}
 }
-
-
-/*
- *
- *
- *
- *
- * CONFIG FUNCTIONS
- *
- *
- *
- *
- */
-
 
 /**
   * @brief System Clock Configuration
@@ -658,12 +791,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA0 PA1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  /*Configure GPIO pins : RC1_Pin RC2_Pin */
+  GPIO_InitStruct.Pin = RC1_Pin|RC2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : SPI1_CS_Pin */
@@ -680,13 +811,21 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB6 PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  /*Configure GPIO pins : RC3_Pin RC4_Pin */
+  GPIO_InitStruct.Pin = RC3_Pin|RC4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF2_TIM4;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 

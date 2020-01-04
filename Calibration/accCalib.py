@@ -8,13 +8,13 @@ aXmax = float(input("Xmax:"))
 aYmax = float(input("Ymax:"))
 aZmax = float(input("Zmax:"))
 
-mX = (aXmax - aXmin) / 19.62
-mY = (aYmax - aYmin) / 19.62
-mZ = (aZmax - aZmin) / 19.62
+mX = (aXmax - aXmin) / (2 * 9.80655)
+mY = (aYmax - aYmin) / (2 * 9.80655)
+mZ = (aZmax - aZmin) / (2 * 9.80655)
 
-cX = 9.81 - mX * aXmax
-cY = 9.81 - mY * aYmax
-cZ = 9.81 - mZ * aZmax
+cX = 9.80655 - mX * aXmax
+cY = 9.80655 - mY * aYmax
+cZ = 9.80655 - mZ * aZmax
 
 print("Accelerometer scale and bias equations:")
 print("aX = " + str(mX) + " * aX' + " + str(cX))

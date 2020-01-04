@@ -72,6 +72,12 @@ void Error_Handler(void);
 #define LED_C_GPIO_Port GPIOC
 #define LED_D_Pin GPIO_PIN_3
 #define LED_D_GPIO_Port GPIOC
+#define RC1_Pin GPIO_PIN_0
+#define RC1_GPIO_Port GPIOA
+#define RC1_EXTI_IRQn EXTI0_IRQn
+#define RC2_Pin GPIO_PIN_1
+#define RC2_GPIO_Port GPIOA
+#define RC2_EXTI_IRQn EXTI1_IRQn
 #define SPI1_CS_Pin GPIO_PIN_4
 #define SPI1_CS_GPIO_Port GPIOA
 #define FLASH_NWP_Pin GPIO_PIN_4
@@ -90,6 +96,12 @@ void Error_Handler(void);
 #define SPI3_CSGYR_GPIO_Port GPIOB
 #define SPI3_CSMAG_Pin GPIO_PIN_5
 #define SPI3_CSMAG_GPIO_Port GPIOB
+#define RC3_Pin GPIO_PIN_6
+#define RC3_GPIO_Port GPIOB
+#define RC3_EXTI_IRQn EXTI9_5_IRQn
+#define RC4_Pin GPIO_PIN_7
+#define RC4_GPIO_Port GPIOB
+#define RC4_EXTI_IRQn EXTI9_5_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

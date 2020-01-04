@@ -45,7 +45,14 @@ void PCA9685_Init(PCA9685 *pca, I2C_HandleTypeDef *I2Chandle, uint8_t pwmFreq) {
 	}
 }
 
-void PCA9685_Set(PCA9685 *pca, uint8_t channel, uint16_t val) {
+void PCA9685_SetMicros(PCA9685 *pca, uint8_t channel, uint16_t micros) {
+	float pulseLength = 1000000.0f * (pca->preScale + 1) / ((float) PCA9685_OSC_FREQ);
+	uint16_t pulse = (uint16_t) (micros / pulseLength);
+
+	PCA9685_SetPWM(pca, channel, 0, pulse);
+}
+
+void PCA9685_SetPulseWidth(PCA9685 *pca, uint8_t channel, uint16_t val) {
 	/* Limit */
 	if (val > 4095) {
 		val = 4095;
@@ -60,14 +67,6 @@ void PCA9685_Set(PCA9685 *pca, uint8_t channel, uint16_t val) {
 	}
 
 	pca->setting[channel] = val;
-}
-
-void PCA9685_SetAll(PCA9685 *pca) {
-	int channel;
-
-	for (channel = 0; channel < 8; channel++) {
-		PCA9685_Set(pca, channel, pca->setting[channel]);
-	}
 }
 
 void PCA9685_SetPWM(PCA9685 *pca, uint8_t channel, uint16_t on, uint16_t off) {

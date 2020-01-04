@@ -20,8 +20,8 @@ typedef struct {
 } PCA9685;
 
 void PCA9685_Init(PCA9685 *pca, I2C_HandleTypeDef *I2Chandle, uint8_t pwmFreq);
-void PCA9685_Set(PCA9685 *pca, uint8_t channel, uint16_t val);
-void PCA9685_SetAll(PCA9685 *pca);
+void PCA9685_SetMicros(PCA9685 *pca, uint8_t channel, uint16_t micros);
+void PCA9685_SetPulseWidth(PCA9685 *pca, uint8_t channel, uint16_t val);
 void PCA9685_SetPWM(PCA9685 *pca, uint8_t channel, uint16_t on, uint16_t off);
 
 #endif

@@ -20,6 +20,7 @@ void MPRLS_Init(MPRLS *bar, SPI_HandleTypeDef *spiHandler,
 				   GPIO_TypeDef *eocPinBank, uint16_t eocPin);
 void MPRLS_Reset(MPRLS *bar);
 uint8_t MPRLS_ReadPressure(MPRLS *bar);
+uint8_t MPRLS_RequestData(MPRLS *bar);
 uint8_t MPRLS_DataReady(MPRLS *bar);
 
 #endif

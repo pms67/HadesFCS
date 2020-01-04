@@ -51,6 +51,23 @@ uint8_t MPRLS_ReadPressure(MPRLS *bar) {
 	return status;
 }
 
+uint8_t MPRLS_RequestData(MPRLS *bar) {
+	/* Select chip */
+	HAL_GPIO_WritePin(bar->csPinBank, bar->csPin, GPIO_PIN_RESET);
+
+	uint8_t data[] = {0xAA, 0x00, 0x00};
+	if (HAL_SPI_Transmit(bar->spiHandler, data, 3, HAL_MAX_DELAY) != HAL_OK) {
+		/* Transmission did not succeed, disable CS and return zero */
+		HAL_GPIO_WritePin(bar->csPinBank, bar->csPin, GPIO_PIN_SET);
+		return 0;
+	}
+
+	/* Pull CS high to deselect chip */
+	HAL_GPIO_WritePin(bar->csPinBank, bar->csPin, GPIO_PIN_SET);
+
+	return 1;
+}
+
 uint8_t MPRLS_DataReady(MPRLS *bar) {
 	return HAL_GPIO_ReadPin(bar->eocPinBank, bar->eocPin);
 }
