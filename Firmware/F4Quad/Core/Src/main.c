@@ -76,6 +76,7 @@ PIController ctrlPitch;
 volatile uint32_t pwmRisingEdgeStart[] = {0,0,0,0};
 volatile uint32_t pwmOnPeriod[] = {0,0,0,0};
 float rcThrottle, rcRoll, rcPitch, rcYaw;
+uint8_t running = 0;
 
 /* RC channel 1 interrupt */
 void EXTI0_IRQHandler(void)
@@ -143,6 +144,13 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
 
+  /* Enable TIM5 for elapsed microseconds count (reading PWM RC input) */
+  __HAL_RCC_TIM5_CLK_ENABLE();
+  TIM5->PSC = HAL_RCC_GetPCLK1Freq()/1000000 - 1;
+  TIM5->CR1 = TIM_CR1_CEN;
+  TIM5->ARR = 0xFFFFFFFF;
+  TIM5->CNT = 0xFFFFFFFE; /* Dirty fix... PWM values are only correct once timer overruns once. */
+
   /* Create task handles */
   osThreadDef(heartbeatTask, startHeartbeatTask, osPriorityLow, 0, 128);
   heartbeatTaskHandle = osThreadCreate(osThread(heartbeatTask), NULL);
@@ -175,7 +183,24 @@ int main(void)
 
   //MPRLS_Init(&bar, &hspi2, GPIOC, SPI2_CS_Pin, GPIOC, BAR_NRST_Pin, GPIOC, INT_BAR_Pin);
 
+  /* Initialise PMW driver */
   PCA9685_Init(&pwm, &hi2c1, 50);
+
+  PCA9685_SetMicros(&pwm, 0, 0);
+  PCA9685_SetMicros(&pwm, 1, 0);
+  PCA9685_SetMicros(&pwm, 2, 0);
+  PCA9685_SetMicros(&pwm, 3, 0);
+
+  HAL_Delay(1000);
+
+  /* Arm motors */
+  PCA9685_SetMicros(&pwm, 0, 500);
+  PCA9685_SetMicros(&pwm, 1, 500);
+  PCA9685_SetMicros(&pwm, 2, 500);
+  PCA9685_SetMicros(&pwm, 3, 500);
+  HAL_Delay(1000);
+
+  running = 1;
 
   /* Initialise filters */
   int n;
@@ -198,12 +223,8 @@ int main(void)
   PI_Init(&ctrlRoll,  CTRL_ROLL_P, CTRL_ROLL_I, CTRL_ROLL_LIM_MIN, CTRL_ROLL_LIM_MAX);
   PI_Init(&ctrlPitch, CTRL_PITCH_P, CTRL_PITCH_I, CTRL_PITCH_LIM_MIN, CTRL_PITCH_LIM_MAX);
 
-  /* Enable TIM5 for elapsed microseconds count (reading PWM RC input) */
-  __HAL_RCC_TIM5_CLK_ENABLE();
-  TIM5->PSC = HAL_RCC_GetPCLK1Freq()/1000000 - 1;
-  TIM5->CR1 = TIM_CR1_CEN;
-  TIM5->ARR = 0xFFFFFFFF;
-  TIM5->CNT = 0xFFFFFFFE; /* Dirty fix... PWM values are only correct once timer overruns once. */
+
+
 
   osKernelStart();
 
@@ -276,7 +297,7 @@ void startGyroscopeTask(void const * argument)
 		/* Update Kalman filter */
 		KalmanRollPitch_Predict(&ekf, gyrFilt, 0.001f * SAMPLE_TIME_GYR_MS);
 
-		///* Update yaw complementary filter */
+		/* Update yaw complementary filter */
 		psi = CF_ALPHA * psiMag + (1.0f - CF_ALPHA) * (psi + 0.001f * SAMPLE_TIME_GYR_MS * (sin(ekf.phi) * gyrFilt[1] + cos(ekf.phi) * gyrFilt[2]) / cos(ekf.theta));
 
 		osDelay(SAMPLE_TIME_GYR_MS);
@@ -288,6 +309,12 @@ void startMagnetometerTask(void const * argument)
 	for (;;) {
 		/* Acquire measurements from sensor */
 		BMX055_ReadMagnetometer(&imu);
+
+		/* Convert to unit vector */
+		float inorm = 1.0f / sqrt(imu.mag[0] * imu.mag[0] + imu.mag[1] * imu.mag[1] + imu.mag[2] * imu.mag[2]);
+		imu.mag[0] *= inorm;
+		imu.mag[1] *= inorm;
+		imu.mag[2] *= inorm;
 
 		/* Filter measurements */
 		float magFilt[3];
@@ -301,16 +328,10 @@ void startMagnetometerTask(void const * argument)
 		/* De-rotate readings to flat plane */
 		float mx =  magFilt[0] * ct + magFilt[1] * st * sp + magFilt[2] * st * cp;
 		float my = 					  magFilt[1]	  * cp - magFilt[2]		 * sp;
-		float mz = -magFilt[0] * st + magFilt[1] * ct * sp + magFilt[2] * ct * cp;
-
-		/* Convert to unit vector */
-		float inorm = 1.0f / sqrt(mx * mx + my * my + mz * mz);
-		mx *= inorm;
-		my *= inorm;
-		mz *= inorm;
+		//float mz = -magFilt[0] * st + magFilt[1] * ct * sp + magFilt[2] * ct * cp;
 
 		/* Estimate yaw angle */
-		psiMag = atan2(-my, mx);
+		psiMag = -atan2(my, mx);
 
 		osDelay(SAMPLE_TIME_MAG_MS);
 	}
@@ -344,6 +365,19 @@ void startRCTask(void const * argument) {
 		rcPitch	   = -0.002f * LPFTwoPole_Update(&lpfRC[2], (float) pwmOnPeriod[2]) + 3.0f; /* Min: -1, Max: 1 */
 		rcYaw      =  0.002f * LPFTwoPole_Update(&lpfRC[3], (float) pwmOnPeriod[0]) - 3.0f; /* Min: -1, Max: 1 */
 
+		/* Apply deadband to roll, pitch, and yaw setpoints (to avoid jittering at zero angle setpoints) */
+		if (rcRoll >= -RC_DEADBAND && rcRoll <= RC_DEADBAND) {
+			rcRoll = 0.0f;
+		}
+
+		if (rcPitch >= -RC_DEADBAND && rcPitch <= RC_DEADBAND) {
+			rcPitch = 0.0f;
+		}
+
+		if (rcYaw >= -RC_DEADBAND && rcPitch <= RC_DEADBAND) {
+			rcYaw = 0.0f;
+		}
+
 		/* Constrain values */
 		if (rcThrottle < 0.0f) {
 			rcThrottle = 0.0f;
@@ -369,7 +403,12 @@ void startRCTask(void const * argument) {
 			rcYaw =  1.0f;
 		}
 
-		osDelay(SAMPLE_TIME_RC_MS); /* 100 Hz */
+		/* Convert RC commands to setpoints */
+		rcRoll  *= RC_TO_ROLL_ANGLE_SETPOINT;
+		rcPitch *= RC_TO_PITCH_ANGLE_SETPOINT;
+		rcYaw   *= RC_TO_YAW_RATE_SETPOINT;
+
+		osDelay(SAMPLE_TIME_RC_MS);
 	}
 }
 
@@ -377,15 +416,8 @@ void startRCTask(void const * argument) {
 void startPWMTask(void const * argument)
 {
 	for(;;) {
+		/* Send microsecond settings to PWM driver */
 		for (int n = 0; n < 4; n++) {
-			/* Limit PWM values */
-			if (pwm.setting[n] > PWM_MAX_MICROS) {
-				pwm.setting[n] = PWM_MAX_MICROS;
-			} else if (pwm.setting[n] < PWM_BASE_MICROS) {
-				pwm.setting[n] = PWM_BASE_MICROS;
-			}
-
-			/* Send microsecond settings to PWM driver */
 			PCA9685_SetMicros(&pwm, n, pwm.setting[n]);
 		}
 
@@ -397,7 +429,14 @@ void startControllerTask(void const * argument)
 {
 
 	for (;;) {
-		/* Calculate throttle microseconds */
+		/* Disable motors if throttle is below threshold */
+		if (rcThrottle < 0.1f) {
+			running = 0;
+		} else {
+			running = 1;
+		}
+
+		/* Calculate throttle PWM value */
 		int16_t throttleOutput = (uint16_t) (PWM_THR_LIMIT * rcThrottle);
 		if (throttleOutput > PWM_THR_LIMIT) {
 			throttleOutput = PWM_THR_LIMIT;
@@ -405,15 +444,48 @@ void startControllerTask(void const * argument)
 			throttleOutput = 0;
 		}
 
-		/* Get roll and pitch controller outputs */
-		int16_t rollOutput  = (int16_t) (PWM_MICROS_PER_UNIT_FORCE * PI_Update(&ctrlRoll,  rcRoll  * 0.17453292519f, ekf.phi,   0.001f * SAMPLE_TIME_CTRL_MS));
-		int16_t pitchOutput = (int16_t) (PWM_MICROS_PER_UNIT_FORCE * PI_Update(&ctrlPitch, rcPitch * 0.17453292519f, ekf.theta, 0.001f * SAMPLE_TIME_CTRL_MS));
+		/* Angle controllers (Desired angle to angular rate) */
+		float rollRateSetpoint  = PI_Update(&ctrlRoll,  rcRoll,  ekf.phi,   0.001f * SAMPLE_TIME_CTRL_MS);
+		float pitchRateSetpoint = PI_Update(&ctrlPitch, rcPitch, ekf.theta, 0.001f * SAMPLE_TIME_CTRL_MS);
 
-		/* Motor mixing (0 = Front Left, 1 = Front Right, 2 = Rear Right, 3 = Rear Left) */
-		pwm.setting[0] = (uint16_t) (PWM_BASE_MICROS + throttleOutput + rollOutput + pitchOutput);
-		pwm.setting[1] = (uint16_t) (PWM_BASE_MICROS + throttleOutput - rollOutput + pitchOutput);
-		pwm.setting[2] = (uint16_t) (PWM_BASE_MICROS + throttleOutput - rollOutput - pitchOutput);
-		pwm.setting[3] = (uint16_t) (PWM_BASE_MICROS + throttleOutput + rollOutput - pitchOutput);
+		/* Rate controllers (Desired angular rate to force (...to PWM...)) */
+		int16_t rollOutput  = (int16_t) (PWM_MICROS_PER_UNIT_FORCE * (CTRL_ROLL_D  * (rollRateSetpoint  - lpfGyr[0].out)));
+		int16_t pitchOutput = (int16_t) (PWM_MICROS_PER_UNIT_FORCE * (CTRL_PITCH_D * (pitchRateSetpoint - lpfGyr[1].out)));
+
+		/* Limit controller PWM values */
+		if (rollOutput > 200) {
+			rollOutput = 200;
+		} else if (rollOutput < -200) {
+			rollOutput = -200;
+		}
+
+		if (pitchOutput > 200) {
+			pitchOutput = 200;
+		} else if (pitchOutput < -200) {
+			pitchOutput = -200;
+		}
+
+		if (running == 1) {
+			/* Motor mixing (0 = Front Left, 1 = Front Right, 2 = Rear Right, 3 = Rear Left) */
+			pwm.setting[0] = (uint16_t) (PWM_BASE_MICROS + throttleOutput + rollOutput + pitchOutput);
+			pwm.setting[1] = (uint16_t) (PWM_BASE_MICROS + throttleOutput - rollOutput + pitchOutput);
+			pwm.setting[2] = (uint16_t) (PWM_BASE_MICROS + throttleOutput - rollOutput - pitchOutput);
+			pwm.setting[3] = (uint16_t) (PWM_BASE_MICROS + throttleOutput + rollOutput - pitchOutput);
+
+			/* Limit PWM values */
+			for (int n = 0; n < 4; n++) {
+				if (pwm.setting[n] > PWM_MAX_MICROS) {
+					pwm.setting[n] = PWM_MAX_MICROS;
+				} else if (pwm.setting[n] < PWM_BASE_MICROS) {
+					pwm.setting[n] = PWM_BASE_MICROS;
+				}
+			}
+		} else {
+			pwm.setting[0] = 500;
+			pwm.setting[1] = 500;
+			pwm.setting[2] = 500;
+			pwm.setting[3] = 500;
+		}
 
 		osDelay(SAMPLE_TIME_CTRL_MS);
 	}
