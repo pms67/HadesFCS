@@ -1,0 +1,29 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# MSS3-V-T_R
+#
+DEF MSS3-V-T_R S 0 30 Y Y 1 F N
+F0 "S" 850 300 50 H V L CNN
+F1 "MSS3-V-T_R" 850 200 50 H V L CNN
+F2 "MSS3VTR" 850 100 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/1/MSS3-V-T_R.pdf" 850 0 50 H I L CNN
+F4 "Slide Switches Slide Type 1P2T (1.4mm height)" 850 -100 50 H I L CNN "Description"
+F5 "1.4" 850 -200 50 H I L CNN "Height"
+F6 "113-MSS3-V-T/R" 850 -300 50 H I L CNN "Mouser2 Part Number"
+F7 "https://www.mouser.com/Search/Refine.aspx?Keyword=113-MSS3-V-T%2FR" 850 -400 50 H I L CNN "Mouser2 Price/Stock"
+F8 "Diptronics" 850 -500 50 H I L CNN "Manufacturer_Name"
+F9 "MSS3-V-T/R" 850 -600 50 H I L CNN "Manufacturer_Part_Number"
+DRAW
+P 5 0 1 6 200 100 800 100 800 -400 200 -400 200 100 N
+X NO A1 0 0 200 R 50 50 0 0 U
+X COM B1 0 -100 200 R 50 50 0 0 U
+X NC C1 0 -200 200 R 50 50 0 0 U
+X MP1 MP1 0 -300 200 R 50 50 0 0 U
+X MP2 MP2 1000 0 200 L 50 50 0 0 U
+X MP3 MP3 1000 -100 200 L 50 50 0 0 U
+X MP4 MP4 1000 -200 200 L 50 50 0 0 U
+ENDDRAW
+ENDDEF
+#
+#End Library

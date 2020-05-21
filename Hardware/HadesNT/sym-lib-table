@@ -1,0 +1,8 @@
+(sym_lib_table
+  (lib (name STM32H750VBT6)(type Legacy)(uri ${KIPRJMOD}/lib/STM32H750VBT6.lib)(options "")(descr ""))
+  (lib (name BMX055)(type Legacy)(uri ${KIPRJMOD}/lib/BMX055.lib)(options "")(descr ""))
+  (lib (name SPL06-007)(type Legacy)(uri ${KIPRJMOD}/lib/SPL06-007.lib)(options "")(descr ""))
+  (lib (name MP2451DT-LF-Z)(type Legacy)(uri ${KIPRJMOD}/lib/MP2451DT-LF-Z.lib)(options "")(descr ""))
+  (lib (name AO4407A)(type Legacy)(uri ${KIPRJMOD}/lib/AO4407A.lib)(options "")(descr ""))
+  (lib (name MSS3-V-T_R)(type Legacy)(uri ${KIPRJMOD}/lib/MSS3-V-T_R.lib)(options "")(descr ""))
+)

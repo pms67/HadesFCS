@@ -1,0 +1,10 @@
+(fp_lib_table
+  (lib (name AO4407A)(type Legacy)(uri ${KIPRJMOD}/lib/AO4407A.mod)(options "")(descr ""))
+  (lib (name BMX055)(type Legacy)(uri ${KIPRJMOD}/lib/BMX055.mod)(options "")(descr ""))
+  (lib (name MP2451DT-LF-Z)(type Legacy)(uri ${KIPRJMOD}/lib/MP2451DT-LF-Z.mod)(options "")(descr ""))
+  (lib (name MSS3-V-T_R)(type Legacy)(uri ${KIPRJMOD}/lib/MSS3-V-T_R.mod)(options "")(descr ""))
+  (lib (name STM32H750VBT6)(type Legacy)(uri ${KIPRJMOD}/lib/STM32H750VBT6.mod)(options "")(descr ""))
+  (lib (name 10118193-0001LF)(type Legacy)(uri ${KIPRJMOD}/lib/10118193-0001LF.mod)(options "")(descr ""))
+  (lib (name MWSA0503-100MT)(type Legacy)(uri ${KIPRJMOD}/lib/MWSA0503-100MT.mod)(options "")(descr ""))
+  (lib (name HadesNTSilk)(type KiCad)(uri ${KIPRJMOD}/HadesNTSilk.pretty)(options "")(descr ""))
+)
