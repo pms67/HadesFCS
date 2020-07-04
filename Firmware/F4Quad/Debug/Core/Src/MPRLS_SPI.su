@@ -1,0 +1,5 @@
+MPRLS_SPI.c:3:6:MPRLS_Init	24	static
+MPRLS_SPI.c:20:6:MPRLS_Reset	16	static
+MPRLS_SPI.c:26:9:MPRLS_ReadPressure	32	static
+MPRLS_SPI.c:54:9:MPRLS_RequestData	24	static
+MPRLS_SPI.c:71:9:MPRLS_DataReady	16	static

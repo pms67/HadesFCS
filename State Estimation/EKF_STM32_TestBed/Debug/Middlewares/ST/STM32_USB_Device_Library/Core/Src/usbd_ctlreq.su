@@ -1,0 +1,15 @@
+usbd_def.h:306:26:SWAPBYTE	32	static
+usbd_ctlreq.c:100:20:USBD_StdDevReq	24	static
+usbd_ctlreq.c:163:20:USBD_StdItfReq	24	static
+usbd_ctlreq.c:214:20:USBD_StdEPReq	24	static
+usbd_ctlreq.c:380:13:USBD_GetDescriptor	24	static
+usbd_ctlreq.c:585:13:USBD_SetAddress	24	static
+usbd_ctlreq.c:626:27:USBD_SetConfig	24	static
+usbd_ctlreq.c:716:13:USBD_GetConfig	16	static
+usbd_ctlreq.c:750:13:USBD_GetStatus	16	static
+usbd_ctlreq.c:791:13:USBD_SetFeature	16	static
+usbd_ctlreq.c:808:13:USBD_ClrFeature	16	static
+usbd_ctlreq.c:836:6:USBD_ParseSetupRequest	24	static
+usbd_ctlreq.c:865:6:USBD_CtlError	16	static
+usbd_ctlreq.c:882:6:USBD_GetString	32	static
+usbd_ctlreq.c:917:16:USBD_GetLen	24	static

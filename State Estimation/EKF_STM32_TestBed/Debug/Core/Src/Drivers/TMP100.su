@@ -1,0 +1,2 @@
+TMP100.c:3:6:TMP100_Init	32	static
+TMP100.c:12:6:TMP100_Read	40	static

@@ -1,0 +1,4 @@
+PCA9685.c:3:6:PCA9685_Init	56	static
+PCA9685.c:48:6:PCA9685_SetMicros	24	static
+PCA9685.c:55:6:PCA9685_SetPulseWidth	16	static
+PCA9685.c:72:6:PCA9685_SetPWM	40	static

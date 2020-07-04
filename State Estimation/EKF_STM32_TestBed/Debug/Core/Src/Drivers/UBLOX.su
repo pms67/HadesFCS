@@ -1,0 +1,3 @@
+UBLOX.c:3:6:UBloxGPS_Init	24	static
+UBLOX.c:22:6:UBloxGPS_Reset	16	static
+UBLOX.c:29:9:UBloxGPS_PutBuf	16	static

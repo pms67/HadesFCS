@@ -1,0 +1,2 @@
+EKFQuat.c:4:6:EKFQuat_Init	48	static
+EKFQuat.c:37:6:EKFQuat_Update	976	static

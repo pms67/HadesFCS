@@ -1,0 +1,10 @@
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\bin\Debug\NAVCDataInterface.exe.config
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\bin\Debug\NAVCDataInterface.exe
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\bin\Debug\NAVCDataInterface.pdb
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\obj\Debug\NAVCDataInterface.csprojResolveAssemblyReference.cache
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\obj\Debug\NAVCDataInterface.frmMain.resources
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\obj\Debug\NAVCDataInterface.Properties.Resources.resources
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\obj\Debug\NAVCDataInterface.csproj.GenerateResource.Cache
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\obj\Debug\NAVCDataInterface.csproj.CoreCompileInputs.cache
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\obj\Debug\NAVCDataInterface.exe
+C:\Users\phili\OneDrive\UAV\Debug Software\NAVCDataInterface\NAVCDataInterface\obj\Debug\NAVCDataInterface.pdb

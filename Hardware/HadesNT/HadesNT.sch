@@ -36,23 +36,6 @@ F 3 "http://www.winbond.com/resource-files/w25q128jv_dtr%20revc%2003272018%20plu
 	1    0    0    -1  
 $EndComp
 $Comp
-L BMX055:BMX055 U6
-U 1 1 5EC4C561
-P 13150 7900
-F 0 "U6" H 14100 8350 50  0000 C CNN
-F 1 "BMX055" H 14150 6850 50  0000 C CNN
-F 2 "BMX055:LGA_PACKAGE_20_PINS" H 14200 8300 50  0001 L CNN
-F 3 "https://componentsearchengine.com//BMX055.pdf" H 14200 8200 50  0001 L CNN
-F 4 "Small versatile 9-axis sensor module" H 14200 8100 50  0001 L CNN "Description"
-F 5 "" H 14200 8000 50  0001 L CNN "Height"
-F 6 "262-BMX055" H 14200 7900 50  0001 L CNN "Mouser2 Part Number"
-F 7 "https://www.mouser.com/Search/Refine.aspx?Keyword=262-BMX055" H 14200 7800 50  0001 L CNN "Mouser2 Price/Stock"
-F 8 "Bosch Sensortec" H 14200 7700 50  0001 L CNN "Manufacturer_Name"
-F 9 "BMX055" H 14200 7600 50  0001 L CNN "Manufacturer_Part_Number"
-	1    13150 7900
-	1    0    0    -1  
-$EndComp
-$Comp
 L Analog_ADC:INA219AxDCN U1
 U 1 1 5EC4DC52
 P 4850 1450
@@ -176,30 +159,14 @@ Wire Wire Line
 Connection ~ 13650 6000
 Wire Wire Line
 	13650 6000 13650 5950
-Text GLabel 7950 8600 2    50   Input ~ 0
+Text GLabel 7200 8500 0    50   Input ~ 0
 SPI1_!CS
-Text GLabel 7950 8500 2    50   Input ~ 0
+Text GLabel 7200 8600 0    50   Input ~ 0
 SPI1_SCK
-Text GLabel 7950 8400 2    50   Input ~ 0
+Text GLabel 7200 8700 0    50   Input ~ 0
 SPI1_MISO
-Text GLabel 7950 8300 2    50   Input ~ 0
+Text GLabel 7200 8800 0    50   Input ~ 0
 SPI1_MOSI
-Wire Wire Line
-	7950 8300 7900 8300
-Wire Wire Line
-	7900 8300 7900 8100
-Wire Wire Line
-	7950 8400 7800 8400
-Wire Wire Line
-	7800 8400 7800 8100
-Wire Wire Line
-	7950 8500 7700 8500
-Wire Wire Line
-	7700 8500 7700 8100
-Wire Wire Line
-	7950 8600 7600 8600
-Wire Wire Line
-	7600 8600 7600 8100
 Text GLabel 8950 8700 2    50   Input ~ 0
 QSPI_CLK
 Text GLabel 8950 8300 2    50   Input ~ 0
@@ -232,8 +199,6 @@ Wire Wire Line
 	8500 8700 8500 8100
 NoConn ~ 8000 8100
 NoConn ~ 8100 8100
-NoConn ~ 8200 8100
-NoConn ~ 8300 8100
 NoConn ~ 8400 8100
 Text GLabel 7100 6100 0    50   Input ~ 0
 HSE_IN
@@ -455,13 +420,13 @@ USB_D-
 Text GLabel 14850 1700 2    50   Input ~ 0
 USB_D-
 Text GLabel 10100 5900 2    50   Input ~ 0
-TIM3_CH4
+TIM8_CH4
 Text GLabel 10100 6000 2    50   Input ~ 0
-TIM3_CH3
+TIM8_CH3
 Text GLabel 10100 6100 2    50   Input ~ 0
-TIM3_CH2
+TIM8_CH2
 Text GLabel 10100 6200 2    50   Input ~ 0
-TIM3_CH1
+TIM8_CH1
 Text GLabel 10100 6300 2    50   Input ~ 0
 TIM4_CH4
 Text GLabel 10100 6400 2    50   Input ~ 0
@@ -768,7 +733,7 @@ Connection ~ 14400 8500
 Wire Wire Line
 	14400 8500 14350 8500
 NoConn ~ 13650 7300
-Text GLabel 13700 9200 0    50   Input ~ 0
+Text GLabel 13550 9200 0    50   Input ~ 0
 SPI4_SCK
 Text GLabel 13150 7900 0    50   Input ~ 0
 SPI4_MISO
@@ -787,7 +752,6 @@ F 3 "" H 14350 8100 50  0001 C CNN
 	1    14350 8100
 	0    1    1    0   
 $EndComp
-NoConn ~ 13650 9100
 NoConn ~ 13150 8100
 NoConn ~ 14350 7900
 Text GLabel 13900 7250 2    50   Input ~ 0
@@ -832,8 +796,6 @@ Text GLabel 14350 8300 2    50   Input ~ 0
 GYR_!CS
 NoConn ~ 13850 9100
 Wire Wire Line
-	13700 9200 13750 9200
-Wire Wire Line
 	13750 9200 13750 9100
 Text GLabel 7100 5200 0    50   Input ~ 0
 GYR_!CS
@@ -846,13 +808,13 @@ Wire Wire Line
 	7550 3800 7700 3800
 Wire Wire Line
 	7700 3800 7700 4300
-Text GLabel 7100 5600 0    50   Input ~ 0
+Text GLabel 8550 3950 2    50   Input ~ 0
 GYR_INT
-Text GLabel 7100 5700 0    50   Input ~ 0
+Text GLabel 8550 4050 2    50   Input ~ 0
 ACC_INT
 Text GLabel 14350 8000 2    50   Input ~ 0
-MAG_INT
-Text GLabel 7100 5800 0    50   Input ~ 0
+MAGD_DRDY
+Text GLabel 7850 9000 0    50   Input ~ 0
 MAG_INT
 $Comp
 L power:GND #PWR063
@@ -943,14 +905,6 @@ F 3 "~" H 8400 10200 50  0001 C CNN
 	1    8400 10200
 	1    0    0    -1  
 $EndComp
-Text GLabel 8200 9900 0    50   Input ~ 0
-TIM3_CH4
-Text GLabel 8200 10000 0    50   Input ~ 0
-TIM3_CH3
-Text GLabel 8200 10100 0    50   Input ~ 0
-TIM3_CH2
-Text GLabel 8200 10200 0    50   Input ~ 0
-TIM3_CH1
 Text GLabel 8200 10300 0    50   Input ~ 0
 TIM4_CH4
 Text GLabel 8200 10400 0    50   Input ~ 0
@@ -1555,75 +1509,69 @@ $EndComp
 $Comp
 L Device:C_Small C12
 U 1 1 5EE54D09
-P 14900 7750
-F 0 "C12" H 14992 7796 50  0000 L CNN
-F 1 "100n" H 14992 7705 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 14900 7750 50  0001 C CNN
-F 3 "~" H 14900 7750 50  0001 C CNN
-	1    14900 7750
+P 14950 7750
+F 0 "C12" H 15042 7796 50  0000 L CNN
+F 1 "100n" H 15042 7705 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 14950 7750 50  0001 C CNN
+F 3 "~" H 14950 7750 50  0001 C CNN
+	1    14950 7750
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:+3V3 #PWR069
 U 1 1 5EE54D0F
-P 14900 7650
-F 0 "#PWR069" H 14900 7500 50  0001 C CNN
-F 1 "+3V3" H 14915 7823 50  0000 C CNN
-F 2 "" H 14900 7650 50  0001 C CNN
-F 3 "" H 14900 7650 50  0001 C CNN
-	1    14900 7650
+P 14950 7650
+F 0 "#PWR069" H 14950 7500 50  0001 C CNN
+F 1 "+3V3" H 14965 7823 50  0000 C CNN
+F 2 "" H 14950 7650 50  0001 C CNN
+F 3 "" H 14950 7650 50  0001 C CNN
+	1    14950 7650
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR070
 U 1 1 5EE54D15
-P 14900 7850
-F 0 "#PWR070" H 14900 7600 50  0001 C CNN
-F 1 "GND" H 14905 7677 50  0000 C CNN
-F 2 "" H 14900 7850 50  0001 C CNN
-F 3 "" H 14900 7850 50  0001 C CNN
-	1    14900 7850
+P 14950 7850
+F 0 "#PWR070" H 14950 7600 50  0001 C CNN
+F 1 "GND" H 14955 7677 50  0000 C CNN
+F 2 "" H 14950 7850 50  0001 C CNN
+F 3 "" H 14950 7850 50  0001 C CNN
+	1    14950 7850
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:C_Small C13
 U 1 1 5EE59D6F
-P 14900 8550
-F 0 "C13" H 14992 8596 50  0000 L CNN
-F 1 "100n" H 14992 8505 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric" H 14900 8550 50  0001 C CNN
-F 3 "~" H 14900 8550 50  0001 C CNN
-	1    14900 8550
+P 14950 8550
+F 0 "C13" H 15042 8596 50  0000 L CNN
+F 1 "100n" H 15042 8505 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 14950 8550 50  0001 C CNN
+F 3 "~" H 14950 8550 50  0001 C CNN
+	1    14950 8550
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:+3V3 #PWR079
 U 1 1 5EE59D75
-P 14900 8450
-F 0 "#PWR079" H 14900 8300 50  0001 C CNN
-F 1 "+3V3" H 14915 8623 50  0000 C CNN
-F 2 "" H 14900 8450 50  0001 C CNN
-F 3 "" H 14900 8450 50  0001 C CNN
-	1    14900 8450
+P 14950 8450
+F 0 "#PWR079" H 14950 8300 50  0001 C CNN
+F 1 "+3V3" H 14965 8623 50  0000 C CNN
+F 2 "" H 14950 8450 50  0001 C CNN
+F 3 "" H 14950 8450 50  0001 C CNN
+	1    14950 8450
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR082
 U 1 1 5EE59D7B
-P 14900 8650
-F 0 "#PWR082" H 14900 8400 50  0001 C CNN
-F 1 "GND" H 14905 8477 50  0000 C CNN
-F 2 "" H 14900 8650 50  0001 C CNN
-F 3 "" H 14900 8650 50  0001 C CNN
-	1    14900 8650
+P 14950 8650
+F 0 "#PWR082" H 14950 8400 50  0001 C CNN
+F 1 "GND" H 14955 8477 50  0000 C CNN
+F 2 "" H 14950 8650 50  0001 C CNN
+F 3 "" H 14950 8650 50  0001 C CNN
+	1    14950 8650
 	1    0    0    -1  
 $EndComp
-Wire Notes Line
-	15250 9300 15250 7050
-Wire Notes Line
-	12650 7050 15250 7050
-Wire Notes Line
-	12650 9300 15250 9300
 $Comp
 L power:VDD #PWR010
 U 1 1 5EF3A9A4
@@ -2386,7 +2334,6 @@ Wire Notes Line
 	3850 2600 3850 5150
 Wire Notes Line
 	1100 5150 3850 5150
-NoConn ~ 8600 4300
 NoConn ~ 8700 4300
 NoConn ~ 8800 4300
 NoConn ~ 8900 4300
@@ -2417,35 +2364,31 @@ NoConn ~ 2400 8600
 $Comp
 L Device:R_Small R24
 U 1 1 5F429324
-P 2050 8400
-F 0 "R24" V 1950 8550 50  0000 R CNN
-F 1 "10k" V 1950 8400 50  0000 R CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 2050 8400 50  0001 C CNN
-F 3 "~" H 2050 8400 50  0001 C CNN
-	1    2050 8400
+P 1600 8400
+F 0 "R24" V 1500 8600 50  0000 R CNN
+F 1 "10k" V 1500 8400 50  0000 R CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 1600 8400 50  0001 C CNN
+F 3 "~" H 1600 8400 50  0001 C CNN
+	1    1600 8400
 	0    -1   -1   0   
 $EndComp
 $Comp
 L power:GND #PWR081
 U 1 1 5F42E20D
-P 2250 8550
-F 0 "#PWR081" H 2250 8300 50  0001 C CNN
-F 1 "GND" H 2250 8400 50  0000 C CNN
-F 2 "" H 2250 8550 50  0001 C CNN
-F 3 "" H 2250 8550 50  0001 C CNN
-	1    2250 8550
+P 2250 8800
+F 0 "#PWR081" H 2250 8550 50  0001 C CNN
+F 1 "GND" H 2250 8650 50  0000 C CNN
+F 2 "" H 2250 8800 50  0001 C CNN
+F 3 "" H 2250 8800 50  0001 C CNN
+	1    2250 8800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2250 8550 2250 8500
-Wire Wire Line
 	2250 8500 2400 8500
-Wire Wire Line
-	2150 8400 2400 8400
-Text GLabel 1850 8400 0    50   Input ~ 0
+Text GLabel 1400 8400 0    50   Input ~ 0
 BOOT0
 Wire Wire Line
-	1850 8400 1950 8400
+	1400 8400 1500 8400
 $Comp
 L power:+3V3 #PWR077
 U 1 1 5F4561C4
@@ -2461,30 +2404,11 @@ Wire Wire Line
 	2250 8250 2250 8300
 Wire Wire Line
 	2250 8300 2400 8300
-Wire Notes Line
-	3450 8000 3450 8750
 NoConn ~ 7100 6400
 NoConn ~ 7100 6500
 NoConn ~ 7100 6600
 NoConn ~ 7100 6700
-$Comp
-L STM32H750VBT6:STM32H750VBT6 U7
-U 1 1 5EC47253
-P 7100 5000
-F 0 "U7" H 9950 5450 50  0000 L CNN
-F 1 "STM32H750VBT6" H 9950 2150 50  0000 L CNN
-F 2 "STM32H750VBT6:QFP50P1600X1600X160-100N" H 9950 5500 50  0001 L CNN
-F 3 "https://www.st.com/resource/en/datasheet/stm32h750vb.pdf" H 9950 5400 50  0001 L CNN
-F 4 "ARM Microcontrollers - MCU High-performance and DSP with DP-FPU, Arm Cortex-M7 MCU with 128 Kbytes of Flash memory, 1MB RAM, 400 MHz CPU, L1 cache, external memory interface, JPEG codec, HW crypto, large set of peripherals" H 9950 5300 50  0001 L CNN "Description"
-F 5 "1.6" H 9950 5200 50  0001 L CNN "Height"
-F 6 "" H 9950 5100 50  0001 L CNN "Mouser2 Part Number"
-F 7 "" H 9950 5000 50  0001 L CNN "Mouser2 Price/Stock"
-F 8 "STMicroelectronics" H 9950 4900 50  0001 L CNN "Manufacturer_Name"
-F 9 "STM32H750VBT6" H 9950 4800 50  0001 L CNN "Manufacturer_Part_Number"
-	1    7100 5000
-	1    0    0    -1  
-$EndComp
-Text GLabel 8550 4050 2    50   Input ~ 0
+Text GLabel 9550 3900 2    50   Input ~ 0
 LED_A
 Text GLabel 8550 3850 2    50   Input ~ 0
 LED_C
@@ -3189,19 +3113,7 @@ Wire Notes Line
 Wire Notes Line
 	700  10900 11100 10900
 Wire Notes Line
-	5100 8900 5100 2850
-Wire Notes Line
 	5100 2850 10900 2850
-Wire Notes Line
-	10900 2850 10900 8900
-Wire Notes Line
-	5100 8900 10900 8900
-Wire Notes Line
-	1500 8750 1500 8000
-Wire Notes Line
-	1500 8000 3450 8000
-Wire Notes Line
-	1500 8750 3450 8750
 Wire Wire Line
 	6600 4500 6600 4550
 Wire Wire Line
@@ -3328,7 +3240,7 @@ Wire Wire Line
 	7900 3600 7900 4300
 Wire Wire Line
 	8000 3800 8000 4300
-Text GLabel 8550 3950 2    50   Input ~ 0
+Text GLabel 9550 3800 2    50   Input ~ 0
 LED_B
 Wire Wire Line
 	8550 4150 8500 4150
@@ -3342,16 +3254,160 @@ Wire Wire Line
 	8550 3950 8300 3950
 Wire Wire Line
 	8300 3950 8300 4300
+NoConn ~ 8600 4300
 Wire Wire Line
-	8550 3850 8200 3850
+	9550 3900 9300 3900
 Wire Wire Line
-	8200 3850 8200 4300
+	9300 3900 9300 4300
+Wire Wire Line
+	9550 3800 9200 3800
+Wire Wire Line
+	9200 3800 9200 4300
+Text GLabel 8200 9900 0    50   Input ~ 0
+TIM8_CH4
+Text GLabel 8200 10000 0    50   Input ~ 0
+TIM8_CH3
+Text GLabel 8200 10100 0    50   Input ~ 0
+TIM8_CH2
+Text GLabel 8200 10200 0    50   Input ~ 0
+TIM8_CH1
+Wire Wire Line
+	7200 8500 7600 8500
+Wire Wire Line
+	7600 8500 7600 8100
+Wire Wire Line
+	7200 8600 7700 8600
+Wire Wire Line
+	7700 8600 7700 8100
+Wire Wire Line
+	7200 8700 7800 8700
+Wire Wire Line
+	7800 8700 7800 8100
+Wire Wire Line
+	7200 8800 7900 8800
+Wire Wire Line
+	7900 8800 7900 8100
+Wire Wire Line
+	7850 8900 8200 8900
+Wire Wire Line
+	8200 8900 8200 8100
+Wire Wire Line
+	7850 9000 8300 9000
+Wire Wire Line
+	8300 9000 8300 8100
+Wire Notes Line
+	5100 9100 10900 9100
+Wire Notes Line
+	10900 2850 10900 9100
+Wire Notes Line
+	5100 2850 5100 9100
+$Comp
+L BMX055:BMX055 U6
+U 1 1 5EC4C561
+P 13150 7900
+F 0 "U6" H 14100 8350 50  0000 C CNN
+F 1 "BMX055" H 14150 6850 50  0000 C CNN
+F 2 "BMX055:LGA_PACKAGE_20_PINS" H 14200 8300 50  0001 L CNN
+F 3 "https://componentsearchengine.com//BMX055.pdf" H 14200 8200 50  0001 L CNN
+F 4 "Small versatile 9-axis sensor module" H 14200 8100 50  0001 L CNN "Description"
+F 5 "" H 14200 8000 50  0001 L CNN "Height"
+F 6 "262-BMX055" H 14200 7900 50  0001 L CNN "Mouser2 Part Number"
+F 7 "https://www.mouser.com/Search/Refine.aspx?Keyword=262-BMX055" H 14200 7800 50  0001 L CNN "Mouser2 Price/Stock"
+F 8 "Bosch Sensortec" H 14200 7700 50  0001 L CNN "Manufacturer_Name"
+F 9 "BMX055" H 14200 7600 50  0001 L CNN "Manufacturer_Part_Number"
+	1    13150 7900
+	1    0    0    -1  
+$EndComp
+Text GLabel 13550 9100 0    50   Input ~ 0
+MAG_INT
+Wire Wire Line
+	13550 9100 13650 9100
+Wire Wire Line
+	13550 9200 13750 9200
+Wire Notes Line
+	15300 9300 15300 7050
+Wire Notes Line
+	12650 7050 15300 7050
+Wire Notes Line
+	12650 9300 15300 9300
+Text GLabel 7850 8900 0    50   Input ~ 0
+MAGD_DRDY
+NoConn ~ 7100 5800
+NoConn ~ 7100 5700
+NoConn ~ 7100 5600
+$Comp
+L STM32H750VBT6:STM32H750VBT6 U7
+U 1 1 5EC47253
+P 7100 5000
+F 0 "U7" H 9950 5450 50  0000 L CNN
+F 1 "STM32H750VBT6" H 9950 2150 50  0000 L CNN
+F 2 "STM32H750VBT6:QFP50P1600X1600X160-100N" H 9950 5500 50  0001 L CNN
+F 3 "https://www.st.com/resource/en/datasheet/stm32h750vb.pdf" H 9950 5400 50  0001 L CNN
+F 4 "ARM Microcontrollers - MCU High-performance and DSP with DP-FPU, Arm Cortex-M7 MCU with 128 Kbytes of Flash memory, 1MB RAM, 400 MHz CPU, L1 cache, external memory interface, JPEG codec, HW crypto, large set of peripherals" H 9950 5300 50  0001 L CNN "Description"
+F 5 "1.6" H 9950 5200 50  0001 L CNN "Height"
+F 6 "" H 9950 5100 50  0001 L CNN "Mouser2 Part Number"
+F 7 "" H 9950 5000 50  0001 L CNN "Mouser2 Price/Stock"
+F 8 "STMicroelectronics" H 9950 4900 50  0001 L CNN "Manufacturer_Name"
+F 9 "STM32H750VBT6" H 9950 4800 50  0001 L CNN "Manufacturer_Part_Number"
+	1    7100 5000
+	1    0    0    -1  
+$EndComp
 Wire Wire Line
 	8550 3750 8100 3750
 Wire Wire Line
 	8100 3750 8100 4300
+Wire Wire Line
+	8550 3850 8200 3850
+Wire Wire Line
+	8200 3850 8200 4300
 NoConn ~ 9000 4300
 NoConn ~ 9100 4300
-NoConn ~ 9200 4300
-NoConn ~ 9300 4300
+Wire Wire Line
+	1900 8400 2400 8400
+$Comp
+L Device:LED_Small D8
+U 1 1 5F58AC40
+P 1900 8500
+F 0 "D8" V 1946 8432 50  0000 R CNN
+F 1 "RE" V 1855 8432 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" V 1900 8500 50  0001 C CNN
+F 3 "~" V 1900 8500 50  0001 C CNN
+	1    1900 8500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5F5AC445
+P 1900 8800
+F 0 "#PWR0104" H 1900 8550 50  0001 C CNN
+F 1 "GND" H 1900 8650 50  0000 C CNN
+F 2 "" H 1900 8800 50  0001 C CNN
+F 3 "" H 1900 8800 50  0001 C CNN
+	1    1900 8800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 8500 2250 8800
+Wire Wire Line
+	1700 8400 1900 8400
+Connection ~ 1900 8400
+Wire Notes Line
+	3450 8000 3450 9000
+Wire Notes Line
+	1050 9000 1050 8000
+Wire Notes Line
+	1050 8000 3450 8000
+Wire Notes Line
+	1050 9000 3450 9000
+$Comp
+L Device:R_Small R25
+U 1 1 5F644C30
+P 1900 8700
+F 0 "R25" H 1841 8654 50  0000 R CNN
+F 1 "2k2" H 1841 8745 50  0000 R CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 1900 8700 50  0001 C CNN
+F 3 "~" H 1900 8700 50  0001 C CNN
+	1    1900 8700
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

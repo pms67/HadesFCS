@@ -6,7 +6,7 @@
 * Sensors: gyro (p, q, r), accelerometer (ax, ay, az), pitot tube and differential pressure sensor (Va)
 * 
 * Written by: Philip M. Salmony @ philsal.co.uk
-* Last changed: 02 Dec 2019
+* Last changed: 04 Jul 2020
 *
 */
 
@@ -47,16 +47,16 @@ void KalmanRollPitch_Update(KalmanRollPitch *kal, float *gyr, float *acc, float 
 	*/
 	
 	/* Compute common trig terms */
-	float sp = sin(kal->phi);   float cp = cos(kal->phi);
-	float tt = tan(kal->theta);
+	float sp = sinf(kal->phi);   float cp = cosf(kal->phi);
+	float tt = tanf(kal->theta);
 	
 	/* x+ = x- + T * f(x,u) */
 	kal->phi   = kal->phi   + T * (p + tt * (q * sp + r * cp));
 	kal->theta = kal->theta + T * (    q * cp      - r * sp);
 	
 	/* Recompute common trig terms using new state estimates */
-	      sp = sin(kal->phi); 		  cp = cos(kal->phi);
-	float st = sin(kal->theta); float ct = cos(kal->theta); tt = st / ct;
+	      sp = sinf(kal->phi); 		   cp = cosf(kal->phi);
+	float st = sinf(kal->theta); float ct = cosf(kal->theta); tt = st / ct;
 	
 	/* Jacobian of f(x,u) */
 	float A[4] = { tt * (q * cp - r * sp), (r * cp + q * sp) * (tt * tt + 1.0f), 

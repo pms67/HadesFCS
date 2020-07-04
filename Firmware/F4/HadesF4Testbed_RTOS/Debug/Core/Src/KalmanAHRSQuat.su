@@ -1,0 +1,5 @@
+KalmanAHRSQuat.c:3:6:EKF_Init	40	static
+KalmanAHRSQuat.c:33:6:EKF_Predict	136	static
+KalmanAHRSQuat.c:103:6:EKF_UpdateAirspeed	16	static
+KalmanAHRSQuat.c:107:9:EKF_UpdateAccelerometer	224	static
+KalmanAHRSQuat.c:208:9:EKF_UpdateHeading	168	static

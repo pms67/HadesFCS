@@ -1,4 +1,4 @@
-16756813253322422
+16759999281281291
 10118193-0001LF
 101181930001LF
 10118193-0001LF-1
@@ -68067,6 +68067,20 @@ Integrated Circuit
 0
 100
 100
+SchmillipKiCADLibrary
+LED_RGB_E6C1206RGBC3UDA
+
+
+0
+4
+4
+SchmillipKiCADLibrary
+USB_CONN_101181930001LF
+10118193-0001LF-1
+Connector
+0
+11
+8
 Sensor_Audio
 Infineon_PG-LLGA-5-1
 Infineon_PG-LLGA-5-1 StepUp generated footprint, https://www.infineon.com/cms/en/product/packages/PG-LLGA/PG-LLGA-5-1/
