@@ -1,4 +1,25 @@
-16745698583297956
+16759999281281291
+10118193-0001LF
+101181930001LF
+10118193-0001LF-1
+Connector
+0
+11
+11
+AO4407A
+SOIC127P600X175-8N
+SO8
+Transistor
+0
+8
+8
+BMX055
+LGA_PACKAGE_20_PINS
+LGA package 20 pins
+Integrated Circuit
+0
+20
+20
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -46591,6 +46612,13 @@ Fuse Fuseholder TR5 Littelfuse/Wickmann No. 460 No560
 0
 2
 2
+HadesNTSilk
+HadesNTSilkLogo
+
+
+0
+0
+0
 Heatsink
 Heatsink_35x26mm_1xFixation3mm_Fischer-SK486-35
 Heatsink, 35mm x 26mm, 1x Fixation 3mm, Fischer SK486-35
@@ -51092,13 +51120,27 @@ Yellow 5381 Series LED
 0
 2
 2
-LogoSilkscreens
-F4Silkscreen
-
-
+MP2451DT-LF-Z
+SOT95P280X145-6N
+SOT23-6
+Integrated Circuit
 0
+6
+6
+MSS3-V-T_R
+MSS3VTR
+MSS3-V-T/R-1
+Switch
 0
+9
+9
+MWSA0503-100MT
+INDPM5452X300N
+MWSA0503-100MT
+Inductor
 0
+2
+2
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -68018,6 +68060,27 @@ rotary encoder
 0
 5
 4
+STM32H750VBT6
+QFP50P1600X1600X160-100N
+LQFP100-14x14
+Integrated Circuit
+0
+100
+100
+SchmillipKiCADLibrary
+LED_RGB_E6C1206RGBC3UDA
+
+
+0
+4
+4
+SchmillipKiCADLibrary
+USB_CONN_101181930001LF
+10118193-0001LF-1
+Connector
+0
+11
+8
 Sensor_Audio
 Infineon_PG-LLGA-5-1
 Infineon_PG-LLGA-5-1 StepUp generated footprint, https://www.infineon.com/cms/en/product/packages/PG-LLGA/PG-LLGA-5-1/

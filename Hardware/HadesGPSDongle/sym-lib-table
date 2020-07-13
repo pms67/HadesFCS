@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name TESEO-LIV3R)(type Legacy)(uri ${KIPRJMOD}/lib/TESEO-LIV3R.lib)(options "")(descr ""))
+  (lib (name CONUFL001-SMD-T)(type Legacy)(uri ${KIPRJMOD}/lib/CONUFL001-SMD-T.lib)(options "")(descr ""))
+  (lib (name CONSMA002)(type Legacy)(uri ${KIPRJMOD}/lib/CONSMA002.lib)(options "")(descr ""))
+)
